@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.finite.gdscphcet.ui.HomeFragment"
         tools:layout="@layout/fragment_home"
-        android:label="GDSC PHCET" />
+        android:label="GDSC PHCET" >
+        <action
+            android:id="@+id/action_homeFragment_to_eventDetailActivity"
+            app:destination="@id/eventDetailActivity" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.finite.gdscphcet.ui.AboutFragment"
@@ -20,4 +24,14 @@
         tools:layout="@layout/fragment_team"
         android:name="com.finite.gdscphcet.ui.TeamFragment"
         android:label="GDSC TEAM" />
+    <activity
+        android:id="@+id/eventDetailActivity"
+        android:name="com.finite.gdscphcet.ui.EventDetailActivity"
+        android:label="activity_event_detail"
+        tools:layout="@layout/activity_event_detail" >
+        <argument
+            android:name="eventid"
+            app:argType="string"
+            android:defaultValue="infosession" />
+    </activity>
 </navigation>
