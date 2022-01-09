@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.finite.gdscphcet.ui.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="GDSC PHCET" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.finite.gdscphcet.ui.AboutFragment"
+        tools:layout="@layout/fragment_about"
+        android:label="ABOUT US" />
+    <fragment
+        android:id="@+id/teamFragment"
+        tools:layout="@layout/fragment_team"
+        android:name="com.finite.gdscphcet.ui.TeamFragment"
+        android:label="GDSC TEAM" />
+</navigation>
