@@ -12,117 +12,278 @@
             type="com.finite.gdscphcet.ui.viewModel.EventDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.EventDetailActivity">
+        android:paddingBottom="20dp"
+        android:clipToPadding="false">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/topConstraint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <GridLayout
-                android:id="@+id/headerGridLayout"
+            android:layout_height="match_parent"
+            tools:context=".ui.EventDetailActivity">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:paddingHorizontal="10dp"
-                android:layout_marginTop="9dp"
-                android:rowCount="1"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center|start"
-                    android:layout_marginEnd="10dp"
-                    android:onClick="@{() -> eventActivity.callFinish()}"
-                    android:src="@drawable/ic_back_button"
-                    app:tint="@color/red" />
+                <GridLayout
+                    android:id="@+id/headerGridLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:paddingHorizontal="10dp"
+                    android:layout_marginTop="9dp"
+                    android:rowCount="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center|start"
+                        android:layout_marginEnd="10dp"
+                        android:onClick="@{() -> eventActivity.callFinish()}"
+                        android:src="@drawable/ic_back_button"
+                        app:tint="@color/red" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:fontFamily="@font/roboto"
+                        android:text="Event Details"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </GridLayout>
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|start"
                     android:fontFamily="@font/roboto"
-                    android:text="Event Details"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="8dp"
+                    android:text="GDSC PHCET"
                     android:textColor="@color/dark_gray"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintTop_toBottomOf="@id/headerGridLayout"
                     tools:ignore="HardcodedText" />
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_gdsc"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.948"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <GridLayout
+                android:id="@+id/divider_grid"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:columnCount="4"
+                android:rowCount="1"
+                app:layout_constraintTop_toBottomOf="@id/topConstraint">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#DB4437" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#4285F4" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#0F9D58" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#F4B400" />
+            </GridLayout>
+
+            <ImageView
+                android:id="@+id/PosterImv"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginVertical="10dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toBottomOf="@id/divider_grid"
+                android:paddingHorizontal="30dp"/>
+
+            <GridLayout
+                android:id="@+id/divider_grid2"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="10dp"
+                android:columnCount="4"
+                android:rowCount="1"
+                app:layout_constraintTop_toBottomOf="@id/PosterImv">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#DB4437" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#4285F4" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#0F9D58" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#F4B400" />
             </GridLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvEventTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto"
                 android:paddingHorizontal="10dp"
-                android:paddingBottom="8dp"
-                android:text="GDSC PHCET"
+                android:paddingTop="10dp"
+                android:text="Title"
                 android:textColor="@color/dark_gray"
-                android:textSize="13sp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/divider_grid2"
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/tvEventDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/roboto"
+                android:paddingHorizontal="10dp"
+                android:text="Date"
+                android:textColor="@color/dark_gray"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tvEventTitle"
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/tvEventTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto"
+                android:paddingHorizontal="10dp"
+                android:text="Time"
+                android:textColor="@color/dark_gray"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tvEventDate"
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="0dp" />
+
+
+            <TextView
+                android:id="@+id/tvEventMode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:layout_marginTop="5dp"
+                android:paddingHorizontal="10dp"
+                android:text="Mode"
+                android:textColor="@color/dark_gray"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tvEventTime"
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <Button
+                android:id="@+id/videoButton"
+                app:icon="@drawable/ic_play_circle_24"
+                android:textColor="@color/red"
+                app:iconTint="@color/red"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="watch video"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintTop_toBottomOf="@id/headerGridLayout"
+                app:layout_constraintTop_toBottomOf="@id/tvEventMode"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto"
+                android:paddingHorizontal="10dp"
+                android:text="About"
+                android:textColor="@color/dark_gray"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/videoButton"
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="0dp" />
+            <TextView
+                android:id="@+id/tvAboutDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="There aren't any upcoming events.\nYou will be notified when there is any."
+                android:textColor="@color/gray"
+                android:textSize="15sp"
+                android:layout_marginStart="9dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAbout"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/eventButton"
+                app:icon="@drawable/ic_website"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:text="Event Page"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAboutDetails"
                 tools:ignore="HardcodedText" />
 
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_gdsc"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.948"
-                app:layout_constraintVertical_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <GridLayout
-            android:id="@+id/divider_grid"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:columnCount="4"
-            android:rowCount="1"
-            app:layout_constraintTop_toBottomOf="@id/topConstraint">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_height="match_parent"
-                android:background="#DB4437" />
-            <View
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_height="match_parent"
-                android:background="#4285F4" />
-            <View
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_height="match_parent"
-                android:background="#0F9D58" />
-            <View
-                android:layout_width="0dp"
-                android:layout_columnWeight="1"
-                android:layout_height="match_parent"
-                android:background="#F4B400" />
-        </GridLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

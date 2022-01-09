@@ -1,13 +1,18 @@
 package com.finite.gdscphcet.ui
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.navArgs
+import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.databinding.ActivityEventDetailBinding
 import com.finite.gdscphcet.databinding.ActivityMainBinding
@@ -44,6 +49,16 @@ class EventDetailActivity : AppCompatActivity() {
 
     fun setEventData(eventId: String) {
 
+        val posterImv : ImageView = findViewById(R.id.PosterImv)
+
+        val tvEventTitle : TextView = findViewById(R.id.tvEventTitle)
+        val tvEventDate : TextView = findViewById(R.id.tvEventDate)
+        val tvEventTime : TextView = findViewById(R.id.tvEventTime)
+        val tvEventMode : TextView = findViewById(R.id.tvEventMode)
+        val tvAboutDetails : TextView = findViewById(R.id.tvAboutDetails)
+        val videoButton: Button = findViewById(R.id.videoButton)
+        val eventButton: Button = findViewById(R.id.eventButton)
+
         database = FirebaseDatabase.getInstance().getReference("pastEvents")
         database.child(eventId).get().addOnSuccessListener {
             if (it.exists()){
@@ -58,14 +73,25 @@ class EventDetailActivity : AppCompatActivity() {
                 val posterlink = it.child("posterlink").value.toString()
                 val videolink = it.child("videolink").value.toString()
 
-                Toast.makeText(this, "$title : $date",Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "$title : $date",Toast.LENGTH_SHORT).show()
 
+                Glide.with(this).load(posterlink).error(R.drawable.ic_404_image).centerCrop().into(posterImv)
 
+                tvEventTitle.text = title
+                tvEventDate.text = "📅 \t\t\t:\t\t$date"
+                tvEventTime.text = "⌚ \t\t\t:\t\t$time"
+                tvEventMode.text = "📍 \t\t\t:\t\t$mode"
+                tvAboutDetails.text = shortdesc
 
+                videoButton.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videolink))
+                    startActivity(intent)
+                }
 
-
-
-
+                eventButton.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(eventlink))
+                    startActivity(intent)
+                }
 
 
 
