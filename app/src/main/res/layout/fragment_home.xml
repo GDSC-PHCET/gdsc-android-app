@@ -182,7 +182,7 @@
                     android:id="@+id/asjday4"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> homeFragment.openDetailActivity(homeViewModel.infosession())}"
+                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/asj4)}"
                     app:cardElevation="3dp"
                     android:padding="10dp"
                     android:layout_margin="10dp"
@@ -237,6 +237,7 @@
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"
                     android:padding="10dp"
+                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/asj3)}"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
@@ -289,6 +290,7 @@
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"
                     android:padding="10dp"
+                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/asj2)}"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
@@ -341,6 +343,7 @@
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"
                     android:padding="10dp"
+                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/asj1)}"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
@@ -393,6 +396,7 @@
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"
                     android:padding="10dp"
+                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/itgc1)}"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
@@ -445,6 +449,7 @@
                     android:layout_height="wrap_content"
                     app:cardElevation="3dp"
                     android:padding="10dp"
+                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/infosession)}"
                     android:layout_margin="10dp"
                     app:cardCornerRadius="10dp">
 
