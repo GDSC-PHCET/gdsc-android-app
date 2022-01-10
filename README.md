@@ -10,7 +10,7 @@ Getting Information and all the resource related to Google Developer Student Clu
 
 This project proposes a "Community Android Application" to accumulate all the Information and Resources related to our developer community here at GDSC PHCET in one single Android Application, which will make it a one-stop destination for all community members to access all the resources from one single platform rather than searching over all our social media handles and web-pages.
 
-<img width="559" alt="sampleimages" src="https://media.discordapp.net/attachments/917143189457104938/929786609522589706/Orientation1.jpg?width=671&height=671">
+<img width="700" alt="sampleimages" src="https://cdn.discordapp.com/attachments/881638762877177858/930102135998263316/unknown.png">
     	  	
 # <b> Functionality & Concepts used : </b>
 
