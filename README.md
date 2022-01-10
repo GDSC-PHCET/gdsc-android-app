@@ -41,6 +41,6 @@ This project proposes a "Community Android Application" to accumulate all the In
 
 <b> Application Link & Future Scope : </b>
 
-- The app is in the Alpha stage current and is being tested, discussed and developed by the student developers here at GDSC PHCET, the app will be released to the Google Play Store as soon as it's ready for the Beta Release. For now, the app can be downloaded from : [here](https://test.link)
+- The app is in the Alpha stage current and is being tested, discussed and developed by the student developers here at GDSC PHCET, the app will be released to the Google Play Store as soon as it's ready for the Beta Release. For now, the app can be downloaded from : [CLICK HERE](https://github.com/DSC-PHCET/gdsc-android-app/releases/download/v1.0.0-alpha/gdsc-phcet-alpha-1.0.0.apk)
 
 - We are currently discussing all the possible features that can be Implemented in this community app, in the coming months we will be adding many more functionalities to this application.
