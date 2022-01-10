@@ -33,6 +33,12 @@ class HomeFragment : Fragment() {
             homeViewModel = viewModel
             homeFragment = this@HomeFragment
         }
+
+        binding?.verifyButton?.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToCertificateActivity()
+            findNavController().navigate(action)
+        }
+
     }
 
     fun openDetailActivity(id : String) {

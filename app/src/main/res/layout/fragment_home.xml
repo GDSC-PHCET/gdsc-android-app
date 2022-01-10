@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
+        android:paddingBottom="30dp"
         android:clipToPadding="false"
         tools:context=".ui.HomeFragment">
 
@@ -498,6 +498,55 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/tvVerifyCertificate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/roboto"
+            android:paddingHorizontal="10dp"
+            android:paddingTop="10dp"
+            android:text="Verify Certificate"
+            android:textColor="@color/dark_gray"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/pasteEventScroll"
+            tools:ignore="HardcodedText"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/tvVerifyDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:layout_marginTop="10dp"
+            android:text="Verify the authenticity of the Certificates Issued by Google Developer Student Club PHCET. Enter the verification code given on the certificates to check it's authenticity. Click Below :"
+            android:textColor="@color/gray"
+            android:textAlignment="textStart"
+            android:textSize="15sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="20dp"
+            android:justificationMode="inter_word"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvVerifyCertificate"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/verifyButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="Certificate Verification"
+            android:textColor="@color/green"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvVerifyDetails"
+            tools:ignore="HardcodedText" />
 
 
 

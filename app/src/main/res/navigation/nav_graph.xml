@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_eventDetailActivity"
             app:destination="@id/eventDetailActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_certificateActivity"
+            app:destination="@id/certificateActivity" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -34,4 +37,8 @@
             app:argType="string"
             android:defaultValue="infosession" />
     </activity>
+    <activity
+        android:id="@+id/certificateActivity"
+        android:name="com.finite.gdscphcet.CertificateActivity"
+        android:label="CertificateActivity" />
 </navigation>
