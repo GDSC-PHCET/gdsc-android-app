@@ -1,5 +1,7 @@
 package com.finite.gdscphcet.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +22,19 @@ class TeamFragment : Fragment() {
         val fragmentBinding = FragmentTeamBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.apply {
+            teamFragment = this@TeamFragment
+        }
+    }
+
+    fun openLink(link: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(intent)
     }
 
 }

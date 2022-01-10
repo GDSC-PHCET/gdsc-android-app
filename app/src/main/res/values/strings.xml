@@ -13,4 +13,25 @@
     <string name="asj2">dsc004</string>
     <string name="asj3">dsc005</string>
     <string name="asj4">dsc006</string>
+
+    <string name="ldrishabh">https://www.linkedin.com/in/fin1te/</string>
+    <string name="igrishabh">https://www.instagram.com/fin1te/</string>
+    <string name="ghrishabh">https://github.com/fin1te</string>
+    <string name="twrishabh">https://twitter.com/shoxxxxie</string>
+
+    <string name="ld1">https://www.linkedin.com/in/parthpitrubhakta/</string>
+    <string name="ld2">https://www.linkedin.com/in/vedantpingale/</string>
+    <string name="ld3">https://www.linkedin.com/in/sakshi-chauhan-/</string>
+    <string name="ld4">https://www.linkedin.com/in/prathmeshpandey9/</string>
+    <string name="ld5">https://www.linkedin.com/in/khushbu-bhatia/</string>
+    <string name="ld6">https://www.linkedin.com/in/aryan-khandagale-9a0b21223/</string>
+
+    <string name="ig1">https://www.instagram.com/parthpitrubhakta/</string>
+    <string name="ig3">https://www.instagram.com/_sakshiiii_25_/</string>
+    <string name="ig4">https://www.instagram.com/prathmesh.pandey.129/</string>
+    <string name="ig6">https://www.instagram.com/cinder_13/</string>
+
+
+
+
 </resources>

@@ -1,21 +1,527 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="teamFragment"
+            type="com.finite.gdscphcet.ui.TeamFragment" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="30dp"
+        android:clipToPadding="false"
         tools:context=".ui.TeamFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topConstraint"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Team" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </FrameLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto"
+                android:text="GDSC Team"
+                android:textAlignment="center"
+                android:textColor="@color/dark_gray"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="HardcodedText" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_gdsc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.948"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <GridLayout
+            android:id="@+id/divider_grid"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:columnCount="4"
+            android:rowCount="1"
+            app:layout_constraintTop_toBottomOf="@id/topConstraint">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="match_parent"
+                android:background="#DB4437" />
+            <View
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="match_parent"
+                android:background="#4285F4" />
+            <View
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="match_parent"
+                android:background="#0F9D58" />
+            <View
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:layout_height="match_parent"
+                android:background="#F4B400" />
+
+
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/divider_grid">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loading_lottie"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/teams" />
+            <TextView
+                android:id="@+id/tvFounding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:textAlignment="center"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="10dp"
+                android:text="Founding GDSC Lead"
+                android:textColor="@color/dark_gray"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/divider_grid"
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="0dp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardElevation="5dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:textColor="#212121"
+                        android:fontFamily="@font/roboto"
+                        android:text="Rishabh Mehta"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:text="Native Android Developer"
+                        tools:ignore="HardcodedText" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:rowCount="1"
+                        android:columnCount="4">
+                            <ImageView
+                                android:layout_columnWeight="1"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:onClick="@{() -> teamFragment.openLink(@string/ldrishabh)}"
+                                android:src="@drawable/ic_linkedin"/>
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ghrishabh)}"
+                            android:src="@drawable/ic_github"/>
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/igrishabh)}"
+                            android:src="@drawable/ic_instagram"/>
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/twrishabh)}"
+                            android:src="@drawable/ic_twitter"/>
+
+                    </GridLayout>
+                </LinearLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tvCoreTeam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/roboto"
+                android:textAlignment="center"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="10dp"
+                android:text="GDSC Core Team"
+                android:textColor="@color/dark_gray"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/divider_grid"
+                tools:ignore="HardcodedText"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <!-- Parth -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:textColor="#212121"
+                        android:fontFamily="@font/roboto"
+                        android:text="Parth Pitrubhakta"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:text="Technical Head"
+                        tools:ignore="HardcodedText" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:rowCount="1"
+                        android:columnCount="4">
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ld1)}"
+                            android:src="@drawable/ic_linkedin"/>
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ig1)}"
+                            android:src="@drawable/ic_instagram"/>
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Vedant -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:textColor="#212121"
+                        android:fontFamily="@font/roboto"
+                        android:text="Vedant Pingale"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:text="Graphics Designer + UI/UX"
+                        tools:ignore="HardcodedText" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:rowCount="1"
+                        android:columnCount="4">
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ld2)}"
+                            android:src="@drawable/ic_linkedin"/>
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Sakshi -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:textColor="#212121"
+                        android:fontFamily="@font/roboto"
+                        android:text="Sakshi Chauhan"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:text="Event Head"
+                        tools:ignore="HardcodedText" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:rowCount="1"
+                        android:columnCount="4">
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ld3)}"
+                            android:src="@drawable/ic_linkedin"/>
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ig3)}"
+                            android:src="@drawable/ic_instagram"/>
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Prathmesh -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:textColor="#212121"
+                        android:fontFamily="@font/roboto"
+                        android:text="Prathmesh Pandey"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:text="Social Media Head"
+                        tools:ignore="HardcodedText" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:rowCount="1"
+                        android:columnCount="4">
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ld4)}"
+                            android:src="@drawable/ic_linkedin"/>
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ig4)}"
+                            android:src="@drawable/ic_instagram"/>
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Khushbu -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:textColor="#212121"
+                        android:fontFamily="@font/roboto"
+                        android:text="Khushbu Bhatia"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:text="Editor + Content Writer"
+                        tools:ignore="HardcodedText" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:rowCount="1"
+                        android:columnCount="4">
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ld5)}"
+                            android:src="@drawable/ic_linkedin"/>
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Aryan -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:contentPadding="15dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:layout_gravity="center"
+                        android:textColor="#212121"
+                        android:fontFamily="@font/roboto"
+                        android:text="Aryan Khandagale"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:text="Outreach + Business Mgmt"
+                        tools:ignore="HardcodedText" />
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:rowCount="1"
+                        android:columnCount="4">
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ld6)}"
+                            android:src="@drawable/ic_linkedin"/>
+                        <ImageView
+                            android:layout_columnWeight="1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:onClick="@{() -> teamFragment.openLink(@string/ig6)}"
+                            android:src="@drawable/ic_instagram"/>
+                    </GridLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
