@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.35208333333333336" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/drawable/bnv_selector.xml" value="0.35208333333333336" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/drawable/ic_gdsc.xml" value="0.35208333333333336" />
+        <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/drawable/ic_launcher_background.xml" value="0.35208333333333336" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/drawable/ic_team.xml" value="0.35208333333333336" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/drawable/ic_website.xml" value="0.35208333333333336" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout-v26/fragment_home.xml" value="0.33177083333333335" />
