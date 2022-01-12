@@ -1,4 +1,4 @@
-# GDSC-PHCET-ANDROID-APP
+# ANDROID STUDY JAMS
 
 Community App of Google Developer Student Club @ PHCET
 
