@@ -12,6 +12,10 @@ This project proposes a "Community Android Application" to accumulate all the In
 
 <!--<img width="700" alt="sampleimages" src="https://cdn.discordapp.com/attachments/881638762877177858/930102135998263316/unknown.png">-->
 <img width="230" alt="sampleimages" src="https://play-lh.googleusercontent.com/D0TXpAEVitRAJO4SKkBNttqbP9VKE-qCijFL8aMihVbIzhOeQVYY8__GwgnN23_FCJh7=w1920-h929-rw"> <img width="230" alt="sampleimages" src="https://play-lh.googleusercontent.com/N-ZEC3FDJC_nC9B5RDs06YI8S0UrIVvBuxnKkDokNtQzkJHUXT0svwYm--MVlYSSMw=w1920-h929-rw"> <img width="230" alt="sampleimages" src="https://play-lh.googleusercontent.com/0cKOYOfXJfaJ0TdNDYsr5p6wb6-4UrQYG1XJJn67YUL_YZSjTg5_1ST8HHTLvR8x9IE=w1920-h929-rw"> <img width="230" alt="sampleimages" src="https://play-lh.googleusercontent.com/FUfJxnoPn0yybqMcVOmLLFTA78LH9MHzC9lKSL9HdcnfaWJCUIttc53KKcpuw7HLUpM=w1920-h929-rw">
+
+## Technology Stack Used :
+![Kotlin](https://img.shields.io/badge/kotlin-%230095D5.svg?style=for-the-badge&logo=kotlin&logoColor=white)
+![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
     	  	
 # <b> Functionality & Concepts used : </b>
 
