@@ -44,6 +44,15 @@ This project proposes a "Community Android Application" to accumulate all the In
 
 - Download the app from [Google Play Store](https://play.google.com/store/apps/details?id=com.finite.gdscphcet)
 
+<div id="badges" align="center">
+  <a>
+    <img src="https://img.shields.io/badge/Android-green?style=for-the-badge&logo=android&logoColor=white" alt="Android Badge"/>
+  </a>
+  <a>
+    <img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" alt="Play Badge"/>
+  </a>
+    </div>
+
 <!--- The app is in the Alpha stage current and is being tested, discussed and developed by the student developers here at GDSC PHCET, the app will be released to the Google Play Store as soon as it's ready for the Beta Release. For now, the app can be downloaded from : [CLICK HERE](https://github.com/DSC-PHCET/gdsc-android-app/releases/download/v1.0.0-alpha/gdsc-phcet-alpha-1.0.0.apk)-->
 
 - We are currently discussing all the possible features that can be Implemented in this community app, in the coming months we will be adding many more functionalities to this application.
