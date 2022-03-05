@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
     }
 
     fun openDetailActivity(id : String) {
-        val action = HomeFragmentDirections.actionHomeFragmentToEventDetailActivity(id)
+        val action = HomeFragmentDirections.actionHomeFragmentToEventDetailActivity()
         findNavController().navigate(action)
     }
 }

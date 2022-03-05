@@ -1,7 +1,9 @@
 package com.finite.gdscphcet
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -15,6 +17,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = this.resources.getColor(R.color.status_bar)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -23,8 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
 
-        //val appBarConfiguration = AppBarConfiguration(setOf(R.id.aboutFragment,R.id.homeFragment,R.id.teamFragment))
-        //setupActionBarWithNavController(navController,appBarConfiguration)
 
         binding.bottomNavigation.setupWithNavController(navController)
 
