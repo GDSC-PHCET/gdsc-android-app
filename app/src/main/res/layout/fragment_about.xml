@@ -144,13 +144,13 @@
                         android:layout_columnWeight="1"
                         android:layout_height="45dp"
                         android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.instagram)}"
-                        android:src="@drawable/ic_instagram"/>
+                        android:src="@drawable/ic_instagram2"/>
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_columnWeight="1"
                         android:layout_height="45dp"
                         android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.youtube)}"
-                        android:src="@drawable/ic_youtube"/>
+                        android:src="@drawable/ic_youtube2"/>
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_columnWeight="1"
@@ -162,13 +162,13 @@
                         android:layout_columnWeight="1"
                         android:layout_height="45dp"
                         android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.github)}"
-                        android:src="@drawable/ic_github"/>
+                        android:src="@drawable/ic_github2"/>
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_columnWeight="1"
                         android:layout_height="45dp"
                         android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.discord)}"
-                        android:src="@drawable/ic_discord"/>
+                        android:src="@drawable/ic_discord2"/>
                 </GridLayout>
 
                 <Button
