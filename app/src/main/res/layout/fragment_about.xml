@@ -271,7 +271,8 @@
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
                             android:padding="10dp"
-                            android:layout_margin="10dp"
+                            android:onClick="@{()-> aboutFragment.openLink(aboutViewModel.app_dev)}"
+                             android:layout_margin="10dp"
                             app:cardCornerRadius="10dp">
 
                             <LinearLayout
@@ -305,6 +306,7 @@
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
                             android:padding="10dp"
+                            android:onClick="@{()-> aboutFragment.openLink(aboutViewModel.machine_learning)}"
                             android:layout_margin="10dp"
                             app:cardCornerRadius="10dp">
 
@@ -340,6 +342,7 @@
                             app:cardElevation="3dp"
                             android:padding="10dp"
                             android:layout_margin="10dp"
+                            android:onClick="@{()-> aboutFragment.openLink(aboutViewModel.web_dev)}"
                             app:cardCornerRadius="10dp">
 
                             <LinearLayout
