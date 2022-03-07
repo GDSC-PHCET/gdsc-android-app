@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.finite.gdscphcet.databinding.FragmentAboutBinding
 import com.finite.gdscphcet.ui.viewModel.AboutViewModel
 
@@ -34,6 +35,24 @@ class AboutFragment : Fragment() {
             aboutFragment = this@AboutFragment
             aboutViewModel = viewModel
         }
+        binding?.appDev?.setOnClickListener {
+            onItemClick("appDev")
+        }
+        binding?.machinelearning?.setOnClickListener {
+            onItemClick("machineLearning")
+        }
+        binding?.webdev?.setOnClickListener {
+            onItemClick("webDev")
+        }
+        binding?.googleCloud?.setOnClickListener {
+            onItemClick("googleCloud")
+        }
+        binding?.openSource?.setOnClickListener {
+            onItemClick("openSource")
+        }
+        binding?.muchMore?.setOnClickListener {
+            onItemClick("muchMore")
+        }
     }
 
     fun openLink(link: String) {
@@ -41,5 +60,10 @@ class AboutFragment : Fragment() {
         startActivity(intent)
     }
 
+    fun onItemClick(position : String){
+        val pos = position
+        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailFragment(pos)
+        findNavController().navigate(action)
+    }
 
 }
