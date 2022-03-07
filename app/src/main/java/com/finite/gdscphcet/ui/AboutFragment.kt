@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.finite.gdscphcet.databinding.FragmentAboutBinding
 import com.finite.gdscphcet.ui.viewModel.AboutViewModel
 
@@ -34,12 +35,16 @@ class AboutFragment : Fragment() {
             aboutFragment = this@AboutFragment
             aboutViewModel = viewModel
         }
+
+        // clicking on much more track user will navigate to much more fragment.
+        binding?.muchMore?.setOnClickListener {
+            val action = AboutFragmentDirections.actionAboutFragmentToMuchMoreFragment()
+            findNavController().navigate(action)
+        }
     }
 
     fun openLink(link: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
         startActivity(intent)
     }
-
-
 }
