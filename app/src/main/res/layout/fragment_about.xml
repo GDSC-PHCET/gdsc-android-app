@@ -267,6 +267,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/appDev"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
@@ -301,6 +302,7 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/machinelearning"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
@@ -335,6 +337,7 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/webdev"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
@@ -369,6 +372,7 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/googleCloud"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
@@ -403,6 +407,7 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/openSource"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
@@ -437,6 +442,7 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/muchMore"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
