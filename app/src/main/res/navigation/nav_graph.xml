@@ -21,7 +21,11 @@
         android:id="@+id/aboutFragment"
         android:name="com.finite.gdscphcet.ui.AboutFragment"
         tools:layout="@layout/fragment_about"
-        android:label="ABOUT US" />
+        android:label="ABOUT US" >
+        <action
+            android:id="@+id/action_aboutFragment_to_trackDetailFragment"
+            app:destination="@id/trackDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/teamFragment"
         tools:layout="@layout/fragment_team"
@@ -41,4 +45,13 @@
         android:id="@+id/certificateActivity"
         android:name="com.finite.gdscphcet.CertificateActivity"
         android:label="CertificateActivity" />
+    <fragment
+        android:id="@+id/trackDetailFragment"
+        android:name="com.finite.gdscphcet.ui.TrackDetailFragment"
+        android:label="fragment_track_detail"
+        tools:layout="@layout/fragment_track_detail" >
+        <argument
+            android:name="position"
+            app:argType="string" />
+    </fragment>
 </navigation>
