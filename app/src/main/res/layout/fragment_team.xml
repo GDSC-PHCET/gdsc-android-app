@@ -121,7 +121,7 @@
                 tools:ignore="HardcodedText"
                 tools:layout_editor_absoluteX="0dp" />
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:cardElevation="5dp"
@@ -130,6 +130,7 @@
                 app:contentPadding="15dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
@@ -208,7 +209,7 @@
 
             <!-- Parth -->
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -216,6 +217,7 @@
                 app:contentPadding="15dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
@@ -262,7 +264,7 @@
 
             <!-- Vedant -->
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -270,6 +272,7 @@
                 app:contentPadding="15dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
@@ -310,7 +313,7 @@
 
             <!-- Sakshi -->
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -318,6 +321,7 @@
                 app:contentPadding="15dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
@@ -364,7 +368,7 @@
 
             <!-- Prathmesh -->
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -372,6 +376,7 @@
                 app:contentPadding="15dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
@@ -418,7 +423,7 @@
 
             <!-- Khushbu -->
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -426,6 +431,7 @@
                 app:contentPadding="15dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
@@ -466,7 +472,7 @@
 
             <!-- Aryan -->
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
@@ -474,6 +480,7 @@
                 app:contentPadding="15dp">
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_gravity="center"
                     android:orientation="vertical"
                     android:layout_height="wrap_content">
                     <TextView
