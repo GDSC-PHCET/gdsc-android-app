@@ -43,6 +43,11 @@ class PastEventsAdapter(private val contxt: Context,private val pastEventsList :
                 intent.putExtra("eventId",currentEvent.eventId)
                 holder.itemView.context.startActivity(intent)
             }
+            holder.cardView.setOnClickListener {
+                val intent = Intent(context,EventDetailActivity::class.java)
+                intent.putExtra("eventId",currentEvent.eventId)
+                holder.itemView.context.startActivity(intent)
+            }
         }
     }
 
@@ -54,5 +59,6 @@ class PastEventsAdapter(private val contxt: Context,private val pastEventsList :
         val pastEventThumbnail : ImageView = itemView.findViewById(R.id.ivPastEventsImage)
         val pastEventTitle : TextView = itemView.findViewById(R.id.tvPastEventsTitle)
         val pastEventDate : TextView = itemView.findViewById(R.id.tvPastEventsDate)
+        val cardView : CardView = itemView.findViewById(R.id.cvImage)
     }
 }
