@@ -37,7 +37,7 @@
         android:label="activity_event_detail"
         tools:layout="@layout/activity_event_detail" >
         <argument
-            android:name="eventid"
+            android:name="eventId"
             app:argType="string"
             android:defaultValue="infosession" />
     </activity>
