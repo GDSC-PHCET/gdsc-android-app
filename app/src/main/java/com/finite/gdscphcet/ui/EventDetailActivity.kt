@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.navArgs
+import androidx.navigation.navArgument
 import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.databinding.ActivityEventDetailBinding
@@ -34,23 +35,26 @@ class EventDetailActivity : AppCompatActivity() {
         val binding = ActivityEventDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding?.apply {
+        binding.apply {
             eventActivity = this@EventDetailActivity
             eventViewModel = viewModel
         }
 
-        val arguments = args.eventid
-        setEventData(arguments)
+        val pastEventId = intent.getStringExtra("eventId")
+
+        Log.d("PRI", "success $pastEventId")
+        if (pastEventId != null) {
+            setEventData(pastEventId)
+        }
     }
 
 
 
     private lateinit var database : DatabaseReference
 
-    fun setEventData(eventId: String) {
+    private fun setEventData(eventId: String) {
 
         val posterImv : ImageView = findViewById(R.id.PosterImv)
-
         val tvEventTitle : TextView = findViewById(R.id.tvEventTitle)
         val tvEventDate : TextView = findViewById(R.id.tvEventDate)
         val tvEventTime : TextView = findViewById(R.id.tvEventTime)
