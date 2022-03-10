@@ -69,4 +69,7 @@ dependencies {
 
 
     implementation "com.airbnb.android:lottie:4.2.2"
+
+    //Android 12 new native splash screen dependency add
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
 }
