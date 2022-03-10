@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GDSCPHCET">
         <activity
+            android:name=".ui.TrackDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".CertificateActivity"
             android:exported="false" />
         <activity
