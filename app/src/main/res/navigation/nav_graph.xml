@@ -23,13 +23,8 @@
         tools:layout="@layout/fragment_about"
         android:label="ABOUT US" >
         <action
-
             android:id="@+id/action_aboutFragment_to_trackDetailActivity"
             app:destination="@id/trackDetailActivity" />
-
-            android:id="@+id/action_aboutFragment_to_trackDetailFragment"
-            app:destination="@id/trackDetailFragment" />
-
     </fragment>
     <fragment
         android:id="@+id/teamFragment"
