@@ -31,5 +31,9 @@
     <string name="ig4">https://www.instagram.com/prathmesh.pandey.129/</string>
     <string name="ig6">https://www.instagram.com/cinder_13/</string>
 
+    <string name="track_details_fragment">Track Details Fragment</string>
+    <string name="bookEventTicket">BOOK TICKET</string>
+
+
 
 </resources>

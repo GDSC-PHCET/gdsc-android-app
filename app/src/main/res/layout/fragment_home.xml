@@ -118,31 +118,66 @@
             tools:ignore="HardcodedText"
             tools:layout_editor_absoluteX="0dp" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/searching_lottie"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvUpcomingEvents"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/searching_lottie" />
-
-        <TextView
-            android:id="@+id/tvNoEvents"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/upcoming_events_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="There aren't any upcoming events.\nYou will be notified when there is any."
-            android:textColor="@color/gray"
-            android:textAlignment="center"
-            android:textSize="15sp"
-            android:paddingHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searching_lottie"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toBottomOf="@id/tvUpcomingEvents">
+
+            <LinearLayout
+                android:id="@+id/upcoming_events_placeholder_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/searching_lottie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/searching_lottie" />
+
+                <TextView
+                    android:id="@+id/tvNoEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:paddingHorizontal="20dp"
+                    android:text="There aren't any upcoming events.\nYou will be notified when there is any."
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searching_lottie"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvUpcomingEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/past_event_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <TextView
             android:id="@+id/tvPastEvents"
@@ -156,348 +191,25 @@
             android:textColor="@color/dark_gray"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tvNoEvents"
+            app:layout_constraintTop_toBottomOf="@id/upcoming_events_layout"
             tools:ignore="HardcodedText"
             tools:layout_editor_absoluteX="0dp" />
 
-        <HorizontalScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPastEvents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pasteEventScroll"
-            android:layout_marginTop="10dp"
-            android:scrollbars="none"
-            android:layout_marginHorizontal="10dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/tvPastEvents"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvPastEvents">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingHorizontal="5dp"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/asjday4"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/asj4)}"
-                    app:cardElevation="3dp"
-                    android:padding="10dp"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_asj"
-
-                                tools:ignore="ContentDescription" />
-                        </androidx.cardview.widget.CardView>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/roboto"
-                            android:paddingTop="10dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="Android Study Jams\nDay 04"
-                            android:textAlignment="center"
-                            android:textColor="@color/dark_gray"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            tools:ignore="HardcodedText" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:text="Dec 17th, 2021"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/asjday3"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="3dp"
-                    android:padding="10dp"
-                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/asj3)}"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_asj"
-
-                                tools:ignore="ContentDescription" />
-                        </androidx.cardview.widget.CardView>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/roboto"
-                            android:paddingTop="10dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="Android Study Jams\nDay 03"
-                            android:textAlignment="center"
-                            android:textColor="@color/dark_gray"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            tools:ignore="HardcodedText" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:text="Dec 14th, 2021"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/asjday2"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="3dp"
-                    android:padding="10dp"
-                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/asj2)}"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_asj"
-
-                                tools:ignore="ContentDescription" />
-                        </androidx.cardview.widget.CardView>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/roboto"
-                            android:paddingTop="10dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="Android Study Jams\nDay 02"
-                            android:textAlignment="center"
-                            android:textColor="@color/dark_gray"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            tools:ignore="HardcodedText" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:text="Dec 11th, 2021"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/asjday1"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="3dp"
-                    android:padding="10dp"
-                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/asj1)}"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_asj"
-
-                                tools:ignore="ContentDescription" />
-                        </androidx.cardview.widget.CardView>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/roboto"
-                            android:paddingTop="10dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="Android Study Jams\nDay 01"
-                            android:textAlignment="center"
-                            android:textColor="@color/dark_gray"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            tools:ignore="HardcodedText" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:text="Dec 9th, 2021"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/itgc1"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="3dp"
-                    android:padding="10dp"
-                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/itgc1)}"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/ic_google_cloud"
-
-                                tools:ignore="ContentDescription" />
-                        </androidx.cardview.widget.CardView>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/roboto"
-                            android:paddingTop="10dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="Introduction to Google\nCloud"
-                            android:textAlignment="center"
-                            android:textColor="@color/dark_gray"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            tools:ignore="HardcodedText" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:text="Oct 16th, 2021"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/infosession"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    app:cardElevation="3dp"
-                    android:padding="10dp"
-                    android:onClick="@{() -> homeFragment.openDetailActivity(@string/infosession)}"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:scaleType="fitCenter"
-                                android:padding="5dp"
-                                android:src="@drawable/ic_gdsc"
-                                tools:ignore="ContentDescription" />
-                        </androidx.cardview.widget.CardView>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/roboto"
-                            android:paddingTop="10dp"
-                            android:paddingHorizontal="10dp"
-                            android:text="GDSC Orientation\n2021"
-                            android:textAlignment="center"
-                            android:textColor="@color/dark_gray"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            tools:ignore="HardcodedText" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="10dp"
-                            android:text="Sep 8th, 2021"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-        </HorizontalScrollView>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            tools:listitem="@layout/past_event_item"
+            />
 
         <TextView
             android:id="@+id/tvVerifyCertificate"
@@ -511,7 +223,7 @@
             android:textColor="@color/dark_gray"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/pasteEventScroll"
+            app:layout_constraintTop_toBottomOf="@id/rvPastEvents"
             tools:ignore="HardcodedText"
             tools:layout_editor_absoluteX="0dp" />
 

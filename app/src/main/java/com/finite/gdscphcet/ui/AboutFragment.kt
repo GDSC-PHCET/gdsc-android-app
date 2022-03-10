@@ -63,6 +63,7 @@ class AboutFragment : Fragment() {
     fun onItemClick(position : String){
         val pos = position
         val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailActivity(pos)
+        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailFragment(pos)
         findNavController().navigate(action)
     }
 

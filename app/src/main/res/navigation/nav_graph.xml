@@ -23,8 +23,13 @@
         tools:layout="@layout/fragment_about"
         android:label="ABOUT US" >
         <action
+
             android:id="@+id/action_aboutFragment_to_trackDetailActivity"
             app:destination="@id/trackDetailActivity" />
+
+            android:id="@+id/action_aboutFragment_to_trackDetailFragment"
+            app:destination="@id/trackDetailFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/teamFragment"
@@ -37,7 +42,7 @@
         android:label="activity_event_detail"
         tools:layout="@layout/activity_event_detail" >
         <argument
-            android:name="eventid"
+            android:name="eventId"
             app:argType="string"
             android:defaultValue="infosession" />
     </activity>
@@ -55,4 +60,13 @@
             app:argType="string" />
     </activity>
 
+    <fragment
+        android:id="@+id/trackDetailFragment"
+        android:name="com.finite.gdscphcet.ui.TrackDetailFragment"
+        android:label="fragment_track_detail"
+        tools:layout="@layout/fragment_track_detail" >
+        <argument
+            android:name="position"
+            app:argType="string" />
+    </fragment>
 </navigation>
