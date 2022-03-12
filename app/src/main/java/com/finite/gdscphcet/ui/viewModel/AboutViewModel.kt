@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 
 class AboutViewModel : ViewModel() {
 
-    val instagram = "https://instagram.com/dsc.phcet"
+    val instagram = "https://instagram.com/gdsc.phcet"
     val github = "https://github.com/DSC-PHCET"
     val linkedin = "https://www.linkedin.com/company/dsc-phcet/"
     val youtube = "https://www.youtube.com/channel/UCT_PuQ6yrstde355wXrrE5Q/"

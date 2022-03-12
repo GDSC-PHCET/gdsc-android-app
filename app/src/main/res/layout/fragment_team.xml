@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="30dp"
+        android:paddingBottom="10dp"
         tools:context=".ui.TeamFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -180,33 +180,38 @@
                         android:rowCount="1">
 
                         <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
+                            android:layout_gravity="fill"
                             android:layout_columnWeight="1"
                             android:onClick="@{() -> teamFragment.openLink(@string/ldrishabh)}"
                             android:src="@drawable/ic_linkedin" />
 
                         <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
+                            android:layout_gravity="fill"
                             android:layout_columnWeight="1"
                             android:onClick="@{() -> teamFragment.openLink(@string/ghrishabh)}"
                             android:src="@drawable/ic_github2" />
                         <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
+                            android:layout_gravity="fill"
                             android:layout_columnWeight="1"
                             android:onClick="@{() -> teamFragment.openLink(@string/hnrishabh)}"
                             android:src="@drawable/ic_hashnode" />
                         <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
+                            android:layout_gravity="fill"
                             android:layout_columnWeight="1"
                             android:onClick="@{() -> teamFragment.openLink(@string/igrishabh)}"
                             android:src="@drawable/ic_instagram2" />
                         <ImageView
-                            android:layout_width="30dp"
+                            android:layout_width="0dp"
                             android:layout_height="30dp"
+                            android:layout_gravity="fill"
                             android:layout_columnWeight="1"
                             android:onClick="@{() -> teamFragment.openLink(@string/twrishabh)}"
                             android:src="@drawable/ic_twitter2" />
@@ -221,10 +226,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/roboto"
                 android:paddingHorizontal="10dp"
                 android:paddingTop="10dp"
-                android:text="GDSC Core Team"
+                android:text="GDSC Senior Core Team"
                 android:textAlignment="center"
                 android:textColor="@color/dark_gray"
                 android:textSize="17sp"
@@ -233,30 +239,21 @@
                 tools:ignore="HardcodedText"
                 tools:layout_editor_absoluteX="0dp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                >
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/glCoreTeam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
-
+                android:padding="1dp"
+                android:columnCount="2">
+                <!-- Parth -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvParth"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="fill"
                     app:cardCornerRadius="10dp"
-                    app:contentPadding="10dp"
-                    android:layout_marginEnd="3dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -285,7 +282,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Technical Head"
@@ -313,18 +310,17 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Vedant -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvVedant"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="fill"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginStart="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -352,7 +348,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Graphics Designer"
@@ -379,13 +375,11 @@
                     android:id="@+id/cvSakshi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_columnWeight="1"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginEnd="3dp"
-                    app:layout_constraintTop_toBottomOf="@id/cvParth"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -413,7 +407,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Event Head"
@@ -445,15 +439,13 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvPrathamesh"
                     android:layout_width="0dp"
+                    android:layout_columnWeight="1"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
-                    android:layout_marginStart="3dp"
-                    app:layout_constraintTop_toBottomOf="@id/cvVedant"
-                    app:layout_constraintStart_toEndOf="@id/glCoreTeam"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    android:layout_marginStart="3dp">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_gravity="center"
@@ -481,7 +473,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Social Media Head"
@@ -513,15 +505,13 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvKhushbu"
                     android:layout_width="0dp"
+                    android:layout_columnWeight="1"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
-                    android:layout_marginEnd="3dp"
-                    app:layout_constraintTop_toBottomOf="@id/cvSakshi"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/glCoreTeam">
+                    android:layout_marginEnd="3dp">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_gravity="center"
@@ -548,7 +538,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Editor + Content"
@@ -569,20 +559,18 @@
                         </GridLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <!-- Aryan -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvAryan"
                     android:layout_width="0dp"
+                    android:layout_columnWeight="1"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
-                    android:layout_marginStart="3dp"
-                    app:layout_constraintStart_toEndOf="@id/glCoreTeam"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cvPrathamesh"
-                    >
+                    android:layout_marginStart="3dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -610,7 +598,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="PR"
@@ -637,7 +625,11 @@
                         </GridLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+            </GridLayout>
 
+
+
+                <!-- JuniorCoreTeam -->
                 <TextView
                     android:id="@+id/tvJuniorCoreTeam"
                     android:layout_width="match_parent"
@@ -656,20 +648,23 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:ignore="HardcodedText" />
 
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+                android:columnCount="2">
 
+                <!-- Khushi -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvKhushnuma"
                     android:layout_width="0dp"
+                    android:layout_columnWeight="1"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
-                    android:layout_marginEnd="3dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvJuniorCoreTeam"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/glCoreTeam"
-                    >
+                    android:layout_marginEnd="3dp">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_gravity="center"
@@ -697,7 +692,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Jr. PR &amp; Event Head"
@@ -731,18 +726,17 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Shreya -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvShreya"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginStart="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvJuniorCoreTeam"
-                    app:layout_constraintStart_toEndOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -770,7 +764,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Jr. Event Head"
@@ -798,18 +792,17 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Bhavesh -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvBhavesh"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginEnd="3dp"
-                    app:layout_constraintTop_toBottomOf="@id/cvKhushnuma"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -838,10 +831,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
-                            android:text="Jr. Social Media Head"
+                            android:text="Jr. Social Media"
                             tools:ignore="HardcodedText" />
                         <GridLayout
                             android:layout_width="match_parent"
@@ -860,18 +853,17 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Neha -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvNeha"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginStart="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cvShreya"
-                    app:layout_constraintStart_toEndOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -899,10 +891,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
-                            android:text="Jr. Editor &amp;Content"
+                            android:text="Jr. Editor &amp; Content"
                             tools:ignore="HardcodedText" />
                         <GridLayout
                             android:layout_width="match_parent"
@@ -926,18 +918,18 @@
                         </GridLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <!-- Sohan -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvSohan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginEnd="3dp"
-                    app:layout_constraintTop_toBottomOf="@id/cvBhavesh"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -966,7 +958,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Jr. Technical Head"
@@ -989,18 +981,17 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Anuj -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvAnuj"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginStart="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cvNeha"
-                    app:layout_constraintStart_toEndOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -1028,7 +1019,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Jr. PR Head"
@@ -1050,19 +1041,17 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Ishika -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvIshika"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginEnd="3dp"
-                    android:layout_marginBottom="3dp"
-                    app:layout_constraintTop_toBottomOf="@id/cvSohan"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -1091,7 +1080,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
                             android:text="Jr. Event Head"
@@ -1119,19 +1108,18 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <!-- Aakash -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvAakash"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="fill"
+                    android:layout_margin="5dp"
                     app:cardCornerRadius="10dp"
                     app:contentPadding="10dp"
                     android:layout_marginStart="3dp"
                     android:layout_marginBottom="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cvAnuj"
-                    app:layout_constraintStart_toEndOf="@id/glCoreTeam"
                     >
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -1159,10 +1147,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto"
-                            android:text="Jr. Graphics Designer"
+                            android:text="Jr. GFX Designer"
                             tools:ignore="HardcodedText" />
                         <GridLayout
                             android:layout_width="match_parent"
@@ -1181,7 +1169,9 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </GridLayout>
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

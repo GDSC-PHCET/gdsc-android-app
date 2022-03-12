@@ -12,9 +12,7 @@
         <entry key="..\:/Users/pranj/AndroidStudioProjects/Open Source/GDSC -APP/gdsc-android-app/app/src/main/res/layout/fragment_team.xml" value="0.1796875" />
         <entry key="..\:/Users/pranj/AndroidStudioProjects/Open Source/GDSC -APP/gdsc-android-app/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22" />
         <entry key="..\:/Users/priyanshu borole/AndroidOtherProj/gdsc-android-app/app/src/main/res/layout/activity_event_detail.xml" value="0.2" />
-        <entry key="..\:/Users/priyanshu borole/AndroidOtherProj/gdsc-android-app/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/priyanshu borole/AndroidOtherProj/gdsc-android-app/app/src/main/res/layout/fragment_home.xml" value="0.1" />
-        <entry key="..\:/Users/priyanshu borole/AndroidOtherProj/gdsc-android-app/app/src/main/res/layout/fragment_team.xml" value="0.1" />
         <entry key="..\:/Users/priyanshu borole/AndroidOtherProj/gdsc-android-app/app/src/main/res/layout/past_event_item.xml" value="0.4" />
         <entry key="..\:/Users/vibhu/AndroidStudioProjects/gdsc-android-app/app/src/main/res/layout/activity_event_detail.xml" value="0.16197916666666667" />
         <entry key="..\:/Users/vibhu/AndroidStudioProjects/gdsc-android-app/app/src/main/res/layout/activity_track_detail.xml" value="0.1" />
@@ -32,7 +30,8 @@
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/activity_main.xml" value="0.21" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/fragment_about.xml" value="0.33" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/fragment_team.xml" value="0.25" />
+        <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/fragment_team.xml" value="0.22" />
+        <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/past_event_item.xml" value="0.33177083333333335" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/menu/bottom_nav_menu.xml" value="0.33177083333333335" />
       </map>
     </option>
