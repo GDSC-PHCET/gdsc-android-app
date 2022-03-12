@@ -61,7 +61,16 @@ This project proposes a "Community Android Application" to accumulate all the In
 - For any discussions related to this project, [Join our Discord Server](https://discord.gg/pPyW66y545)
 
 
+<h2>Contributors:</h2>
+
 ## Thanks to all the contributors ❤️
-<a href = "https://github.com/DSC-PHCET/gdsc-android-app/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo=DSC-PHCET/gdsc-android-app"/>
-</a>
+
+<table>
+   <tr>
+      <td>
+         <a href = "https://github.com/DSC-PHCET/gdsc-android-app/graphs/contributors">
+         <img src = "https://contrib.rocks/image?repo=DSC-PHCET/gdsc-android-app"/>
+         </a>
+      </td>
+   </tr>
+</table>
