@@ -8,7 +8,7 @@
     app:cardBackgroundColor="@color/white"
     android:clickable="true"
     android:padding="10dp"
-    android:layout_margin="15dp"
+    android:layout_margin="5dp"
     app:cardCornerRadius="15dp"
     app:cardElevation="3dp"
     android:layout_gravity="center_horizontal"
