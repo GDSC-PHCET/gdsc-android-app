@@ -24,5 +24,6 @@
     <color name="green">#00E35F</color>
     <color name="blue">#0000FF</color>
     <color name="navy">#000000</color>
+    <color name="shimmer_color">#BFBDBD</color>
 
 </resources>
