@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.adapters.PastEventsAdapter
 import com.finite.gdscphcet.adapters.UpcomingEventsAdapter
@@ -27,6 +29,9 @@ class HomeFragment : Fragment() {
     private lateinit var pastEventsList: ArrayList<PastEventModel>
     private lateinit var upcomingEventsRecyclerView: RecyclerView
     private lateinit var upcomingEventsList: ArrayList<UpcomingEventModel>
+    private lateinit var upcomingPlaceHolder: LinearLayout
+    private lateinit var upcomingShimmer: ShimmerFrameLayout
+    private lateinit var pastShimmer: ShimmerFrameLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +49,13 @@ class HomeFragment : Fragment() {
             homeViewModel = viewModel
             homeFragment = this@HomeFragment
         }
+
+        upcomingShimmer = binding!!.shimmerEffectUpcomingRv
+        pastShimmer = binding!!.shimmerEffectPastRv
+        upcomingPlaceHolder = binding!!.upcomingEventsPlaceholderLayout
+
+        upcomingShimmer.startShimmer()
+        pastShimmer.startShimmer()
 
         binding?.verifyButton?.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToCertificateActivity()
@@ -84,6 +96,9 @@ class HomeFragment : Fragment() {
                         requireContext(),
                         pastEventsList.reversed() as MutableList<PastEventModel>
                     )
+                    pastShimmer.stopShimmer()
+                    pastShimmer.visibility = View.GONE
+                    pastEventsRecyclerView.visibility = View.VISIBLE
                 }
             }
 
@@ -114,8 +129,14 @@ class HomeFragment : Fragment() {
                         requireContext(),
                         upcomingEventsList.reversed() as MutableList<UpcomingEventModel>
                     )
+                    upcomingShimmer.stopShimmer()
+                    upcomingShimmer.visibility = View.GONE
+
                 } else{
+                    upcomingShimmer.stopShimmer()
+                    upcomingShimmer.visibility = View.GONE
                     upcomingEventsRecyclerView.visibility = View.GONE
+                    upcomingPlaceHolder.visibility = View.VISIBLE
                 }
             }
 
