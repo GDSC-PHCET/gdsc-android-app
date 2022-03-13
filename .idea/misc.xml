@@ -33,6 +33,10 @@
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/fragment_team.xml" value="0.22" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/past_event_item.xml" value="0.33177083333333335" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/menu/bottom_nav_menu.xml" value="0.33177083333333335" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/drawable-hdpi/arrow_forward_24.xml" value="0.1395" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/drawable-hdpi/ic_arrow_24.xml" value="0.141" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/drawable-hdpi/ic_video_24.xml" value="0.1395" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/activity_track_detail.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

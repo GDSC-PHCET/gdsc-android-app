@@ -1,20 +1,561 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.TrackDetailActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Track Detail Activity"
-        android:gravity="center"
-        android:textSize="30sp"
-        tools:ignore="HardcodedText"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="trackDetailActivity"
+            type="com.finite.gdscphcet.ui.TrackDetailActivity" />
+        <variable
+            name="trackViewModel"
+            type="com.finite.gdscphcet.ui.viewModel.TrackDetailViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        android:clipToPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.TrackDetailActivity">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <GridLayout
+                    android:id="@+id/headerGridTrackLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:paddingHorizontal="10dp"
+                    android:layout_marginTop="9dp"
+                    android:rowCount="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center|start"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_back_button"
+                        app:tint="@color/red" />
+
+                    <TextView
+                        android:id="@+id/track_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:fontFamily="@font/roboto"
+                        android:text="App Developement"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                </GridLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/roboto"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="8dp"
+                    android:text="Resources by GDSC PHCET"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.263"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/headerGridTrackLayout"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_gdsc"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.948"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <GridLayout
+                android:id="@+id/divider_grid"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:columnCount="4"
+                android:rowCount="1"
+                app:layout_constraintTop_toBottomOf="@id/topConstraint">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#DB4437" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#4285F4" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#0F9D58" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#F4B400" />
+            </GridLayout>
+
+            <TextView
+                android:id="@+id/study_res_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
+                android:text="Study Resources"
+                android:textColor="@color/dark_gray"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/topConstraint"
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/video_container"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/study_res_text_view"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/ic_arrow_24"/>
+
+                <TextView
+                    android:id="@+id/videoButton"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/button_style"
+                    android:text="Video Resources"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/study_res_text_view"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/doc_container"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:padding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/video_container"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/ic_arrow_24"/>
+
+                <TextView
+                    android:id="@+id/docButton"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/button_style"
+                    android:text="Documentation"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/study_res_text_view"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <GridLayout
+                android:id="@+id/divider_grid_2"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="10dp"
+                android:columnCount="4"
+                android:rowCount="1"
+                app:layout_constraintTop_toBottomOf="@id/doc_container">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#DB4437" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#4285F4" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#0F9D58" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="match_parent"
+                    android:background="#F4B400" />
+            </GridLayout>
+
+
+            <LinearLayout
+                android:id="@+id/beginner_level_project_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_grid_2"
+                android:layout_marginTop="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|start"
+                    android:fontFamily="@font/roboto"
+                    android:text="Projects"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topConstraint"
+                    tools:ignore="HardcodedText" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/arrow_forward_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|start"
+                    android:fontFamily="@font/roboto"
+                    android:text="Beginner levels"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topConstraint"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+
+
+            <HorizontalScrollView
+                android:id="@+id/tracksScroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/beginner_level_project_view">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#99ccff">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/appDev"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="3dp"
+                        android:padding="10dp"
+
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto"
+                                android:paddingTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="Dice Roller App"
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/dice_roller"
+                                android:layout_gravity="center"
+                                android:contentDescription="Project image"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto"
+                                android:paddingTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="A Dice Roller Android app that has a Button to roll a dice and updates the text on the
+screen with the result of the roll."
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        app:cardElevation="3dp"
+                        android:padding="10dp"
+
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto"
+                                android:paddingTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="Tip Calculator App"
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/tip_calculator"
+                                android:layout_gravity="center"
+                                android:contentDescription="Project image"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto"
+                                android:paddingTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="You can use tip-calculator app to calculate how much the tips someone for great service."
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        app:cardElevation="3dp"
+                        android:padding="10dp"
+
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto"
+                                android:paddingTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="CupCake App"
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/cup_cake"
+                                android:layout_gravity="center"
+                                android:contentDescription="Project image"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto"
+                                android:paddingTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="This app contains an order flow for cupcakes with options for quantity, flavor, and pickup date."
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        app:cardElevation="3dp"
+                        android:padding="10dp"
+
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto"
+                                android:paddingTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="Words App"
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="18sp"
+                                tools:ignore="HardcodedText" />
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_marginTop="10dp"
+                                android:src="@drawable/words_app"
+                                android:layout_gravity="center"
+                                android:contentDescription="Project image"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/roboto"
+                                android:paddingTop="10dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="Words app allows you to select a letter and use Intents to navigate to an Activity that
+presents a number of words starting with that letter."
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_gray"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/visit_you_tube_channel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="#ff0000"
+
+                android:text=" Visit our You tube channel"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tracksScroll"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>
