@@ -137,7 +137,7 @@ class EventDetailActivity : AppCompatActivity() {
                 val shortdesc = it.child("shortdesc").value.toString()
                 val eventlink = it.child("eventlink").value.toString()
                 val posterlink = it.child("posterlink").value.toString()
-                val videolink = it.child("videolink").value.toString()
+                val videolink = it.child("ticketlink").value.toString()
 
                 //Toast.makeText(this, "$title : $date",Toast.LENGTH_SHORT).show()
 

@@ -129,9 +129,12 @@ class HomeFragment : Fragment() {
                         requireContext(),
                         upcomingEventsList.reversed() as MutableList<UpcomingEventModel>
                     )
+                    upcomingShimmer.stopShimmer()
                     upcomingShimmer.visibility = View.GONE
 
                 } else{
+                    upcomingShimmer.stopShimmer()
+                    upcomingShimmer.visibility = View.GONE
                     upcomingEventsRecyclerView.visibility = View.GONE
                     upcomingPlaceHolder.visibility = View.VISIBLE
                 }
