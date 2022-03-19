@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.finite.gdscphcet.databinding.FragmentAboutBinding
@@ -60,8 +61,9 @@ class AboutFragment : Fragment() {
     }
 
     fun onItemClick(position : String){
-        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailActivity(position)
-        findNavController().navigate(action)
+        Toast.makeText(context, "Coming soon! ^^", Toast.LENGTH_SHORT).show()
+//        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailActivity(position)
+//        findNavController().navigate(action)
     }
 
 }

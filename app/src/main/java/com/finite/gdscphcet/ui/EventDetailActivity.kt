@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -41,6 +42,11 @@ class EventDetailActivity : AppCompatActivity() {
 
         val binding = ActivityEventDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = this.resources.getColor(R.color.status_bar)
 
         binding.apply {
             eventActivity = this@EventDetailActivity
@@ -94,13 +100,13 @@ class EventDetailActivity : AppCompatActivity() {
         database.child(eventId).get().addOnSuccessListener {
             if (it.exists()){
 
-                posterImvShimmer.visibility = View.GONE
-                eventDetailsShimmer.visibility = View.GONE
-                eventAboutShimmer.visibility = View.GONE
-
-                posterImvShimmer.stopShimmer()
-                eventDetailsShimmer.stopShimmer()
-                eventAboutShimmer.stopShimmer()
+//                posterImvShimmer.visibility = View.GONE
+//                eventDetailsShimmer.visibility = View.GONE
+//                eventAboutShimmer.visibility = View.GONE
+//
+//                posterImvShimmer.stopShimmer()
+//                eventDetailsShimmer.stopShimmer()
+//                eventAboutShimmer.stopShimmer()
 
                 Log.d("success", "Hua")
                 val title = it.child("title").value.toString()
@@ -132,6 +138,14 @@ class EventDetailActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
+                posterImvShimmer.visibility = View.GONE
+                eventDetailsShimmer.visibility = View.GONE
+                eventAboutShimmer.visibility = View.GONE
+
+                posterImvShimmer.stopShimmer()
+                eventDetailsShimmer.stopShimmer()
+                eventAboutShimmer.stopShimmer()
+
             }else{
                 Toast.makeText(this,"does not exists",Toast.LENGTH_SHORT).show()
                 Log.d("DoesNotExists", " nai hai data bhai :(")
@@ -139,6 +153,7 @@ class EventDetailActivity : AppCompatActivity() {
 
         }.addOnFailureListener{
             Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
+            finish()
             Log.d("Failed","fail zhaala")
         }
     }
@@ -149,13 +164,6 @@ class EventDetailActivity : AppCompatActivity() {
         database.child(eventId).get().addOnSuccessListener {
             if (it.exists()){
 
-                posterImvShimmer.visibility = View.GONE
-                eventDetailsShimmer.visibility = View.GONE
-                eventAboutShimmer.visibility = View.GONE
-
-                posterImvShimmer.stopShimmer()
-                eventDetailsShimmer.stopShimmer()
-                eventAboutShimmer.stopShimmer()
 
                 Log.d("success", "Hua")
                 val title = it.child("title").value.toString()
@@ -187,6 +195,14 @@ class EventDetailActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
+                posterImvShimmer.visibility = View.GONE
+                eventDetailsShimmer.visibility = View.GONE
+                eventAboutShimmer.visibility = View.GONE
+
+                posterImvShimmer.stopShimmer()
+                eventDetailsShimmer.stopShimmer()
+                eventAboutShimmer.stopShimmer()
+
             }else{
                 Toast.makeText(this,"does not exists",Toast.LENGTH_SHORT).show()
                 Log.d("DoesNotExists", " nai hai data bhai :(")
@@ -194,6 +210,7 @@ class EventDetailActivity : AppCompatActivity() {
 
         }.addOnFailureListener{
             Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
+            finish()
             Log.d("Failed","fail zhaala")
         }
     }

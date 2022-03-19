@@ -140,9 +140,10 @@
 
                 <ImageView
                     android:id="@+id/PosterImv"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:scaleType="fitCenter"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -157,11 +158,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <include layout="@layout/shimmer_event_image" />
-                    </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <include layout="@layout/shimmer_event_image" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -347,7 +354,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <include layout="@layout/shimmer_event_about_text" />
+                        <include layout="@layout/shimmer_event_details_text" />
                     </LinearLayout>
 
                 </com.facebook.shimmer.ShimmerFrameLayout>

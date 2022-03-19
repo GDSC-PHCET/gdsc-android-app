@@ -3,6 +3,7 @@ package com.finite.gdscphcet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.finite.gdscphcet.databinding.ActivityCertificateBinding
@@ -20,6 +21,11 @@ class CertificateActivity : AppCompatActivity() {
 
         val binding = ActivityCertificateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = this.resources.getColor(R.color.status_bar)
 
         binding?.apply {
             certificateVm = viewModel
