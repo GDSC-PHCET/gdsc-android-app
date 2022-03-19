@@ -1,0 +1,63 @@
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/eventTitleLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintTop_toBottomOf="@id/divider_grid2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvEventTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:paddingHorizontal="10dp"
+        android:background="@color/shimmer_color"
+        android:text=""
+        android:textColor="@color/dark_gray"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEventDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/roboto"
+        android:paddingHorizontal="10dp"
+        android:background="@color/shimmer_color"
+        android:text=""
+        android:textColor="@color/dark_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventTitle"/>
+
+    <TextView
+        android:id="@+id/tvEventTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto"
+        android:paddingHorizontal="10dp"
+        android:background="@color/shimmer_color"
+        android:text=""
+        android:textColor="@color/dark_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventDate"/>
+
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto"
+        android:paddingHorizontal="10dp"
+        android:text=""
+        android:background="@color/shimmer_color"
+        android:textColor="@color/dark_gray"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tvEventTime"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

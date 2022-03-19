@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.databinding.ActivityEventDetailBinding
 import com.finite.gdscphcet.ui.viewModel.EventDetailViewModel
@@ -30,6 +32,9 @@ class EventDetailActivity : AppCompatActivity() {
     private lateinit var tvEventMode : TextView
     private lateinit var tvAboutDetails : TextView
     private lateinit var eventButton: Button
+    private lateinit var posterImvShimmer: ShimmerFrameLayout
+    private lateinit var eventDetailsShimmer: ShimmerFrameLayout
+    private lateinit var eventAboutShimmer: ShimmerFrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,14 @@ class EventDetailActivity : AppCompatActivity() {
         tvEventMode = binding.tvEventMode
         tvAboutDetails = binding.tvAboutDetails
         eventButton = binding.eventButton
+
+        posterImvShimmer = binding.shimmerEffectEventPoster
+        eventDetailsShimmer = binding.shimmerEffectEventDetails
+        eventAboutShimmer = binding.shimmerEffectEventAbout
+
+        posterImvShimmer.startShimmer()
+        eventDetailsShimmer.startShimmer()
+        eventAboutShimmer.startShimmer()
 
         val eventId = intent.getStringExtra("eventId")
         val eventTicketLink = intent.getStringExtra("eventTicket")
@@ -81,6 +94,14 @@ class EventDetailActivity : AppCompatActivity() {
         database.child(eventId).get().addOnSuccessListener {
             if (it.exists()){
 
+                posterImvShimmer.visibility = View.GONE
+                eventDetailsShimmer.visibility = View.GONE
+                eventAboutShimmer.visibility = View.GONE
+
+                posterImvShimmer.stopShimmer()
+                eventDetailsShimmer.stopShimmer()
+                eventAboutShimmer.stopShimmer()
+
                 Log.d("success", "Hua")
                 val title = it.child("title").value.toString()
                 val date = it.child("date").value.toString()
@@ -111,7 +132,6 @@ class EventDetailActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-
             }else{
                 Toast.makeText(this,"does not exists",Toast.LENGTH_SHORT).show()
                 Log.d("DoesNotExists", " nai hai data bhai :(")
@@ -128,6 +148,14 @@ class EventDetailActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("upcomingEvents")
         database.child(eventId).get().addOnSuccessListener {
             if (it.exists()){
+
+                posterImvShimmer.visibility = View.GONE
+                eventDetailsShimmer.visibility = View.GONE
+                eventAboutShimmer.visibility = View.GONE
+
+                posterImvShimmer.stopShimmer()
+                eventDetailsShimmer.stopShimmer()
+                eventAboutShimmer.stopShimmer()
 
                 Log.d("success", "Hua")
                 val title = it.child("title").value.toString()
@@ -158,7 +186,6 @@ class EventDetailActivity : AppCompatActivity() {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(eventlink))
                     startActivity(intent)
                 }
-
 
             }else{
                 Toast.makeText(this,"does not exists",Toast.LENGTH_SHORT).show()
