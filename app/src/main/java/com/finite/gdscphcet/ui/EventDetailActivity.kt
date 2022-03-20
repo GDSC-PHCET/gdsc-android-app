@@ -2,7 +2,6 @@ package com.finite.gdscphcet.ui
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -26,16 +26,17 @@ class EventDetailActivity : AppCompatActivity() {
     val args: EventDetailActivityArgs by navArgs()
     private val viewModel: EventDetailViewModel by viewModels()
     private lateinit var videoButton: Button
-    private lateinit var posterImv : ImageView
-    private lateinit var tvEventTitle : TextView
-    private lateinit var tvEventDate : TextView
-    private lateinit var tvEventTime : TextView
-    private lateinit var tvEventMode : TextView
-    private lateinit var tvAboutDetails : TextView
+    private lateinit var posterImv: ImageView
+    private lateinit var tvEventTitle: TextView
+    private lateinit var tvEventDate: TextView
+    private lateinit var tvEventTime: TextView
+    private lateinit var tvEventMode: TextView
+    private lateinit var tvAboutDetails: TextView
     private lateinit var eventButton: Button
     private lateinit var posterImvShimmer: ShimmerFrameLayout
     private lateinit var eventDetailsShimmer: ShimmerFrameLayout
     private lateinit var eventAboutShimmer: ShimmerFrameLayout
+    private lateinit var Eventsharebutton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +62,7 @@ class EventDetailActivity : AppCompatActivity() {
         tvEventMode = binding.tvEventMode
         tvAboutDetails = binding.tvAboutDetails
         eventButton = binding.eventButton
+        Eventsharebutton = binding.Eventsharebutton
 
         posterImvShimmer = binding.shimmerEffectEventPoster
         eventDetailsShimmer = binding.shimmerEffectEventDetails
@@ -78,27 +80,26 @@ class EventDetailActivity : AppCompatActivity() {
             if (eventTicketLink != null) {
                 setUpcomingEventData(eventId)
                 videoButton.setText(getString(R.string.bookEventTicket))
-            }
-            else
+            } else
                 setPastEventData(eventId)
         }
     }
 
-    private lateinit var database : DatabaseReference
+    private lateinit var database: DatabaseReference
 
     private fun setPastEventData(eventId: String) {
 
-        val posterImv : ImageView = findViewById(R.id.PosterImv)
-        val tvEventTitle : TextView = findViewById(R.id.tvEventTitle)
-        val tvEventDate : TextView = findViewById(R.id.tvEventDate)
-        val tvEventTime : TextView = findViewById(R.id.tvEventTime)
-        val tvEventMode : TextView = findViewById(R.id.tvEventMode)
-        val tvAboutDetails : TextView = findViewById(R.id.tvAboutDetails)
+        val posterImv: ImageView = findViewById(R.id.PosterImv)
+        val tvEventTitle: TextView = findViewById(R.id.tvEventTitle)
+        val tvEventDate: TextView = findViewById(R.id.tvEventDate)
+        val tvEventTime: TextView = findViewById(R.id.tvEventTime)
+        val tvEventMode: TextView = findViewById(R.id.tvEventMode)
+        val tvAboutDetails: TextView = findViewById(R.id.tvAboutDetails)
         val eventButton: Button = findViewById(R.id.eventButton)
 
         database = FirebaseDatabase.getInstance().getReference("pastEvents")
         database.child(eventId).get().addOnSuccessListener {
-            if (it.exists()){
+            if (it.exists()) {
 
 //                posterImvShimmer.visibility = View.GONE
 //                eventDetailsShimmer.visibility = View.GONE
@@ -120,7 +121,16 @@ class EventDetailActivity : AppCompatActivity() {
 
                 //Toast.makeText(this, "$title : $date",Toast.LENGTH_SHORT).show()
 
-                Glide.with(this).load(posterlink).error(R.drawable.ic_404_image).centerCrop().into(posterImv)
+                Glide.with(this).load(posterlink).error(R.drawable.ic_404_image).centerCrop()
+                    .into(posterImv)
+
+                Eventsharebutton.setOnClickListener {
+                    val intent = Intent()
+                    intent.action = Intent.ACTION_SEND
+                    intent.type = "text/plain"
+                    intent.putExtra(Intent.EXTRA_TEXT, "Hi , there was an event called : "+title+" at "+time+" "+date+" organised by GDSC PHCET.\n\n"+"Checkout here: "+eventlink)
+                    startActivity(Intent.createChooser(intent, "Share with:"))
+                }
 
                 tvEventTitle.text = title
                 tvEventDate.text = "📅 \t\t\t:\t\t$date"
@@ -146,15 +156,15 @@ class EventDetailActivity : AppCompatActivity() {
                 eventDetailsShimmer.stopShimmer()
                 eventAboutShimmer.stopShimmer()
 
-            }else{
-                Toast.makeText(this,"does not exists",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "does not exists", Toast.LENGTH_SHORT).show()
                 Log.d("DoesNotExists", " nai hai data bhai :(")
             }
 
-        }.addOnFailureListener{
-            Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
             finish()
-            Log.d("Failed","fail zhaala")
+            Log.d("Failed", "fail zhaala")
         }
     }
 
@@ -162,7 +172,7 @@ class EventDetailActivity : AppCompatActivity() {
 
         database = FirebaseDatabase.getInstance().getReference("upcomingEvents")
         database.child(eventId).get().addOnSuccessListener {
-            if (it.exists()){
+            if (it.exists()) {
 
 
                 Log.d("success", "Hua")
@@ -177,7 +187,16 @@ class EventDetailActivity : AppCompatActivity() {
 
                 //Toast.makeText(this, "$title : $date",Toast.LENGTH_SHORT).show()
 
-                Glide.with(this).load(posterlink).error(R.drawable.ic_404_image).centerCrop().into(posterImv)
+                Glide.with(this).load(posterlink).error(R.drawable.ic_404_image).centerCrop()
+                    .into(posterImv)
+
+                Eventsharebutton.setOnClickListener {
+                    val intent = Intent()
+                    intent.action = Intent.ACTION_SEND
+                    intent.type = "text/plain"
+                    intent.putExtra(Intent.EXTRA_TEXT, "Hi , there will be event called : "+title+" at "+time+" "+date+" organised by GDSC PHCET.\n\n"+"Checkout here: "+eventlink)
+                    startActivity(Intent.createChooser(intent, "Share with:"))
+                }
 
                 tvEventTitle.text = title
                 tvEventDate.text = "📅 \t\t\t:\t\t$date"
@@ -203,15 +222,15 @@ class EventDetailActivity : AppCompatActivity() {
                 eventDetailsShimmer.stopShimmer()
                 eventAboutShimmer.stopShimmer()
 
-            }else{
-                Toast.makeText(this,"does not exists",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "does not exists", Toast.LENGTH_SHORT).show()
                 Log.d("DoesNotExists", " nai hai data bhai :(")
             }
 
-        }.addOnFailureListener{
-            Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
             finish()
-            Log.d("Failed","fail zhaala")
+            Log.d("Failed", "fail zhaala")
         }
     }
 
