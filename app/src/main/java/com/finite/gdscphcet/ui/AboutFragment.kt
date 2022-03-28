@@ -3,13 +3,12 @@ package com.finite.gdscphcet.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.finite.gdscphcet.databinding.FragmentAboutBinding
 import com.finite.gdscphcet.ui.viewModel.AboutViewModel
 
@@ -52,6 +51,11 @@ class AboutFragment : Fragment() {
         }
         binding?.muchMore?.setOnClickListener {
             onItemClick("muchMore")
+        }
+        binding?.learnMoreButton?.setOnClickListener {
+            val url = "https://developers.google.com/community/gdsc"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
         }
     }
 
