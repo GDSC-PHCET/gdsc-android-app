@@ -1,13 +1,21 @@
 package com.finite.gdscphcet
 
+
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.widget.doAfterTextChanged
 import com.finite.gdscphcet.databinding.ActivityCertificateBinding
 import com.finite.gdscphcet.ui.CertificateViewModel
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
@@ -15,6 +23,11 @@ class CertificateActivity : AppCompatActivity() {
 
     private val viewModel : CertificateViewModel by viewModels()
     private lateinit var database : DatabaseReference
+    lateinit var progress_bar:ProgressBar
+    lateinit var p_bar_layout:RelativeLayout
+    lateinit var et_code:TextInputEditText
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,23 +40,52 @@ class CertificateActivity : AppCompatActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.statusBarColor = this.resources.getColor(R.color.status_bar)
 
+        progress_bar=findViewById(R.id.progress_Bar)
+        p_bar_layout=findViewById(R.id.p_bar_layout)
+        et_code=findViewById(R.id.codeEditText)
+
         binding?.apply {
             certificateVm = viewModel
             certificateActivity = this@CertificateActivity
+
+
+
         }
+
+        et_code.setOnClickListener {
+            binding.codeTextField.setError(null)
+        }
+
+        et_code.doAfterTextChanged {
+            binding.codeTextField.setError(null)
+            binding.certstatus.text = ""
+        }
+
 
         binding.verifyButton.setOnClickListener{
             var text: String = binding.codeEditText.text.toString().trim()
+
             if (text.isEmpty()) {
                 binding.codeTextField.setError("Error! Enter the Code!")
             }
             else {
                 text = text.uppercase()
 
+                closeKeyBoard()
+                et_code.onEditorAction(EditorInfo.IME_ACTION_DONE)
+                progress_bar.visibility=View.VISIBLE
+                p_bar_layout.visibility=View.VISIBLE
+                et_code.setFocusable(false)
+
                 database = FirebaseDatabase.getInstance().getReference("certificates")
                 database.child(text).get().addOnSuccessListener {
 
+
                     if (it.exists()) { // Real Certificate
+                        progress_bar.visibility=View.GONE
+                        p_bar_layout.visibility=View.GONE
+                        et_code.setFocusableInTouchMode(true)
+
                         binding.codeTextField.setError(null)
                         binding.certstatus.text = "Status : Verified Certificate"
                         binding.certissuedto.text = "Issued To :  " + it.child("issuedTo").value.toString()
@@ -57,6 +99,12 @@ class CertificateActivity : AppCompatActivity() {
 
                     } else {
                         // Fake Certificate
+                        progress_bar.visibility=View.GONE
+                        p_bar_layout.visibility=View.GONE
+                        et_code.setFocusableInTouchMode(true)
+
+
+
                         binding.codeTextField.setError("Invalid Code")
 
                         Toast.makeText(this, "InvalidCode : $text",Toast.LENGTH_SHORT).show()
@@ -69,9 +117,14 @@ class CertificateActivity : AppCompatActivity() {
                         binding.certtype.text = ""
                     }
 
+
                 }.addOnFailureListener {
 
-                    Toast.makeText(this, "OnFailureCalled",Toast.LENGTH_SHORT).show()
+                    progress_bar.visibility=View.GONE
+                    p_bar_layout.visibility=View.GONE
+                    et_code.setFocusableInTouchMode(true)
+
+                    Toast.makeText(this, "No Internet Connection!Please check your network connectivity.",Toast.LENGTH_LONG).show()
 
                 }
 
@@ -79,5 +132,25 @@ class CertificateActivity : AppCompatActivity() {
 
         }
 
+
+
+
     }
+
+
+
+    private fun closeKeyBoard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+
+
+
+
+
+
 }
