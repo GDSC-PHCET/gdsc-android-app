@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
@@ -26,11 +27,18 @@ class CertificateActivity : AppCompatActivity() {
     lateinit var p_bar_layout:RelativeLayout
     lateinit var et_code:TextInputEditText
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityCertificateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = this.resources.getColor(R.color.status_bar)
 
         progress_bar=findViewById(R.id.progress_Bar)
         p_bar_layout=findViewById(R.id.p_bar_layout)
