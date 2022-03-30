@@ -20,6 +20,7 @@ import com.finite.gdscphcet.R
 import com.finite.gdscphcet.model.PastEventModel
 import com.finite.gdscphcet.model.UpcomingEventModel
 import com.finite.gdscphcet.ui.EventDetailActivity
+import java.text.SimpleDateFormat
 
 class UpcomingEventsAdapter(private val contxt: Context, private val upcomingEventList: MutableList<UpcomingEventModel>) : RecyclerView.Adapter<UpcomingEventsAdapter.EventViewHolder>() {
 
@@ -35,6 +36,8 @@ class UpcomingEventsAdapter(private val contxt: Context, private val upcomingEve
             Glide.with(holder.itemView.context).load(currentEvent.thumbnaillink).into(holder.pastEventThumbnail)
             holder.pastEventTitle.text = currentEvent.title
             holder.pastEventDate.text = currentEvent.date
+
+            val valid_until = holder.pastEventDate.text
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context,EventDetailActivity::class.java)
