@@ -82,6 +82,11 @@ class CertificateActivity : AppCompatActivity() {
 
 
                     if (it.exists()) { // Real Certificate
+
+                        var dialog = DialogueboxFragment()
+                        dialog.show(supportFragmentManager, "customDialogue")
+                        dialog.setCancelable(true)
+
                         progress_bar.visibility=View.GONE
                         p_bar_layout.visibility=View.GONE
                         et_code.setFocusableInTouchMode(true)
