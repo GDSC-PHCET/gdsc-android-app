@@ -53,6 +53,11 @@ class AboutFragment : Fragment() {
         binding?.muchMore?.setOnClickListener {
             onItemClick("muchMore")
         }
+        binding?.learnMoreButton?.setOnClickListener {
+            val url = "https://developers.google.com/community/gdsc"
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
     }
 
     fun openLink(link: String) {
