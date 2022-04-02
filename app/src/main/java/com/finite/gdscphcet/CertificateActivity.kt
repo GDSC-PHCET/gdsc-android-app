@@ -2,6 +2,8 @@ package com.finite.gdscphcet
 
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -83,9 +85,11 @@ class CertificateActivity : AppCompatActivity() {
 
                     if (it.exists()) { // Real Certificate
 
-                        var dialog = DialogueboxFragment()
-                        dialog.show(supportFragmentManager, "customDialogue")
-                        dialog.setCancelable(true)
+                        var mydialog = DialogueboxFragment()
+                        mydialog.show(supportFragmentManager, "customDialogue")
+                        mydialog.setCancelable(true)
+
+
 
                         progress_bar.visibility=View.GONE
                         p_bar_layout.visibility=View.GONE
