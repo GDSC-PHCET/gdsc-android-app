@@ -15,7 +15,7 @@ import com.finite.gdscphcet.ui.viewModel.AboutViewModel
 
 class AboutFragment : Fragment() {
 
-    private var binding : FragmentAboutBinding? = null
+    private var binding : com.finite.gdscphcet.databinding.FragmentAboutBinding? = null
     private val viewModel: AboutViewModel by viewModels()
 
     override fun onCreateView(
@@ -35,8 +35,11 @@ class AboutFragment : Fragment() {
             aboutFragment = this@AboutFragment
             aboutViewModel = viewModel
         }
-        binding?.appDev?.setOnClickListener {
-            onItemClick("appDev")
+        binding?.androidDev?.setOnClickListener {
+            onItemClick("androidDev")
+        }
+        binding?.flutterDev?.setOnClickListener {
+            onItemClick("flutterDev")
         }
         binding?.machinelearning?.setOnClickListener {
             onItemClick("machineLearning")
