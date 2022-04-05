@@ -35,8 +35,11 @@ class AboutFragment : Fragment() {
             aboutFragment = this@AboutFragment
             aboutViewModel = viewModel
         }
-        binding?.appDev?.setOnClickListener {
-            onItemClick("appDev")
+        binding?.androidDev?.setOnClickListener {
+            onItemClick("androidDev")
+        }
+        binding?.flutterDev?.setOnClickListener {
+            onItemClick("flutterDev")
         }
         binding?.machinelearning?.setOnClickListener {
             onItemClick("machineLearning")
