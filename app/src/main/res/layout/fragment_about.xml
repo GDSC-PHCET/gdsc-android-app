@@ -460,6 +460,111 @@
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/cloudComputing"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="3dp"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_cloud_computing"
+                                    android:layout_gravity="center"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/roboto"
+                                    android:paddingTop="10dp"
+                                    android:paddingHorizontal="10dp"
+                                    android:text="Cloud\nComputing"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="15sp"
+                                    tools:ignore="HardcodedText" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/arVr"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="3dp"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_ar_vr"
+                                    android:layout_gravity="center"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/roboto"
+                                    android:paddingTop="10dp"
+                                    android:paddingHorizontal="10dp"
+                                    android:text="AR/VR\n"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="15sp"
+                                    tools:ignore="HardcodedText" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/graphicDesign"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="3dp"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_graphic_design"
+                                    android:layout_gravity="center"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/roboto"
+                                    android:paddingTop="10dp"
+                                    android:paddingHorizontal="10dp"
+                                    android:text="Graphic\nDesign"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="15sp"
+                                    tools:ignore="HardcodedText" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/muchMore"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"

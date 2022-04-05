@@ -50,6 +50,15 @@ class AboutFragment : Fragment() {
         binding?.openSource?.setOnClickListener {
             onItemClick("openSource")
         }
+        binding?.cloudComputing?.setOnClickListener {
+            onItemClick("cloudComputing")
+        }
+        binding?.arVr?.setOnClickListener {
+            onItemClick("AR/VR")
+        }
+        binding?.graphicDesign?.setOnClickListener {
+            onItemClick("graphicDesigning")
+        }
         binding?.muchMore?.setOnClickListener {
             onItemClick("muchMore")
         }
