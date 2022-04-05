@@ -64,4 +64,13 @@
             android:name="position"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/dialogueboxFragment"
+        android:name="com.finite.gdscphcet.DialogueboxFragment"
+        android:label="fragment_dialoguebox"
+        tools:layout="@layout/fragment_dialoguebox" >
+        <action
+            android:id="@+id/action_dialogueboxFragment_to_certificateActivity"
+            app:destination="@id/certificateActivity" />
+    </fragment>
 </navigation>
