@@ -75,4 +75,9 @@ dependencies {
 
     //shimmer effect
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //for fcm
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-iid:19.0.1'
+    implementation 'com.google.firebase:firebase-messaging:19.0.1'
 }
