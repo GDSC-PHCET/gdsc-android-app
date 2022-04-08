@@ -285,7 +285,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/appDev"
+                            android:id="@+id/androidDev"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             app:cardElevation="3dp"
@@ -301,7 +301,7 @@
                                     android:layout_width="80dp"
                                     android:layout_height="80dp"
                                     android:layout_marginTop="10dp"
-                                    android:src="@drawable/ic_app_dev"
+                                    android:src="@drawable/android"
                                     android:layout_gravity="center"/>
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -312,7 +312,42 @@
                                     android:fontFamily="@font/roboto"
                                     android:paddingTop="10dp"
                                     android:paddingHorizontal="10dp"
-                                    android:text="App\nDevelopment"
+                                    android:text="Android\nDevelopment"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/dark_gray"
+                                    android:textSize="15sp"
+                                    tools:ignore="HardcodedText" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/flutterDev"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="3dp"
+                            android:padding="10dp"
+                            android:layout_margin="10dp"
+                            app:cardCornerRadius="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:layout_marginTop="10dp"
+                                    android:src="@drawable/ic_flutter"
+                                    android:layout_gravity="center"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/roboto"
+                                    android:paddingTop="10dp"
+                                    android:paddingHorizontal="10dp"
+                                    android:text="Flutter\nDevelopment"
                                     android:textAlignment="center"
                                     android:textColor="@color/dark_gray"
                                     android:textSize="15sp"
