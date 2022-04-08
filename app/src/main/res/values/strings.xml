@@ -67,5 +67,10 @@
     <string name="aakash">https://firebasestorage.googleapis.com/v0/b/gdsc-phcet.appspot.com/o/aakash.png?alt=media&amp;token=8be2215f-1f9a-4852-9139-1e1dae4f4c7d</string>
     <string name="verification_successful">Verification Successful</string>
 
+    <string name="notification_title">GDSC PHCET</string>
+    <string name="notification_text">New Event is Added!!</string>
+    <string name="fcm_message">FCM Message</string>
+    <string name="notification_channel_id" translatable="false">gdsc_channel</string>
+    <string name="notification_channel_name" translatable="true">GDSC</string>
 
 </resources>
