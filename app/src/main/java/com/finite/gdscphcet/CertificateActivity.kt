@@ -63,7 +63,7 @@ class CertificateActivity : AppCompatActivity() {
             binding.certstatus.text = ""
         }
 
-
+//fix #76 : Added poster image to firebase storage and linked them with realtime database
         binding.verifyButton.setOnClickListener{
             var text: String = binding.codeEditText.text.toString().trim()
 
