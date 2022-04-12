@@ -18,8 +18,11 @@ class TrackDetailActivity : AppCompatActivity() {
 
         toolbar=findViewById(R.id.toolbar_trackDetailActivity)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.title="GDSC PHCET"
-
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
 
         val position = args.position
     }
