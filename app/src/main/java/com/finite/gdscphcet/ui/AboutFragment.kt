@@ -79,8 +79,8 @@ class AboutFragment : Fragment() {
 
     fun onItemClick(position : String){
         Toast.makeText(context, "Coming soon! ^^", Toast.LENGTH_SHORT).show()
-//        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailActivity(position)
-//        findNavController().navigate(action)
+        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailActivity(position)
+        findNavController().navigate(action)
     }
 
 }

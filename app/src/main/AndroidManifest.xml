@@ -14,6 +14,8 @@
         android:theme="@style/Theme.GDSCPHCET">
         <activity
             android:name=".ui.TrackDetailActivity"
+            android:theme="@style/CustomActionBartheme"
+            android:parentActivityName=".ui.TrackDetailActivity"
             android:exported="false" />
         <activity
             android:name=".CertificateActivity"

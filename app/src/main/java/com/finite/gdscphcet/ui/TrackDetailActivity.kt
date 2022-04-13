@@ -12,7 +12,7 @@ class TrackDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_track_detail)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val position = args.position
     }
 }
