@@ -73,4 +73,16 @@
     <string name="notification_channel_id" translatable="false">gdsc_channel</string>
     <string name="notification_channel_name" translatable="true">GDSC</string>
 
+
+
+    <string name="android_dev">Android Dev Resources</string>
+    <string name="flutter_dev">Flutter Dev Resources</string>
+    <string name="machine_learning">Machine Learning Resources</string>
+    <string name="web_dev">Web Dev Resources </string>
+    <string name="cloud_res">Cloud Resources</string>
+    <string name="open_source">Open Source Details</string>
+    <string name="ar_vr_res">AR/VR Resources</string>
+    <string name="graphic_design">Graphic Design Resources</string>
+    <string name="much_more">Much More Details</string>
+
 </resources>

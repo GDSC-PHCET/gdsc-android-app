@@ -50,9 +50,10 @@
         android:name="com.finite.gdscphcet.ui.TrackDetailActivity"
         android:label="activity_track_detail"
         tools:layout="@layout/activity_track_detail" >
+
         <argument
             android:name="position"
-            app:argType="string" />
+            app:argType="integer" />
     </activity>
 
     <fragment

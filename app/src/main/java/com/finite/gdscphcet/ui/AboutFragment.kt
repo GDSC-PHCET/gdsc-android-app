@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.finite.gdscphcet.R
 import com.finite.gdscphcet.databinding.FragmentAboutBinding
 import com.finite.gdscphcet.ui.viewModel.AboutViewModel
 
@@ -36,34 +37,32 @@ class AboutFragment : Fragment() {
             aboutViewModel = viewModel
         }
         binding?.androidDev?.setOnClickListener {
-            onItemClick("androidDev")
+            onItemClick(R.string.android_dev)
         }
         binding?.flutterDev?.setOnClickListener {
-            onItemClick("flutterDev")
+            onItemClick(R.string.flutter_dev)
         }
         binding?.machinelearning?.setOnClickListener {
-            onItemClick("machineLearning")
+            onItemClick(R.string.machine_learning)
         }
         binding?.webdev?.setOnClickListener {
-            onItemClick("webDev")
+            onItemClick(R.string.web_dev)
         }
         binding?.googleCloud?.setOnClickListener {
-            onItemClick("googleCloud")
+            onItemClick(R.string.cloud_res)
         }
         binding?.openSource?.setOnClickListener {
-            onItemClick("openSource")
+            onItemClick(R.string.open_source)
         }
-        binding?.cloudComputing?.setOnClickListener {
-            onItemClick("cloudComputing")
-        }
+
         binding?.arVr?.setOnClickListener {
-            onItemClick("AR/VR")
+            onItemClick(R.string.ar_vr_res)
         }
         binding?.graphicDesign?.setOnClickListener {
-            onItemClick("graphicDesigning")
+            onItemClick(R.string.graphic_design)
         }
         binding?.muchMore?.setOnClickListener {
-            onItemClick("muchMore")
+            onItemClick(R.string.much_more)
         }
         binding?.learnMoreButton?.setOnClickListener {
             val url = "https://developers.google.com/community/gdsc"
@@ -77,10 +76,10 @@ class AboutFragment : Fragment() {
         startActivity(intent)
     }
 
-    fun onItemClick(position : String){
+    fun onItemClick(position: Int){
         Toast.makeText(context, "Coming soon! ^^", Toast.LENGTH_SHORT).show()
-//        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailActivity(position)
-//        findNavController().navigate(action)
+        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailActivity(position)
+        findNavController().navigate(action)
     }
 
 }

@@ -49,6 +49,15 @@
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/shimmer_event_details_text.xml" value="0.27233860624198375" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/layout/shimmer_layout.xml" value="0.27233860624198375" />
         <entry key="..\:/androidproject/GDSCPHCET/app/src/main/res/menu/bottom_nav_menu.xml" value="0.33177083333333335" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/activity_track_detail.xml" value="0.1" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/android_details.xml" value="0.1" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/augmented_virtual_res.xml" value="0.1" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/cloud_resources.xml" value="0.1" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/flutter_details.xml" value="0.1" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/graphic_design_res.xml" value="0.1" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/machine_learning.xml" value="0.5428571428571428" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/open_source.xml" value="0.1" />
+        <entry key="..\:/gdsc-android-app/app/src/main/res/layout/web_dev.xml" value="0.1" />
       </map>
     </option>
   </component>
