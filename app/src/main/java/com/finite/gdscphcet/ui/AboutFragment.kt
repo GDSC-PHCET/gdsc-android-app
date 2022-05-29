@@ -78,6 +78,10 @@ class AboutFragment : Fragment() {
     }
 
     fun onItemClick(position : String){
+	        activity?.let{
+            val intent = Intent (it, TrackDetailActivity::class.java)
+            it.startActivity(intent)
+        }
         Toast.makeText(context, "Coming soon! ^^", Toast.LENGTH_SHORT).show()
 //        val action = AboutFragmentDirections.actionAboutFragmentToTrackDetailActivity(position)
 //        findNavController().navigate(action)
