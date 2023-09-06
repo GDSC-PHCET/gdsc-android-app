@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/pastEventCardView"
+    android:id="@+id/upcomingEventCardView"
     android:clickable="true"
     android:padding="10dp"
     android:layout_margin="5dp"
@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/itemPastImage"
+            android:id="@+id/itemUpcomingImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imagePastEvent"
+                android:id="@+id/imageUpcomingEvent"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
@@ -45,7 +45,7 @@
 
 
         <TextView
-            android:id="@+id/titlePastEvent"
+            android:id="@+id/titleUpcomingEvent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -56,13 +56,13 @@
 
             app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
-            app:layout_constraintTop_toTopOf="@+id/itemPastImage"
+            app:layout_constraintStart_toEndOf="@+id/itemUpcomingImage"
+            app:layout_constraintTop_toTopOf="@+id/itemUpcomingImage"
             app:layout_constraintVertical_bias="0"
             tools:text="Android Study Jams Day 04 - Kickstarting Android" />
 
         <TextView
-            android:id="@+id/datePastEvent"
+            android:id="@+id/dateUpcomingEvent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintVertical_bias="1"
@@ -71,9 +71,9 @@
             android:textColor="@color/google_blue"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/typePastEvent"
-            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
-            app:layout_constraintTop_toBottomOf="@+id/titlePastEvent"
+            app:layout_constraintBottom_toTopOf="@+id/typeUpcomingEvent"
+            app:layout_constraintStart_toEndOf="@+id/itemUpcomingImage"
+            app:layout_constraintTop_toBottomOf="@+id/titleUpcomingEvent"
             tools:text="📅  Dec 17th, 2021" />
 
 
@@ -84,11 +84,11 @@
             android:layout_marginStart="10dp"
             android:text="@string/emote_notes"
             android:textSize="15sp"
-            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
-            app:layout_constraintTop_toTopOf="@+id/typePastEvent" />
+            app:layout_constraintStart_toEndOf="@+id/itemUpcomingImage"
+            app:layout_constraintTop_toTopOf="@+id/typeUpcomingEvent" />
 
         <TextView
-            android:id="@+id/typePastEvent"
+            android:id="@+id/typeUpcomingEvent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

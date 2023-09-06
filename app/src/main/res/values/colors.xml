@@ -25,5 +25,12 @@
     <color name="blue">#0000FF</color>
     <color name="navy">#000000</color>
     <color name="shimmer_color">#BFBDBD</color>
+    <color name="google_blue">#4285F4</color>
+
+    <color name="google_blue_background">#204285F4</color>
+    <color name="google_red_background">#20FF4737</color>
+    <color name="google_green_background">#2008AD50</color>
+    <color name="google_yellow_background">#20FEBF08</color>
+
 
 </resources>
