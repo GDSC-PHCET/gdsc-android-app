@@ -73,14 +73,14 @@ class HomeFragment : Fragment() {
         upcomingShimmer.startShimmer()
         pastShimmer.startShimmer()
 
-        binding?.verifyButton?.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToCertificateActivity()
-            findNavController().navigate(action)
-        }
+//        binding?.verifyButton?.setOnClickListener {
+//            val action = HomeFragmentDirections.actionHomeFragmentToCertificateActivity()
+//            findNavController().navigate(action)
+//        }
 
         pastEventsRecyclerView = binding!!.rvPastEvents
         pastEventsRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         pastEventsRecyclerView.setHasFixedSize(true)
 
 
