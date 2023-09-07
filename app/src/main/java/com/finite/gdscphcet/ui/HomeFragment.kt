@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
 
 //    private val url = "https://gdsc.community.dev/pillai-hoc-college-of-engineering-and-technology-navi-mumbai/"
     private val url = "https://gdsc.community.dev/dy-patil-college-of-engineering-pune/"
-
+//      private val url = "https://gdsc.community.dev/mody-university-of-science-and-technology-laxmangarh/"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -84,56 +84,18 @@ class HomeFragment : Fragment() {
         pastEventsRecyclerView.setHasFixedSize(true)
 
 
-
-//        pastEventsList
-//        pastEventsList = arrayListOf()
-//        getPastEventsData()
-
         upcomingEventsRecyclerView = binding!!.rvUpcomingEvents
         upcomingEventsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         upcomingEventsRecyclerView.setHasFixedSize(true)
         upcomingEventsList = arrayListOf()
-//        getUpcomingEventsData()
+
 
         CoroutineScope(Dispatchers.Main).launch {
             newgetPastEvents()
             newgetUpcomingEvents()
         }
     }
-
-//    private fun getPastEventsData() {
-//        dbref = FirebaseDatabase.getInstance().getReference("pastEvents")
-//
-//        dbref.addListenerForSingleValueEvent(object : ValueEventListener {
-//
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//
-//                if (snapshot.exists()) {
-//
-//                    for (eventSnapshot in snapshot.children) {
-//
-//                        val event = eventSnapshot.getValue(PastEventModel::class.java)
-//                        pastEventsList.add(event!!)
-//
-//                    }
-//                    pastEventsRecyclerView.adapter = PastEventsAdapter(
-//                        requireContext(),
-//                        pastEventsList.reversed() as MutableList<PastEventModel>
-//                    )
-//                    pastShimmer.stopShimmer()
-//                    pastShimmer.visibility = View.GONE
-//                    pastEventsRecyclerView.visibility = View.VISIBLE
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                println(error)
-//            }
-//
-//
-//        })
-//    }
 
     private suspend fun newgetPastEvents() {
 
@@ -194,45 +156,5 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
-
-//    private fun getUpcomingEventsData() {
-//        dbref = FirebaseDatabase.getInstance().getReference("upcomingEvents")
-//
-//        dbref.addListenerForSingleValueEvent(object : ValueEventListener {
-//
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//
-//                if (snapshot.exists()) {
-//                    upcomingEventsRecyclerView.visibility = View.VISIBLE
-//                    binding?.upcomingEventsPlaceholderLayout!!.visibility = View.GONE
-//
-//                    for (eventSnapshot in snapshot.children) {
-//                        val event = eventSnapshot.getValue(UpcomingEventModel::class.java)
-//                        upcomingEventsList.add(event!!)
-//                    }
-//                    upcomingEventsRecyclerView.adapter = UpcomingEventsAdapter(
-//                        requireContext(),
-//                        upcomingEventsList.reversed() as MutableList<UpcomingEventModel>
-//                    )
-//                    upcomingShimmer.stopShimmer()
-//                    upcomingShimmer.visibility = View.GONE
-//
-//                } else{
-//                    upcomingShimmer.stopShimmer()
-//                    upcomingShimmer.visibility = View.GONE
-//                    upcomingEventsRecyclerView.visibility = View.GONE
-//                    upcomingPlaceHolder.visibility = View.VISIBLE
-//                }
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                println(error)
-//            }
-//
-//
-//        })
-//    }
-
 
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/upcomingEventCardView"
+    tools:cardBack="@color/google_red_background"
     android:clickable="true"
     android:padding="10dp"
     android:layout_margin="5dp"
@@ -17,7 +18,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/itemUpcomingImage"
+            android:id="@+id/itemPastImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
@@ -48,33 +49,74 @@
             android:id="@+id/titleUpcomingEvent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/dark_gray"
             android:textSize="17sp"
             android:textStyle="bold"
-
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@+id/itemUpcomingImage"
-            app:layout_constraintTop_toTopOf="@+id/itemUpcomingImage"
-            app:layout_constraintVertical_bias="0"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
+            app:layout_constraintTop_toTopOf="@+id/itemPastImage"
             tools:text="Android Study Jams Day 04 - Kickstarting Android" />
 
-        <TextView
-            android:id="@+id/dateUpcomingEvent"
+        <LinearLayout
+            android:id="@+id/dateLinearLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintVertical_bias="1"
             android:layout_marginHorizontal="10dp"
-            android:paddingTop="10dp"
-            android:textColor="@color/google_blue"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/typeUpcomingEvent"
-            app:layout_constraintStart_toEndOf="@+id/itemUpcomingImage"
-            app:layout_constraintTop_toBottomOf="@+id/titleUpcomingEvent"
-            tools:text="📅  Dec 17th, 2021" />
+            android:orientation="vertical"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
+            app:layout_constraintTop_toBottomOf="@+id/titleUpcomingEvent">
+
+<!--            <com.google.android.material.chip.ChipGroup-->
+<!--                android:id="@+id/tagsChipGroup"-->
+<!--                app:chipSpacingHorizontal="2dp"-->
+<!--                app:chipSpacingVertical="-12dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:singleLine="false">-->
+<!--                &lt;!&ndash; Your Chip views will be added here programmatically &ndash;&gt;-->
+
+<!--&lt;!&ndash;                <com.google.android.material.chip.Chip&ndash;&gt;-->
+<!--&lt;!&ndash;                    style="@style/Widget.Material3.Chip.Suggestion"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="Android"&ndash;&gt;-->
+<!--&lt;!&ndash;                    app:chipCornerRadius="15dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textColor="@color/black"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:visibility="gone"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="10sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    app:chipBackgroundColor="@color/google_red_background"&ndash;&gt;-->
+<!--&lt;!&ndash;                    app:chipStrokeWidth="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    app:ensureMinTouchTargetSize="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                    tools:visibility="visible" />&ndash;&gt;-->
+<!--            </com.google.android.material.chip.ChipGroup>-->
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/tagsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:flexWrap="wrap"
+                app:alignItems="stretch"
+                app:justifyContent="flex_start"
+                app:layout_constraintTop_toBottomOf="@+id/titleUpcomingEvent">
+                <!-- TextViews will be added here programmatically -->
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <TextView
+                android:id="@+id/dateUpcomingEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/google_blue"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="📅  Dec 17th, 2021" />
+        </LinearLayout>
 
 
         <TextView
@@ -84,33 +126,73 @@
             android:layout_marginStart="10dp"
             android:text="@string/emote_notes"
             android:textSize="15sp"
-            app:layout_constraintStart_toEndOf="@+id/itemUpcomingImage"
-            app:layout_constraintTop_toTopOf="@+id/typeUpcomingEvent" />
+            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
+            app:layout_constraintTop_toBottomOf="@+id/dateLinearLayout" />
 
         <TextView
             android:id="@+id/typeUpcomingEvent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="15dp"
-            android:text="Virtual\nssss"
+            android:text="Virtual\nEvent"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/typeLinearLayout" />
-
-
-
-
-        <ImageView
-            android:layout_marginEnd="5dp"
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_next"
+            app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/typeLinearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/dateLinearLayout" />
+
+
+        <LinearLayout
+            android:id="@+id/imageView"
+            android:layout_marginHorizontal="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <View
+                    android:id="@+id/leftSemiCircle"
+                    android:layout_width="15dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/semi_circle_top"/>
+
+                <View
+                    android:id="@+id/upcomingEventDivider"
+                    android:layout_marginVertical="15dp"
+                    android:layout_width="1dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:background="#60C0C0C0" />
+
+                <View
+                    android:id="@+id/rightSemiCircle"
+                    android:layout_width="15dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/semi_circle_bottom"/>
+            </FrameLayout>
+            <ImageView
+                android:id="@+id/icUpcomingEventNextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_next"
+                />
+        </LinearLayout>
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,8 +1,6 @@
 package com.finite.gdscphcet.adapters
 
-import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +10,8 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
-import com.finite.gdscphcet.model.PastEventModel
 import com.finite.gdscphcet.ui.EventDetailActivity
 import com.finite.scrapingpractise.model.PastEvent
-import kotlin.random.Random
 
 class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : RecyclerView.Adapter<PastEventsAdapter.EventViewHolder>() {
 
@@ -29,53 +25,58 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val currentEvent = pastEventsList[position]
         holder.itemView.apply {
-            //Log.d("PRI","link ${currentEvent.thumbnaillink}")
+
             Glide.with(holder.itemView.context).load(currentEvent.image).into(holder.pastEventThumbnail)
             holder.pastEventTitle.text = currentEvent.title
             holder.pastEventDate.text = "\uD83D\uDCC5  ${currentEvent.date}"
-//            holder.pastEventType.text = "\uD83D\uDCDD  ${currentEvent.type}"
-            holder.pastEventType.text = "${currentEvent.type}"
-            holder.cardView.setCardBackgroundColor(
-                when(colorCounter) {
-                    1 -> {
-                        colorCounter++
-                        resources.getColor(R.color.google_blue_background)
-                    }
 
-                    2 -> {
-                        colorCounter++
-                        resources.getColor(R.color.google_red_background)
-                    }
+            holder.pastEventType.text = currentEvent.type
 
-                    3 -> {
-                        colorCounter++
-                        resources.getColor(R.color.google_yellow_background)
-                    }
-
-                    4 -> {
-                        colorCounter = 1
-                        resources.getColor(R.color.google_green_background)
-                    }
-
-                    else -> {
-                        resources.getColor(R.color.white)
-                    }
+            when (colorCounter) {
+                1 -> {
+                    colorCounter++
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
+                    holder.pastEventDate.setTextColor(resources.getColor(R.color.google_blue))
+                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_blue))
+                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_45))
                 }
-            )
-            /*holder.itemView.setOnClickListener{ view ->
-                val bundle = bundleOf("pastEventId" to currentEvent.eventId)
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_eventDetailActivity,bundle)
-            }*/
+
+                2 -> {
+                    colorCounter++
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_red_alpha_15))
+                    holder.pastEventDate.setTextColor(resources.getColor(R.color.google_red))
+                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_red))
+                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_red_alpha_45))
+                }
+
+                3 -> {
+                    colorCounter++
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_yellow_alpha_15))
+                    holder.pastEventDate.setTextColor(resources.getColor(R.color.google_yellow))
+                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_yellow))
+                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_45))
+                }
+
+                4 -> {
+                    colorCounter = 1
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_green_alpha_15))
+                    holder.pastEventDate.setTextColor(resources.getColor(R.color.google_green))
+                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_green))
+                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_green_alpha_45))
+                }
+
+
+                else -> {
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.white))
+                }
+            }
+
             holder.itemView.setOnClickListener {
                 val intent = Intent(context,EventDetailActivity::class.java)
                 //intent.putExtra("eventId",currentEvent.eventId)
                 holder.itemView.context.startActivity(intent)
             }
-//            holder.cardView.setOnClickListener {
-//                val intent = Intent(context,EventDetailActivity::class.java)
-//                //intent.putExtra("eventId",currentEvent.eventId)
-//                holder.itemView.context.startActivity(intent)
-//            }
+
         }
     }
 
@@ -88,6 +89,8 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
         val pastEventTitle : TextView = itemView.findViewById(R.id.titlePastEvent)
         val pastEventDate : TextView = itemView.findViewById(R.id.datePastEvent)
         val pastEventType : TextView = itemView.findViewById(R.id.typePastEvent)
+        val icNextButton : ImageView = itemView.findViewById(R.id.icPastEventNextButton)
+        val divider : View = itemView.findViewById(R.id.pastEventDivider)
 
         val cardView : CardView = itemView.findViewById(R.id.pastEventCardView)
     }
