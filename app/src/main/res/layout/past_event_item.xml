@@ -126,7 +126,7 @@
                     android:layout_width="10dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_height="match_parent"
-                    android:background="@drawable/dashed_vertical_line_yellow" />
+                    tools:background="@drawable/dashed_vertical_line_yellow" />
 
                 <View
                     android:id="@+id/rightSemiCircle"

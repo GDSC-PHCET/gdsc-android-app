@@ -26,46 +26,42 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
         val currentEvent = pastEventsList[position]
         holder.itemView.apply {
 
-            Glide.with(holder.itemView.context).load(currentEvent.image).into(holder.pastEventThumbnail)
-            holder.pastEventTitle.text = currentEvent.title
-            holder.pastEventDate.text = "\uD83D\uDCC5  ${currentEvent.date}"
+            Glide.with(holder.itemView.context).load(currentEvent.image).into(holder.logo)
+            holder.title.text = currentEvent.title
+            holder.date.text = "\uD83D\uDCC5  ${currentEvent.date}"
 
-            holder.pastEventType.text = currentEvent.type
+            holder.type.text = currentEvent.type
 
             when (colorCounter) {
                 1 -> {
                     colorCounter++
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
-                    holder.pastEventDate.setTextColor(resources.getColor(R.color.google_blue))
+                    holder.date.setTextColor(resources.getColor(R.color.google_blue))
                     holder.icNextButton.setColorFilter(resources.getColor(R.color.google_blue))
-//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_45))
                     holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_blue)
                 }
 
                 2 -> {
                     colorCounter++
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_red_alpha_15))
-                    holder.pastEventDate.setTextColor(resources.getColor(R.color.google_red))
+                    holder.date.setTextColor(resources.getColor(R.color.google_red))
                     holder.icNextButton.setColorFilter(resources.getColor(R.color.google_red))
-//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_red_alpha_45))
                     holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_red)
                 }
 
                 3 -> {
                     colorCounter++
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_yellow_alpha_15))
-                    holder.pastEventDate.setTextColor(resources.getColor(R.color.google_yellow))
+                    holder.date.setTextColor(resources.getColor(R.color.google_yellow))
                     holder.icNextButton.setColorFilter(resources.getColor(R.color.google_yellow))
-//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_45))
                     holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_yellow)
                 }
 
                 4 -> {
                     colorCounter = 1
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_green_alpha_15))
-                    holder.pastEventDate.setTextColor(resources.getColor(R.color.google_green))
+                    holder.date.setTextColor(resources.getColor(R.color.google_green))
                     holder.icNextButton.setColorFilter(resources.getColor(R.color.google_green))
-//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_green_alpha_45))
                     holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_green)
                 }
 
@@ -77,10 +73,9 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context,EventDetailActivity::class.java)
-                //intent.putExtra("eventId",currentEvent.eventId)
+                intent.putExtra("eventUrl", currentEvent.url)
                 holder.itemView.context.startActivity(intent)
             }
-
         }
     }
 
@@ -89,13 +84,12 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
     }
 
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val pastEventThumbnail : ImageView = itemView.findViewById(R.id.imagePastEvent)
-        val pastEventTitle : TextView = itemView.findViewById(R.id.titlePastEvent)
-        val pastEventDate : TextView = itemView.findViewById(R.id.datePastEvent)
-        val pastEventType : TextView = itemView.findViewById(R.id.typePastEvent)
+        val logo : ImageView = itemView.findViewById(R.id.imagePastEvent)
+        val title : TextView = itemView.findViewById(R.id.titlePastEvent)
+        val date : TextView = itemView.findViewById(R.id.datePastEvent)
+        val type : TextView = itemView.findViewById(R.id.typePastEvent)
         val icNextButton : ImageView = itemView.findViewById(R.id.icPastEventNextButton)
         val divider : View = itemView.findViewById(R.id.pastEventDivider)
-
         val cardView : CardView = itemView.findViewById(R.id.pastEventCardView)
     }
 }
