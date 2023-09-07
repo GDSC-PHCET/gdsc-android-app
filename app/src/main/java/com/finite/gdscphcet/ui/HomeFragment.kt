@@ -1,12 +1,11 @@
 package com.finite.gdscphcet.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,6 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.finite.gdscphcet.adapters.PastEventsAdapter
 import com.finite.gdscphcet.adapters.UpcomingEventsAdapter
 import com.finite.gdscphcet.databinding.FragmentHomeBinding
-import com.finite.gdscphcet.model.UpcomingEventModel
 import com.finite.gdscphcet.repository.PastEventRepo
 import com.finite.gdscphcet.repository.UpcomingEventRepo
 import com.finite.gdscphcet.ui.viewModel.HomeViewModel
@@ -41,9 +39,10 @@ class HomeFragment : Fragment() {
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
-//    private val url = "https://gdsc.community.dev/pillai-hoc-college-of-engineering-and-technology-navi-mumbai/"
+    //    private val url = "https://gdsc.community.dev/pillai-hoc-college-of-engineering-and-technology-navi-mumbai/"
     private val url = "https://gdsc.community.dev/dy-patil-college-of-engineering-pune/"
-//      private val url = "https://gdsc.community.dev/mody-university-of-science-and-technology-laxmangarh/"
+
+    //      private val url = "https://gdsc.community.dev/mody-university-of-science-and-technology-laxmangarh/"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,19 +68,18 @@ class HomeFragment : Fragment() {
         swipeRefreshLayout = binding!!.homeSwipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
             updateEvents()
-            swipeRefreshLayout.isRefreshing = false
         }
     }
 
     private fun updateEvents() {
-            upcomingEventsRecyclerView.visibility = View.GONE
-            pastEventsRecyclerView.visibility = View.GONE
-            upcomingPlaceHolder.visibility = View.GONE
+        upcomingEventsRecyclerView.visibility = View.GONE
+        pastEventsRecyclerView.visibility = View.GONE
+        upcomingPlaceHolder.visibility = View.GONE
 
-            upcomingShimmer.visibility = View.VISIBLE
-            pastShimmer.visibility = View.VISIBLE
-            upcomingShimmer.startShimmer()
-            pastShimmer.startShimmer()
+        upcomingShimmer.visibility = View.VISIBLE
+        pastShimmer.visibility = View.VISIBLE
+        upcomingShimmer.startShimmer()
+        pastShimmer.startShimmer()
 
         CoroutineScope(Dispatchers.Main).launch {
             getPastEvents()
@@ -131,6 +129,7 @@ class HomeFragment : Fragment() {
             pastShimmer.stopShimmer()
             pastShimmer.visibility = View.GONE
             pastEventsRecyclerView.visibility = View.VISIBLE
+            if (swipeRefreshLayout.isRefreshing) swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -148,7 +147,8 @@ class HomeFragment : Fragment() {
         withContext(Dispatchers.Main) {
             upcomingShimmer.stopShimmer()
             upcomingShimmer.visibility = View.GONE
-            if(upcomingEvents.isEmpty()) {
+            if (swipeRefreshLayout.isRefreshing) swipeRefreshLayout.isRefreshing = false
+            if (upcomingEvents.isEmpty()) {
                 upcomingEventsRecyclerView.visibility = View.GONE
                 upcomingPlaceHolder.visibility = View.VISIBLE
             } else {
