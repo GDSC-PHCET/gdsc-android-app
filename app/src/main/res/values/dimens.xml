@@ -11,5 +11,5 @@
 
     <!-- Define margin values -->
     <dimen name="tag_margin_end">2dp</dimen>
-    <dimen name="tag_margin_bottom">2dp</dimen>
+    <dimen name="tag_margin_bottom">3dp</dimen>
 </resources>

@@ -52,6 +52,12 @@ class UpcomingEventsAdapter(private val upcomingEventList:  List<UpcomingEvent>)
 //                chip.chipStrokeWidth = 0f
 //                holder.tagsChipGroup.addView(chip)
 //            }
+
+            // currentEvent.tags
+            //var dummyList = listOf("Android","Web","Cloud")
+            // add currentEvent.tags to dummyList
+            //dummyList = dummyList + currentEvent.tags
+
             for (tag in currentEvent.tags) {
                 val textView = TextView(holder.itemView.context)
                 textView.text = tag
@@ -122,32 +128,36 @@ class UpcomingEventsAdapter(private val upcomingEventList:  List<UpcomingEvent>)
                     colorCounter++
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
                     holder.upcomingEventDate.setTextColor(resources.getColor(R.color.google_blue))
-                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_blue))
-                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_45))
+                    holder.upcomingViewDetails.setTextColor(resources.getColor(R.color.google_blue))
+//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_45))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_line_blue)
                 }
 
                 2 -> {
                     colorCounter++
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_red_alpha_15))
                     holder.upcomingEventDate.setTextColor(resources.getColor(R.color.google_red))
-                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_red))
+                    holder.upcomingViewDetails.setTextColor(resources.getColor(R.color.google_red))
                     holder.divider.setBackgroundColor(resources.getColor(R.color.google_red_alpha_45))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_line_red)
                 }
 
                 3 -> {
                     colorCounter++
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_yellow_alpha_15))
                     holder.upcomingEventDate.setTextColor(resources.getColor(R.color.google_yellow))
-                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_yellow))
+                    holder.upcomingViewDetails.setTextColor(resources.getColor(R.color.google_yellow))
                     holder.divider.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_45))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_line_yellow)
                 }
 
                 4 -> {
                     colorCounter = 1
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_green_alpha_15))
                     holder.upcomingEventDate.setTextColor(resources.getColor(R.color.google_green))
-                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_green))
+                    holder.upcomingViewDetails.setTextColor(resources.getColor(R.color.google_green))
                     holder.divider.setBackgroundColor(resources.getColor(R.color.google_green_alpha_45))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_line_green)
                 }
 
 
@@ -175,7 +185,7 @@ class UpcomingEventsAdapter(private val upcomingEventList:  List<UpcomingEvent>)
         val upcomingEventTitle : TextView = itemView.findViewById(R.id.titleUpcomingEvent)
         val upcomingEventDate : TextView = itemView.findViewById(R.id.dateUpcomingEvent)
         val upcomingEventType : TextView = itemView.findViewById(R.id.typeUpcomingEvent)
-        val icNextButton : ImageView = itemView.findViewById(R.id.icUpcomingEventNextButton)
+        val upcomingViewDetails : TextView = itemView.findViewById(R.id.upcomingTextViewDetails)
 //        val tagsChipGroup : ChipGroup = itemView.findViewById(R.id.tagsChipGroup)
         val tagsContainer : ViewGroup = itemView.findViewById(R.id.tagsContainer)
         val divider : View = itemView.findViewById(R.id.upcomingEventDivider)

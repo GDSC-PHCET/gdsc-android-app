@@ -38,7 +38,8 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
                     holder.pastEventDate.setTextColor(resources.getColor(R.color.google_blue))
                     holder.icNextButton.setColorFilter(resources.getColor(R.color.google_blue))
-                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_45))
+//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_45))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_blue)
                 }
 
                 2 -> {
@@ -46,7 +47,8 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_red_alpha_15))
                     holder.pastEventDate.setTextColor(resources.getColor(R.color.google_red))
                     holder.icNextButton.setColorFilter(resources.getColor(R.color.google_red))
-                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_red_alpha_45))
+//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_red_alpha_45))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_red)
                 }
 
                 3 -> {
@@ -54,7 +56,8 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_yellow_alpha_15))
                     holder.pastEventDate.setTextColor(resources.getColor(R.color.google_yellow))
                     holder.icNextButton.setColorFilter(resources.getColor(R.color.google_yellow))
-                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_45))
+//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_45))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_yellow)
                 }
 
                 4 -> {
@@ -62,7 +65,8 @@ class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : Recycler
                     holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_green_alpha_15))
                     holder.pastEventDate.setTextColor(resources.getColor(R.color.google_green))
                     holder.icNextButton.setColorFilter(resources.getColor(R.color.google_green))
-                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_green_alpha_45))
+//                    holder.divider.setBackgroundColor(resources.getColor(R.color.google_green_alpha_45))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_green)
                 }
 
 
