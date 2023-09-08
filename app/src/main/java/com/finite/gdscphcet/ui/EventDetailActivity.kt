@@ -1,6 +1,8 @@
 package com.finite.gdscphcet.ui
 
 import android.app.PendingIntent.OnFinished
+import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +11,9 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.adapters.PastEventsAdapter
@@ -27,6 +31,8 @@ import kotlinx.coroutines.withContext
 class EventDetailActivity : AppCompatActivity() {
 
     private var color = ""
+    private var url = ""
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +40,45 @@ class EventDetailActivity : AppCompatActivity() {
         val binding = ActivityEventDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val window = this.window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.statusBarColor = this.resources.getColor(R.color.status_bar)
+//        val window = this.window
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+//        window.statusBarColor = this.resources.getColor(R.color.status_bar)
+
+        window.statusBarColor = resources.getColor(R.color.status_bar)
+
+        initialiseUI(binding)
+
+        swipeRefreshLayout = binding.eventDetailSwipeRefreshLayout
+
+        swipeRefreshLayout.setOnRefreshListener {
+            window.statusBarColor = resources.getColor(R.color.status_bar)
+            initialiseUI(binding)
+        }
+
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.shareButton.setOnClickListener {
+            // TODO : Add actual share logic, create a shareable image and share it
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "Hey! Check out this event by GDSC PHCET : $url")
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+    }
+
+    private fun initialiseUI(binding: ActivityEventDetailBinding) {
+        binding.uiConstraintLayout.visibility = View.GONE
+        binding.shimmerLayout.visibility = View.VISIBLE
+        binding.shimmerLayout.startShimmer()
 
         val eventType = intent.getStringExtra("eventType")
-        val url = intent.getStringExtra("eventUrl") ?: ""
+        url = intent.getStringExtra("eventUrl") ?: ""
         color = intent.getStringExtra("color") ?: ""
 
         Log.d("Testlog", "onCreate: $eventType : $url")
@@ -68,12 +106,23 @@ class EventDetailActivity : AppCompatActivity() {
         withContext(Dispatchers.Main) {
             binding.apply {
                 Glide.with(this@EventDetailActivity).load(upcomingEvents.logoUrl)
+                    .placeholder(R.mipmap.ic_launcher)
                     .into(binding.logoImageView)
                 Glide.with(this@EventDetailActivity).load(upcomingEvents.bannerUrl)
+                    .placeholder(R.drawable.gdsc_banner)
                     .into(binding.coverBannerImageView)
                 setupUpcomingUI(upcomingEvents, binding)
+
+                stopShimmer(binding)
+                if(swipeRefreshLayout.isRefreshing) swipeRefreshLayout.isRefreshing = false
             }
         }
+    }
+
+    private fun stopShimmer(binding: ActivityEventDetailBinding) {
+        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.visibility = View.GONE
+        binding.uiConstraintLayout.visibility = View.VISIBLE
     }
 
     private suspend fun loadPastEventDetails(url: String, binding: ActivityEventDetailBinding) {
@@ -90,10 +139,15 @@ class EventDetailActivity : AppCompatActivity() {
         withContext(Dispatchers.Main) {
             binding.apply {
                 Glide.with(this@EventDetailActivity).load(pastEvents.logoUrl)
+                    .placeholder(R.mipmap.ic_launcher)
                     .into(binding.logoImageView)
                 Glide.with(this@EventDetailActivity).load(pastEvents.bannerUrl)
+                    .placeholder(R.drawable.gdsc_banner)
                     .into(binding.coverBannerImageView)
                 setupPastUI(pastEvents, binding)
+
+                stopShimmer(binding)
+                if(swipeRefreshLayout.isRefreshing) swipeRefreshLayout.isRefreshing = false
             }
         }
     }
@@ -122,6 +176,7 @@ class EventDetailActivity : AppCompatActivity() {
                 "UTF-8"
             )
 
+            binding.tagsContainer.removeAllViews()
 
             for (tag in upcomingEvents.tags) {
                 val textView = TextView(this@EventDetailActivity)
@@ -218,6 +273,9 @@ class EventDetailActivity : AppCompatActivity() {
                     eventTagsImageView.setColorFilter(resources.getColor(R.color.google_blue))
                     longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
+                    logoImageView.borderColor = resources.getColor(R.color.google_blue_45_opaque)
+                    window.statusBarColor = resources.getColor(R.color.google_blue_alpha_45)
+                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_blue)
                 }
 
                 "red" -> {
@@ -231,6 +289,9 @@ class EventDetailActivity : AppCompatActivity() {
                     eventTagsImageView.setColorFilter(resources.getColor(R.color.google_red))
                     longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
+                    logoImageView.borderColor = resources.getColor(R.color.google_red_45_opaque)
+                    window.statusBarColor = resources.getColor(R.color.google_red_alpha_45)
+                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_red)
                 }
 
                 "yellow" -> {
@@ -244,6 +305,9 @@ class EventDetailActivity : AppCompatActivity() {
                     eventTagsImageView.setColorFilter(resources.getColor(R.color.google_yellow))
                     longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
+                    logoImageView.borderColor = resources.getColor(R.color.google_yellow_45_opaque)
+                    window.statusBarColor = resources.getColor(R.color.google_yellow_alpha_45)
+                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_yellow)
                 }
 
                 "green" -> {
@@ -257,6 +321,9 @@ class EventDetailActivity : AppCompatActivity() {
                     eventTagsImageView.setColorFilter(resources.getColor(R.color.google_green))
                     longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
+                    logoImageView.borderColor = resources.getColor(R.color.google_green_45_opaque)
+                    window.statusBarColor = resources.getColor(R.color.google_green_alpha_45)
+                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_green)
                 }
             }
         }
@@ -285,6 +352,8 @@ class EventDetailActivity : AppCompatActivity() {
                 "text/html",
                 "UTF-8"
             )
+
+            binding.tagsContainer.removeAllViews()
 
             for (tag in pastEvents.tags) {
                 val textView = TextView(this@EventDetailActivity)
@@ -381,6 +450,9 @@ class EventDetailActivity : AppCompatActivity() {
                     eventTagsImageView.setColorFilter(resources.getColor(R.color.google_blue))
                     longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
+                    logoImageView.borderColor = resources.getColor(R.color.google_blue_45_opaque)
+                    window.statusBarColor = resources.getColor(R.color.google_blue_alpha_45)
+                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_blue)
                 }
 
                 "red" -> {
@@ -394,6 +466,9 @@ class EventDetailActivity : AppCompatActivity() {
                     eventTagsImageView.setColorFilter(resources.getColor(R.color.google_red))
                     longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
+                    logoImageView.borderColor = resources.getColor(R.color.google_red_45_opaque)
+                    window.statusBarColor = resources.getColor(R.color.google_red_alpha_45)
+                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_red)
                 }
 
                 "yellow" -> {
@@ -407,6 +482,9 @@ class EventDetailActivity : AppCompatActivity() {
                     eventTagsImageView.setColorFilter(resources.getColor(R.color.google_yellow))
                     longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
+                    logoImageView.borderColor = resources.getColor(R.color.google_yellow_45_opaque)
+                    window.statusBarColor = resources.getColor(R.color.google_yellow_alpha_45)
+                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_yellow)
                 }
 
                 "green" -> {
@@ -420,6 +498,9 @@ class EventDetailActivity : AppCompatActivity() {
                     eventTagsImageView.setColorFilter(resources.getColor(R.color.google_green))
                     longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
+                    logoImageView.borderColor = resources.getColor(R.color.google_green_45_opaque)
+                    window.statusBarColor = resources.getColor(R.color.google_green_alpha_45)
+                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_green)
                 }
             }
         }
@@ -430,10 +511,6 @@ class EventDetailActivity : AppCompatActivity() {
         super.onBackPressed()
         finish()
     }
-
-
-
-
 
 
 }

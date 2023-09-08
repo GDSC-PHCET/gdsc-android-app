@@ -36,11 +36,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
-//        private val url = "https://gdsc.community.dev/pillai-hoc-college-of-engineering-and-technology-navi-mumbai/"
+        private val url = "https://gdsc.community.dev/pillai-hoc-college-of-engineering-and-technology-navi-mumbai/"
 //    private val url = "https://gdsc.community.dev/dy-patil-college-of-engineering-pune/"
 //        private val url = "https://gdsc.community.dev/mody-university-of-science-and-technology-laxmangarh/"
 //        private val url = "https://gdsc.community.dev/mit-academy-of-engineering-pune/"
-     private val url = "https://gdsc.community.dev/sir-syed-university-of-engineering-and-technology/"
+//     private val url = "https://gdsc.community.dev/sir-syed-university-of-engineering-and-technology/"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

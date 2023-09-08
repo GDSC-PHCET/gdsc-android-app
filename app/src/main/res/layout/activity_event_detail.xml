@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/profileSwipeRefreshLayout"
+    android:id="@+id/eventDetailSwipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
@@ -21,177 +20,211 @@
         tools:context=".fragments.ScrollFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parentConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false">
+            android:layout_height="match_parent">
 
-            <!-- Background Cover Banner -->
-
-            <!-- Back Button -->
-            <ImageView
-                android:id="@+id/coverBannerImageView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/uiConstraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-            <ImageView
-                android:id="@+id/backButton"
-                android:layout_margin="16dp"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:padding="6dp"
-                android:background="@drawable/circle_back_button_bg"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_back" />
-
-            <!-- Profile Image in Circle (Top Left) -->
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/logoImageView"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:layout_marginTop="112dp"
-                android:layout_marginStart="16dp"
-                tools:src="@tools:sample/avatars"
-                app:civ_border_color="#FFFFFF"
-                app:civ_border_width="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <!-- Event Title -->
-            <TextView
-                android:id="@+id/eventTitleTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Event Title"
-                android:layout_marginEnd="20dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/logoImageView"
-                app:layout_constraintTop_toBottomOf="@+id/logoImageView" />
-
-            <!-- CardView for Date, Time, and Mode -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailsCardView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eventTitleTextView">
-
-                <GridLayout
+                <!-- Background Cover Banner -->
+                <ImageView
+                    android:id="@+id/coverBannerImageView"
                     android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <!-- Back Button -->
+                <ImageView
+                    android:id="@+id/backButton"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/circle_back_button_bg"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Back Button -->
+                <ImageView
+                    android:id="@+id/shareButton"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/circle_back_button_bg"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_share"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Profile Image in Circle (Top Left) -->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/logoImageView"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="112dp"
+                    app:civ_border_color="#FFFFFF"
+                    app:civ_border_width="5dp"
+                    tools:src="@tools:sample/avatars" />
+
+                <!-- Event Title -->
+                <TextView
+                    android:id="@+id/eventTitleTextView"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:columnCount="2"
-                    android:padding="16dp"
-                    android:rowCount="3">
+                    tools:text="Event Title"
+                    android:textSize="20sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/logoImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/logoImageView"/>
 
-                    <!-- Date -->
-                    <ImageView
-                        android:id="@+id/eventDateImageView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/ic_date"
-                        app:tint="@color/black" />
+                <!-- CardView for Date, Time, and Mode -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/detailsCardView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eventTitleTextView">
 
-                    <TextView
-                        android:id="@+id/eventDateTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="Date"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <!-- Time -->
-                    <ImageView
-                        android:id="@+id/eventTimeImageView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/ic_time"
-                        app:tint="@color/black" />
-
-                    <TextView
-                        android:id="@+id/eventTimeTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="Time"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <!-- Mode -->
-                    <ImageView
-                        android:id="@+id/eventModeImageView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="8dp"
-                        android:src="@drawable/ic_people"
-                        app:tint="@color/black" />
-
-                    <TextView
-                        android:id="@+id/eventModeTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="Mode"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <!-- Tags -->
-                    <ImageView
-                        android:id="@+id/eventTagsImageView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="top"
-                        android:src="@drawable/ic_tags"
-                        app:tint="@color/black" />
-
-                    <com.google.android.flexbox.FlexboxLayout
-                        android:id="@+id/tagsContainer"
+                    <GridLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:orientation="horizontal"
-                        app:alignItems="stretch"
-                        app:flexWrap="wrap"
-                        app:justifyContent="flex_start">
+                        android:columnCount="2"
+                        android:padding="16dp"
+                        android:rowCount="3">
 
-                        <!-- TextViews will be added here programmatically -->
-                    </com.google.android.flexbox.FlexboxLayout>
+                        <!-- Date -->
+                        <ImageView
+                            android:id="@+id/eventDateImageView"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="8dp"
+                            android:src="@drawable/ic_date"
+                            app:tint="@color/black" />
 
-                </GridLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/eventDateTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Date"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
 
-            <WebView
-                android:id="@+id/longDescriptionWebView"
+                        <!-- Time -->
+                        <ImageView
+                            android:id="@+id/eventTimeImageView"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="8dp"
+                            android:src="@drawable/ic_time"
+                            app:tint="@color/black" />
+
+                        <TextView
+                            android:id="@+id/eventTimeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Time"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <!-- Mode -->
+                        <ImageView
+                            android:id="@+id/eventModeImageView"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="8dp"
+                            android:src="@drawable/ic_people"
+                            app:tint="@color/black" />
+
+                        <TextView
+                            android:id="@+id/eventModeTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Mode"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <!-- Tags -->
+                        <ImageView
+                            android:id="@+id/eventTagsImageView"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="top"
+                            android:src="@drawable/ic_tags"
+                            app:tint="@color/black" />
+
+                        <com.google.android.flexbox.FlexboxLayout
+                            android:id="@+id/tagsContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:orientation="horizontal"
+                            app:alignItems="stretch"
+                            app:flexWrap="wrap"
+                            app:justifyContent="flex_start">
+
+                            <!-- TextViews will be added here programmatically -->
+                        </com.google.android.flexbox.FlexboxLayout>
+
+                    </GridLayout>
+                </androidx.cardview.widget.CardView>
+
+                <WebView
+                    android:id="@+id/longDescriptionWebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:layout_marginBottom="10dp"
+                    android:scrollbars="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailsCardView"
+                    tools:layout_editor_absoluteX="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Shimmer Layout -->
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerLayout"
+                android:visibility="visible"
+                tools:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="10dp"
-                android:scrollbars="none"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailsCardView"
-                tools:layout_editor_absoluteX="16dp" />
-
-
+                android:layout_height="match_parent">
+                <include layout="@layout/shimmer_event_detail"/>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+            
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

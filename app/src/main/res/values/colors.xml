@@ -46,5 +46,10 @@
     <color name="google_green_alpha_45">#4508AD50</color>
     <color name="google_yellow_alpha_45">#45FEBF08</color>
 
+    <color name="google_yellow_45_opaque">#FFF6EE</color>
+    <color name="google_red_45_opaque">#FFF5F9</color>
+    <color name="google_green_45_opaque">#F0F5F4</color>
+    <color name="google_blue_45_opaque">#FAF6FF</color>
+
 
 </resources>

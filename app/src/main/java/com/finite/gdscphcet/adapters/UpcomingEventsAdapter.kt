@@ -31,7 +31,7 @@ class UpcomingEventsAdapter(private val upcomingEventList:  List<UpcomingEvent>)
         val currentEvent = upcomingEventList[position]
         holder.itemView.apply {
 
-            Glide.with(holder.itemView.context).load(currentEvent.image).into(holder.logo)
+            Glide.with(holder.itemView.context).load(currentEvent.image).placeholder(R.mipmap.ic_launcher).into(holder.logo)
             holder.title.text = currentEvent.title
             holder.date.text = "\uD83D\uDCC5  ${currentEvent.date}"
             holder.type.text = currentEvent.type
