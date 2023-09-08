@@ -26,26 +26,29 @@
             android:clipToPadding="false">
 
             <!-- Background Cover Banner -->
+
+            <!-- Back Button -->
             <ImageView
                 android:id="@+id/coverBannerImageView"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:scaleType="centerCrop"
-                tools:src="@tools:sample/backgrounds/scenic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                tools:src="@tools:sample/backgrounds/scenic" />
 
-            <!-- Back Button -->
-            <ImageButton
+            <ImageView
                 android:id="@+id/backButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
                 android:layout_margin="16dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_back"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="6dp"
+                android:background="@drawable/circle_back_button_bg"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_back" />
 
             <!-- Profile Image in Circle (Top Left) -->
             <de.hdodenhof.circleimageview.CircleImageView
@@ -182,6 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="10dp"
+                android:scrollbars="none"
                 android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailsCardView"
