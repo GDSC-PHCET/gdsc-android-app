@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -16,7 +15,6 @@ import com.finite.gdscphcet.adapters.UpcomingEventsAdapter
 import com.finite.gdscphcet.databinding.FragmentHomeBinding
 import com.finite.gdscphcet.repository.PastEventRepo
 import com.finite.gdscphcet.repository.UpcomingEventRepo
-import com.finite.gdscphcet.ui.viewModel.HomeViewModel
 import com.finite.scrapingpractise.model.PastEvent
 import com.finite.scrapingpractise.model.UpcomingEvent
 import kotlinx.coroutines.CoroutineScope
@@ -28,7 +26,6 @@ import kotlinx.coroutines.withContext
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
-    private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var pastEventsRecyclerView: RecyclerView
     private lateinit var upcomingEventsRecyclerView: RecyclerView

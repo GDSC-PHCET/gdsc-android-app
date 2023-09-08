@@ -8,15 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.finite.gdscphcet.databinding.FragmentAboutBinding
-import com.finite.gdscphcet.ui.viewModel.AboutViewModel
 
 class AboutFragment : Fragment() {
 
     private var binding : FragmentAboutBinding? = null
-    private val viewModel: AboutViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
