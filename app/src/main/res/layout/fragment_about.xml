@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="aboutFragment"
-            type="com.finite.gdscphcet.ui.AboutFragment" />
-
-        <variable
-            name="aboutViewModel"
-            type="com.finite.gdscphcet.ui.viewModel.AboutViewModel" />
-    </data>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeSwipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -149,35 +141,30 @@
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_columnWeight="1"
-                    android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.instagram)}"
                     android:src="@drawable/ic_instagram2" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_columnWeight="1"
-                    android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.youtube)}"
                     android:src="@drawable/ic_youtube2" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_columnWeight="1"
-                    android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.linkedin)}"
                     android:src="@drawable/ic_linkedin" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_columnWeight="1"
-                    android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.github)}"
                     android:src="@drawable/ic_github2" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_columnWeight="1"
-                    android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.discord)}"
                     android:src="@drawable/ic_discord2" />
             </GridLayout>
 
@@ -187,7 +174,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.website)}"
                 android:text="Official Website"
                 app:icon="@drawable/ic_website"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -240,7 +226,6 @@
                         android:layout_marginVertical="10dp"
                         android:layout_marginStart="10dp"
                         android:backgroundTint="@color/green"
-                        android:onClick="@{() -> aboutFragment.openLink(aboutViewModel.join_community)}"
                         android:text="Become a Member"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
@@ -543,4 +528,4 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</layout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

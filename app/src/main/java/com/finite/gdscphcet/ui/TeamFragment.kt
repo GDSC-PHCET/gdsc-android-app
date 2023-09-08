@@ -29,10 +29,6 @@ class TeamFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
-            teamFragment = this@TeamFragment
-        }
-
         Glide.with(this).load(getString(R.string.rishabh)).centerCrop().into(binding!!.piRishabh)
         Glide.with(this).load(getString(R.string.parth)).centerCrop().into(binding!!.piParth)
         Glide.with(this).load(getString(R.string.vedant)).centerCrop().into(binding!!.piVedant)

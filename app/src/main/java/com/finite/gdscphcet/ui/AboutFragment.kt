@@ -31,10 +31,7 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
-            aboutFragment = this@AboutFragment
-            aboutViewModel = viewModel
-        }
+
         binding?.appDev?.setOnClickListener {
             onItemClick("appDev")
         }

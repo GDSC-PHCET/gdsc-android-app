@@ -2,7 +2,7 @@ package com.finite.gdscphcet.repository
 
 import com.finite.gdscphcet.utils.EventUtils
 import com.finite.gdscphcet.utils.EventUtils.getAgendaItems
-import com.finite.scrapingpractise.model.PastEventDetails
+import com.finite.scrapingpractise.model.UpcomingEventDetails
 import com.finite.scrapingpractise.model.UpcomingEvent
 import org.jsoup.Jsoup
 import org.jsoup.parser.Parser
@@ -10,6 +10,7 @@ import org.jsoup.parser.Parser
 object UpcomingEventRepo {
 
     fun getUpcomingEventsList(url: String): MutableList<UpcomingEvent> {
+
         val doc = Jsoup.connect(url).ignoreContentType(true).get()
         val eventsList: MutableList<UpcomingEvent> = mutableListOf()
         val eventElements = doc.select("ul.event-list > li.event")
@@ -32,7 +33,7 @@ object UpcomingEventRepo {
         return eventsList
     }
 
-    fun getUpcomingEventDetails(url: String): PastEventDetails {
+    fun getUpcomingEventDetails(url: String): UpcomingEventDetails {
 
         val doc = Jsoup.connect(url).get()
 
@@ -76,6 +77,6 @@ object UpcomingEventRepo {
         val agenda = getAgendaItems(doc)
 
         // Create and return a PastEventDetails object
-        return PastEventDetails(title, mode, dateTime, tags, shortDesc, longDesc, whenDate, whenTime, agenda, bannerUrl, logoUrl)
+        return UpcomingEventDetails(title, mode, dateTime, tags, shortDesc, longDesc, whenDate, whenTime, agenda, bannerUrl, logoUrl)
     }
 }

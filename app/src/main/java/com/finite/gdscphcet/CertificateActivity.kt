@@ -27,10 +27,6 @@ class CertificateActivity : AppCompatActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.statusBarColor = this.resources.getColor(R.color.status_bar)
 
-        binding?.apply {
-            certificateVm = viewModel
-            certificateActivity = this@CertificateActivity
-        }
 
         binding.verifyButton.setOnClickListener{
             var text: String = binding.codeEditText.text.toString().trim()
