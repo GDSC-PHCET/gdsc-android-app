@@ -1,6 +1,7 @@
 package com.finite.scrapingpractise.model
 
 import com.finite.gdscphcet.model.Agenda
+import org.jsoup.nodes.Element
 
 data class UpcomingEventDetails(
     val title: String = "",

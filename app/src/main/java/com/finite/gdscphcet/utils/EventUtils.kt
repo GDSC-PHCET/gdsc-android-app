@@ -3,6 +3,7 @@ package com.finite.gdscphcet.utils
 import com.finite.gdscphcet.model.Agenda
 import com.google.gson.Gson
 import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
 
 object EventUtils {
 
@@ -76,5 +77,9 @@ object EventUtils {
         val imageUrl = metaTag?.attr("content")
 
         return imageUrl ?: ""
+    }
+
+    fun getEventDetailsLongDesc(doc: Document): Element {
+        return doc.selectFirst("div.event-description.general-body")?: Element("")
     }
 }

@@ -20,7 +20,16 @@ object PastEventRepo {
             val image = eventElement.selectFirst("img.event-image")!!.attr("src")
             val eventDate = eventElement.selectFirst("p.vertical-box--event-date")!!.text()
             val eventType = eventElement.selectFirst("p.event-page.vertical-box--event-type")!!.text()
-            val eventUrl = "https://gdsc.community.dev" + eventElement.attr("href")
+            //val eventUrl = "https://gdsc.community.dev" + eventElement.attr("href")
+
+            val href = eventElement.attr("href")
+            val eventUrl = if (href.startsWith("https://gdsc.community.dev")) {
+                href // If it already starts with the prefix, use it as is
+            } else {
+                "https://gdsc.community.dev$href" // Otherwise, add the prefix
+            }
+
+
 
             val eventTitleElement = eventElement.selectFirst("p.event-page.vertical-box--event-title")
             val eventTitle = Parser.unescapeEntities(eventTitleElement?.html()?: "", false).split("<br>").firstOrNull()?.trim() ?: ""
@@ -39,7 +48,9 @@ object PastEventRepo {
         val title = Parser.unescapeEntities(doc.selectFirst("h1.event-title-heading span.font_banner2")?.text()?: "", false)
         val dateTime = doc.select("#react-event-header-address > h2 > div").text() ?: ""
         val shortDesc = doc.selectFirst("p.event-short-description-on-banner")?.text() ?: ""
-        val longDesc = doc.selectFirst("div.description-container div.event-description")?.text() ?: ""
+//        val longDesc = doc.selectFirst("div.description-container div.event-description")?.text() ?: ""
+        //val longDesc = Parser.unescapeEntities(doc.selectFirst("div.description-container div.event-description")?.text() ?: "", false)
+        val longDesc = EventUtils.getEventDetailsLongDesc(doc).toString()
         val bannerUrl = EventUtils.getEventBannerUrl(doc)
         val logoUrl = EventUtils.getEventDetailsLogoUrl(doc)
 

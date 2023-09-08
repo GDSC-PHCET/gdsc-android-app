@@ -25,10 +25,16 @@
     <color name="blue">#0000FF</color>
     <color name="navy">#000000</color>
     <color name="shimmer_color">#BFBDBD</color>
+
     <color name="google_blue">#4285F4</color>
     <color name="google_red">#FF4737</color>
     <color name="google_green">#08AD50</color>
     <color name="google_yellow">#FEBF08</color>
+
+    <color name="google_blue_alpha_5">#054285F4</color>
+    <color name="google_red_alpha_5">#05FF4737</color>
+    <color name="google_green_alpha_5">#0508AD50</color>
+    <color name="google_yellow_alpha_5">#05FEBF08</color>
 
     <color name="google_blue_alpha_15">#154285F4</color>
     <color name="google_red_alpha_15">#15FF4737</color>

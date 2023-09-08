@@ -17,7 +17,9 @@ class ScrapingUnitTest {
     //private val url = "https://gdsc.community.dev/shri-shankaracharya-technical-campus-bhilai/"
 //    private val url = "https://gdsc.community.dev/pillai-college-of-engineering-navi-mumbai/"
     //private val url = "https://gdsc.community.dev/pranveer-singh-institute-of-technology-kanpur/"
-    private val url = "https://gdsc.community.dev/dy-patil-college-of-engineering-pune/"
+//    private val url = "https://gdsc.community.dev/dy-patil-college-of-engineering-pune/"
+
+    private val url = "https://gdsc.community.dev/mit-academy-of-engineering-pune/"
 
     private val pastEventUrl = "https://gdsc.community.dev/events/details/developer-student-clubs-dy-patil-college-of-engineering-pune-presents-google-io-extended-watch-party-pathway-to-become-a-senior-developer-at-paytm/"
     private val upcomingEventUrl = "https://gdsc.community.dev/events/details/developer-student-clubs-dy-patil-college-of-engineering-pune-presents-google-cloud-study-jam-session-1/"
@@ -129,6 +131,15 @@ class ScrapingUnitTest {
             }
         }
 
+    }
+
+    @Test
+    fun `Get HTML Desc`() {
+        val doc = PastEventRepo.getDocument("https://gdsc.community.dev/events/details/developer-student-clubs-ramrao-adik-institute-of-technology-navi-mumbai-presents-cyber-security-workshop/")
+
+        val longDesc = EventUtils.getEventDetailsLongDesc(doc)
+
+        println(longDesc)
     }
 
 //    @Test

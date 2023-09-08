@@ -15,10 +15,12 @@ import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.ui.EventDetailActivity
 import com.finite.scrapingpractise.model.UpcomingEvent
+import kotlin.math.log
 
 class UpcomingEventsAdapter(private val upcomingEventList:  List<UpcomingEvent>) : RecyclerView.Adapter<UpcomingEventsAdapter.EventViewHolder>() {
 
     private var colorCounter = (1..4).random()
+    private val baseCounter = colorCounter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.upcoming_event_item,parent,false)
@@ -123,7 +125,11 @@ class UpcomingEventsAdapter(private val upcomingEventList:  List<UpcomingEvent>)
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context,EventDetailActivity::class.java)
+                //Log.d("Testlog", "Past: url = ${currentEvent.url} and type = upcoming")
+                Log.d("Testlog", "Color = ${getCurrentColor(((baseCounter + position)%4))}, Position is ${position} Position +1 is ${(position+1)}")
+                intent.putExtra("color", getCurrentColor((baseCounter + position)%4))
                 intent.putExtra("eventUrl", currentEvent.url)
+                intent.putExtra("eventType", "upcoming")
                 holder.itemView.context.startActivity(intent)
             }
         }
@@ -131,6 +137,17 @@ class UpcomingEventsAdapter(private val upcomingEventList:  List<UpcomingEvent>)
 
     override fun getItemCount(): Int {
         return upcomingEventList.size
+    }
+
+    private fun getCurrentColor(colorCounter: Int): String {
+        return when (colorCounter) {
+            1 -> "blue"
+            2 -> "red"
+            3 -> "yellow"
+            0 -> "green"
+
+            else -> "white"
+        }
     }
 
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

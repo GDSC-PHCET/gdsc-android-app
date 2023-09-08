@@ -1,25 +1,32 @@
 package com.finite.gdscphcet.ui
 
+import android.app.PendingIntent.OnFinished
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
+import com.finite.gdscphcet.adapters.PastEventsAdapter
 import com.finite.gdscphcet.databinding.ActivityEventDetailBinding
+import com.finite.gdscphcet.repository.PastEventRepo
+import com.finite.gdscphcet.repository.UpcomingEventRepo
+import com.finite.scrapingpractise.model.PastEventDetails
+import com.finite.scrapingpractise.model.UpcomingEventDetails
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class EventDetailActivity : AppCompatActivity() {
 
-    //private val viewModel: EventDetailViewModel by viewModels()
-//    private lateinit var videoButton: Button
-//    private lateinit var posterImv : ImageView
-//    private lateinit var tvEventTitle : TextView
-//    private lateinit var tvEventDate : TextView
-//    private lateinit var tvEventTime : TextView
-//    private lateinit var tvEventMode : TextView
-//    private lateinit var tvAboutDetails : TextView
-//    private lateinit var eventButton: Button
-//    private lateinit var posterImvShimmer: ShimmerFrameLayout
-//    private lateinit var eventDetailsShimmer: ShimmerFrameLayout
-//    private lateinit var eventAboutShimmer: ShimmerFrameLayout
+    private var color = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,174 +39,401 @@ class EventDetailActivity : AppCompatActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.statusBarColor = this.resources.getColor(R.color.status_bar)
 
-//        binding.apply {
-//            eventActivity = this@EventDetailActivity
-//            eventViewModel = viewModel
-//        }
+        val eventType = intent.getStringExtra("eventType")
+        val url = intent.getStringExtra("eventUrl") ?: ""
+        color = intent.getStringExtra("color") ?: ""
 
-//        videoButton = binding.videoButton
-//        posterImv = binding.PosterImv
-//        tvEventTitle = binding.tvEventTitle
-//        tvEventDate = binding.tvEventDate
-//        tvEventTime = binding.tvEventTime
-//        tvEventMode = binding.tvEventMode
-//        tvAboutDetails = binding.tvAboutDetails
-//        eventButton = binding.eventButton
-//
-//        posterImvShimmer = binding.shimmerEffectEventPoster
-//        eventDetailsShimmer = binding.shimmerEffectEventDetails
-//        eventAboutShimmer = binding.shimmerEffectEventAbout
-//
-//        posterImvShimmer.startShimmer()
-//        eventDetailsShimmer.startShimmer()
-//        eventAboutShimmer.startShimmer()
+        Log.d("Testlog", "onCreate: $eventType : $url")
 
-//        val eventId = intent.getStringExtra("eventId")
-//        val eventTicketLink = intent.getStringExtra("eventTicket")
 
-//        Log.d("PRI", "success $eventId")
-//        if (eventId != null) {
-//            if (eventTicketLink != null) {
-//                setUpcomingEventData(eventId)
-//                videoButton.setText(getString(R.string.bookEventTicket))
-//            }
-//            else
-//                setPastEventData(eventId)
-//        }
+        CoroutineScope(Dispatchers.Main).launch {
+            when (eventType) {
+                "upcoming" -> loadUpcomingEventDetails(url, binding)
+                "past" -> loadPastEventDetails(url, binding)
+            }
+        }
     }
 
-//    private lateinit var database : DatabaseReference
+    private suspend fun loadUpcomingEventDetails(url: String, binding: ActivityEventDetailBinding) {
+        Log.d("Testlog", "Reached loadUpcomingEventDetails:")
+        var upcomingEvents = UpcomingEventDetails()
+        withContext(Dispatchers.IO) {
 
-//    private fun setPastEventData(eventId: String) {
-//
-//        val posterImv : ImageView = findViewById(R.id.PosterImv)
-//        val tvEventTitle : TextView = findViewById(R.id.tvEventTitle)
-//        val tvEventDate : TextView = findViewById(R.id.tvEventDate)
-//        val tvEventTime : TextView = findViewById(R.id.tvEventTime)
-//        val tvEventMode : TextView = findViewById(R.id.tvEventMode)
-//        val tvAboutDetails : TextView = findViewById(R.id.tvAboutDetails)
-//        val eventButton: Button = findViewById(R.id.eventButton)
-//
-//        database = FirebaseDatabase.getInstance().getReference("pastEvents")
-//        database.child(eventId).get().addOnSuccessListener {
-//            if (it.exists()){
-//
-////                posterImvShimmer.visibility = View.GONE
-////                eventDetailsShimmer.visibility = View.GONE
-////                eventAboutShimmer.visibility = View.GONE
-////
-////                posterImvShimmer.stopShimmer()
-////                eventDetailsShimmer.stopShimmer()
-////                eventAboutShimmer.stopShimmer()
-//
-//                Log.d("success", "Hua")
-//                val title = it.child("title").value.toString()
-//                val date = it.child("date").value.toString()
-//                val time = it.child("time").value.toString()
-//                val mode = it.child("mode").value.toString()
-//                val shortdesc = it.child("shortdesc").value.toString()
-//                val eventlink = it.child("eventlink").value.toString()
-//                val posterlink = it.child("posterlink").value.toString()
-//                val videolink = it.child("videolink").value.toString()
-//
-//                //Toast.makeText(this, "$title : $date",Toast.LENGTH_SHORT).show()
-//
-//                Glide.with(this).load(posterlink).error(R.drawable.ic_404_image).centerCrop().into(posterImv)
-//
-//                tvEventTitle.text = title
-//                tvEventDate.text = "📅 \t\t\t:\t\t$date"
-//                tvEventTime.text = "⌚ \t\t\t:\t\t$time"
-//                tvEventMode.text = "📍 \t\t\t:\t\t$mode"
-//                tvAboutDetails.text = shortdesc
-//
-//                videoButton.setOnClickListener {
-//                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videolink))
-//                    startActivity(intent)
-//                }
-//
-//                eventButton.setOnClickListener {
-//                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(eventlink))
-//                    startActivity(intent)
-//                }
-//
-//                posterImvShimmer.visibility = View.GONE
-//                eventDetailsShimmer.visibility = View.GONE
-//                eventAboutShimmer.visibility = View.GONE
-//
-//                posterImvShimmer.stopShimmer()
-//                eventDetailsShimmer.stopShimmer()
-//                eventAboutShimmer.stopShimmer()
-//
-//            }else{
-//                Toast.makeText(this,"does not exists",Toast.LENGTH_SHORT).show()
-//                Log.d("DoesNotExists", " nai hai data bhai :(")
-//            }
-//
-//        }.addOnFailureListener{
-//            Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
-//            finish()
-//            Log.d("Failed","fail zhaala")
-//        }
-//    }
-//
-//    private fun setUpcomingEventData(eventId: String) {
-//
-//        database = FirebaseDatabase.getInstance().getReference("upcomingEvents")
-//        database.child(eventId).get().addOnSuccessListener {
-//            if (it.exists()){
-//
-//
-//                Log.d("success", "Hua")
-//                val title = it.child("title").value.toString()
-//                val date = it.child("date").value.toString()
-//                val time = it.child("time").value.toString()
-//                val mode = it.child("mode").value.toString()
-//                val shortdesc = it.child("shortdesc").value.toString()
-//                val eventlink = it.child("eventlink").value.toString()
-//                val posterlink = it.child("posterlink").value.toString()
-//                val videolink = it.child("ticketlink").value.toString()
-//
-//                //Toast.makeText(this, "$title : $date",Toast.LENGTH_SHORT).show()
-//
-//                Glide.with(this).load(posterlink).error(R.drawable.ic_404_image).centerCrop().into(posterImv)
-//
-//                tvEventTitle.text = title
-//                tvEventDate.text = "📅 \t\t\t:\t\t$date"
-//                tvEventTime.text = "⌚ \t\t\t:\t\t$time"
-//                tvEventMode.text = "📍 \t\t\t:\t\t$mode"
-//                tvAboutDetails.text = shortdesc
-//
-//                videoButton.setOnClickListener {
-//                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videolink))
-//                    startActivity(intent)
-//                }
-//
-//                eventButton.setOnClickListener {
-//                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(eventlink))
-//                    startActivity(intent)
-//                }
-//
-//                posterImvShimmer.visibility = View.GONE
-//                eventDetailsShimmer.visibility = View.GONE
-//                eventAboutShimmer.visibility = View.GONE
-//
-//                posterImvShimmer.stopShimmer()
-//                eventDetailsShimmer.stopShimmer()
-//                eventAboutShimmer.stopShimmer()
-//
-//            }else{
-//                Toast.makeText(this,"does not exists",Toast.LENGTH_SHORT).show()
-//                Log.d("DoesNotExists", " nai hai data bhai :(")
-//            }
-//
-//        }.addOnFailureListener{
-//            Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
-//            finish()
-//            Log.d("Failed","fail zhaala")
-//        }
-//    }
+            val job = async {
+                UpcomingEventRepo.getUpcomingEventDetails(url)
+            }
+            upcomingEvents = job.await()
+        }
 
-//    fun callFinish() {
-//        finish()
-//    }
+        withContext(Dispatchers.Main) {
+            binding.apply {
+                Glide.with(this@EventDetailActivity).load(upcomingEvents.logoUrl)
+                    .into(binding.logoImageView)
+                Glide.with(this@EventDetailActivity).load(upcomingEvents.bannerUrl)
+                    .into(binding.coverBannerImageView)
+                setupUpcomingUI(upcomingEvents, binding)
+            }
+        }
+    }
+
+    private suspend fun loadPastEventDetails(url: String, binding: ActivityEventDetailBinding) {
+        //Log.d("Testlog", "Reached loadPastEventDetails: $url")
+        var pastEvents = PastEventDetails()
+        withContext(Dispatchers.IO) {
+            val job = async {
+                PastEventRepo.getPastEventDetails(url)
+            }
+            pastEvents = job.await()
+            //Log.d("Testlog", "loadPastEventDetails: $pastEvents")
+        }
+
+        withContext(Dispatchers.Main) {
+            binding.apply {
+                Glide.with(this@EventDetailActivity).load(pastEvents.logoUrl)
+                    .into(binding.logoImageView)
+                Glide.with(this@EventDetailActivity).load(pastEvents.bannerUrl)
+                    .into(binding.coverBannerImageView)
+                setupPastUI(pastEvents, binding)
+            }
+        }
+    }
+
+    private fun setupUpcomingUI(
+        upcomingEvents: UpcomingEventDetails,
+        binding: ActivityEventDetailBinding
+    ) {
+        binding.apply {
+            binding.eventTitleTextView.text = upcomingEvents.title
+
+            if(upcomingEvents.whenDate.isEmpty() || upcomingEvents.whenTime.isEmpty()){
+                val parts = upcomingEvents.dateTime.split(",").map { it.trim() }
+                binding.eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
+                binding.eventTimeTextView.text =  parts[2]
+            } else {
+                binding.eventDateTextView.text = upcomingEvents.whenDate
+                binding.eventTimeTextView.text = upcomingEvents.whenTime
+            }
+
+
+            binding.eventModeTextView.text = upcomingEvents.mode
+            binding.longDescriptionWebView.loadData(
+                upcomingEvents.longDesc,
+                "text/html",
+                "UTF-8"
+            )
+
+
+            for (tag in upcomingEvents.tags) {
+                val textView = TextView(this@EventDetailActivity)
+                textView.text = tag
+                textView.textSize = 10f
+                textView.setTextColor(
+                    ContextCompat.getColor(
+                        this@EventDetailActivity,
+                        R.color.black
+                    )
+                )
+
+                val layoutParams = ViewGroup.MarginLayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+
+                layoutParams.setMargins(
+                    0,
+                    0,
+                    resources.getDimensionPixelSize(R.dimen.tag_margin_end),
+                    resources.getDimensionPixelSize(R.dimen.tag_margin_bottom)
+                )
+                textView.layoutParams = layoutParams
+                textView.setPadding(
+                    resources.getDimensionPixelSize(R.dimen.tag_padding_start),
+                    resources.getDimensionPixelSize(R.dimen.tag_padding_top),
+                    resources.getDimensionPixelSize(R.dimen.tag_padding_end),
+                    resources.getDimensionPixelSize(R.dimen.tag_padding_bottom)
+                )
+
+                when (color) {
+                    "blue" -> {
+                        val background = GradientDrawable()
+                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+                        background.setColor(
+                            ContextCompat.getColor(
+                                this@EventDetailActivity,
+                                R.color.google_blue_alpha_45
+                            )
+                        )
+                        textView.background = background
+                    }
+
+                    "red" -> {
+                        val background = GradientDrawable()
+                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+                        background.setColor(
+                            ContextCompat.getColor(
+                                this@EventDetailActivity,
+                                R.color.google_red_alpha_45
+                            )
+                        )
+                        textView.background = background
+                    }
+
+                    "yellow" -> {
+                        val background = GradientDrawable()
+                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+                        background.setColor(
+                            ContextCompat.getColor(
+                                this@EventDetailActivity,
+                                R.color.google_yellow_alpha_45
+                            )
+                        )
+                        textView.background = background
+                    }
+
+                    "green" -> {
+                        val background = GradientDrawable()
+                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+                        background.setColor(
+                            ContextCompat.getColor(
+                                this@EventDetailActivity,
+                                R.color.google_green_alpha_45
+                            )
+                        )
+                        textView.background = background
+                    }
+                }
+
+                binding.tagsContainer.addView(textView)
+            }
+
+            when (color) {
+                "blue" -> {
+                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
+                    eventDateTextView.setTextColor(resources.getColor(R.color.google_blue))
+                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_blue))
+                    eventModeTextView.setTextColor(resources.getColor(R.color.google_blue))
+                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_blue))
+                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_blue))
+                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_blue))
+                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_blue))
+                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
+                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
+                }
+
+                "red" -> {
+                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_red_alpha_15))
+                    eventDateTextView.setTextColor(resources.getColor(R.color.google_red))
+                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_red))
+                    eventModeTextView.setTextColor(resources.getColor(R.color.google_red))
+                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_red))
+                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_red))
+                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_red))
+                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_red))
+                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
+                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
+                }
+
+                "yellow" -> {
+                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_yellow_alpha_15))
+                    eventDateTextView.setTextColor(resources.getColor(R.color.google_yellow))
+                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_yellow))
+                    eventModeTextView.setTextColor(resources.getColor(R.color.google_yellow))
+                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_yellow))
+                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_yellow))
+                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_yellow))
+                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_yellow))
+                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
+                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
+                }
+
+                "green" -> {
+                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_green_alpha_15))
+                    eventDateTextView.setTextColor(resources.getColor(R.color.google_green))
+                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_green))
+                    eventModeTextView.setTextColor(resources.getColor(R.color.google_green))
+                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_green))
+                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_green))
+                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_green))
+                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_green))
+                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
+                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
+                }
+            }
+        }
+    }
+
+    private fun setupPastUI(
+        pastEvents: PastEventDetails,
+        binding: ActivityEventDetailBinding
+    ) {
+        binding.apply {
+            binding.eventTitleTextView.text = pastEvents.title
+
+            if(pastEvents.whenDate.isEmpty() || pastEvents.whenTime.isEmpty()){
+                val parts = pastEvents.dateTime.split(",").map { it.trim() }
+                binding.eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
+                binding.eventTimeTextView.text =  parts[2]
+            } else {
+                binding.eventDateTextView.text = pastEvents.whenDate
+                binding.eventTimeTextView.text = pastEvents.whenTime
+            }
+
+            binding.eventModeTextView.text = pastEvents.mode
+            //Log.d("Testlog", "setupPastUI: ${pastEvents.longDesc}")
+            binding.longDescriptionWebView.loadData(
+                pastEvents.longDesc,
+                "text/html",
+                "UTF-8"
+            )
+
+            for (tag in pastEvents.tags) {
+                val textView = TextView(this@EventDetailActivity)
+                textView.text = tag
+                textView.textSize = 10f
+                textView.setTextColor(
+                    ContextCompat.getColor(
+                        this@EventDetailActivity,
+                        R.color.black
+                    )
+                )
+
+                val layoutParams = ViewGroup.MarginLayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+
+                layoutParams.setMargins(
+                    0,
+                    0,
+                    resources.getDimensionPixelSize(R.dimen.tag_margin_end),
+                    resources.getDimensionPixelSize(R.dimen.tag_margin_bottom)
+                )
+                textView.layoutParams = layoutParams
+                textView.setPadding(
+                    resources.getDimensionPixelSize(R.dimen.tag_padding_start),
+                    resources.getDimensionPixelSize(R.dimen.tag_padding_top),
+                    resources.getDimensionPixelSize(R.dimen.tag_padding_end),
+                    resources.getDimensionPixelSize(R.dimen.tag_padding_bottom)
+                )
+
+                when (color) {
+                    "blue" -> {
+                        val background = GradientDrawable()
+                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+                        background.setColor(
+                            ContextCompat.getColor(
+                                this@EventDetailActivity,
+                                R.color.google_blue_alpha_45
+                            )
+                        )
+                        textView.background = background
+                    }
+
+                    "red" -> {
+                        val background = GradientDrawable()
+                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+                        background.setColor(
+                            ContextCompat.getColor(
+                                this@EventDetailActivity,
+                                R.color.google_red_alpha_45
+                            )
+                        )
+                        textView.background = background
+                    }
+
+                    "yellow" -> {
+                        val background = GradientDrawable()
+                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+                        background.setColor(
+                            ContextCompat.getColor(
+                                this@EventDetailActivity,
+                                R.color.google_yellow_alpha_45
+                            )
+                        )
+                        textView.background = background
+                    }
+
+                    "green" -> {
+                        val background = GradientDrawable()
+                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+                        background.setColor(
+                            ContextCompat.getColor(
+                                this@EventDetailActivity,
+                                R.color.google_green_alpha_45
+                            )
+                        )
+                        textView.background = background
+                    }
+                }
+
+                binding.tagsContainer.addView(textView)
+            }
+
+            when (color) {
+                "blue" -> {
+                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
+                    eventDateTextView.setTextColor(resources.getColor(R.color.google_blue))
+                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_blue))
+                    eventModeTextView.setTextColor(resources.getColor(R.color.google_blue))
+                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_blue))
+                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_blue))
+                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_blue))
+                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_blue))
+                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
+                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
+                }
+
+                "red" -> {
+                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_red_alpha_15))
+                    eventDateTextView.setTextColor(resources.getColor(R.color.google_red))
+                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_red))
+                    eventModeTextView.setTextColor(resources.getColor(R.color.google_red))
+                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_red))
+                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_red))
+                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_red))
+                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_red))
+                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
+                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
+                }
+
+                "yellow" -> {
+                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_yellow_alpha_15))
+                    eventDateTextView.setTextColor(resources.getColor(R.color.google_yellow))
+                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_yellow))
+                    eventModeTextView.setTextColor(resources.getColor(R.color.google_yellow))
+                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_yellow))
+                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_yellow))
+                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_yellow))
+                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_yellow))
+                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
+                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
+                }
+
+                "green" -> {
+                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_green_alpha_15))
+                    eventDateTextView.setTextColor(resources.getColor(R.color.google_green))
+                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_green))
+                    eventModeTextView.setTextColor(resources.getColor(R.color.google_green))
+                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_green))
+                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_green))
+                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_green))
+                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_green))
+                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
+                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
+                }
+            }
+        }
+    }
+
+    // when back button is pressed finish the activity
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
+
+
+
+
+
 }
