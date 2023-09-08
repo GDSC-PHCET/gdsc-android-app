@@ -1,10 +1,10 @@
 package com.finite.gdscphcet.utils
 
-import com.finite.scrapingpractise.model.Agenda
+import com.finite.gdscphcet.model.Agenda
 import com.google.gson.Gson
 import org.jsoup.nodes.Document
 
-object AgendaItems {
+object EventUtils {
 
     fun getAgendaItems(doc: Document): List<Agenda> {
         val agenda = mutableListOf<Agenda>()
@@ -56,5 +56,25 @@ object AgendaItems {
         }
 
         return agenda
+    }
+
+    fun getEventBannerUrl(doc: Document): String {
+        // Define a regular expression pattern to extract the background image URL
+        val pattern = Regex("\\.responsive-event-banner\\s*\\{[^}]*background-image:\\s*url\\(([^)]+)\\);")
+
+        // Find the URL using the regular expression
+        val matchResult = pattern.find(doc.toString())
+
+        return matchResult?.groupValues?.get(1) ?: ""
+    }
+
+    fun getEventDetailsLogoUrl(doc: Document): String {
+        // Find the meta tag with property="og:image"
+        val metaTag = doc.select("meta[property=og:image]").first()
+
+        // Extract the content attribute (URL) from the meta tag
+        val imageUrl = metaTag?.attr("content")
+
+        return imageUrl ?: ""
     }
 }

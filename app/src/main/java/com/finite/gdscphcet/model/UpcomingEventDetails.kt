@@ -1,5 +1,7 @@
 package com.finite.scrapingpractise.model
 
+import com.finite.gdscphcet.model.Agenda
+
 data class UpcomingEventDetails(
     val title: String = "",
     val mode: String = "",
@@ -10,10 +12,8 @@ data class UpcomingEventDetails(
     val whenDate : String = "",
     val whenTime : String = "",
     val agenda : List<Agenda> = listOf(),
+    val bannerUrl : String = "",
+    val logoUrl : String = ""
 )
 
-data class Agenda(
-    val time : String = "",
-    val activity : String = "",
-    val description : String = ""
-)
+

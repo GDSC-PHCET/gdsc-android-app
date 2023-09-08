@@ -1,5 +1,7 @@
 package com.finite.scrapingpractise.model
 
+import com.finite.gdscphcet.model.Agenda
+
 data class PastEventDetails(
     val title: String = "",
     val mode: String = "",
@@ -10,5 +12,7 @@ data class PastEventDetails(
     val whenDate : String = "",
     val whenTime : String = "",
     val agenda : List<Agenda> = listOf(),
+    val bannerUrl : String = "",
+    val logoUrl : String = ""
 )
 

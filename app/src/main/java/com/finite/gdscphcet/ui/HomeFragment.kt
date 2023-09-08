@@ -41,8 +41,8 @@ class HomeFragment : Fragment() {
 
 //        private val url = "https://gdsc.community.dev/pillai-hoc-college-of-engineering-and-technology-navi-mumbai/"
     private val url = "https://gdsc.community.dev/dy-patil-college-of-engineering-pune/"
-
-    //      private val url = "https://gdsc.community.dev/mody-university-of-science-and-technology-laxmangarh/"
+//        private val url = "https://gdsc.community.dev/mody-university-of-science-and-technology-laxmangarh/"
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

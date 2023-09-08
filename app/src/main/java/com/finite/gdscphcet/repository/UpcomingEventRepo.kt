@@ -1,6 +1,7 @@
 package com.finite.gdscphcet.repository
 
-import com.finite.gdscphcet.utils.AgendaItems.getAgendaItems
+import com.finite.gdscphcet.utils.EventUtils
+import com.finite.gdscphcet.utils.EventUtils.getAgendaItems
 import com.finite.scrapingpractise.model.PastEventDetails
 import com.finite.scrapingpractise.model.UpcomingEvent
 import org.jsoup.Jsoup
@@ -39,6 +40,8 @@ object UpcomingEventRepo {
         val dateTime = doc.select("#react-event-header-address > h2 > div").text() ?: ""
         val shortDesc = doc.selectFirst("p.event-short-description-on-banner")?.text() ?: ""
         val longDesc = doc.selectFirst("div.description-container div.event-description")?.text() ?: ""
+        val bannerUrl = EventUtils.getEventBannerUrl(doc)
+        val logoUrl = EventUtils.getEventDetailsLogoUrl(doc)
 
         // Extract the date and time
         val secondColumn = doc.selectFirst("div.second-column")
@@ -73,6 +76,6 @@ object UpcomingEventRepo {
         val agenda = getAgendaItems(doc)
 
         // Create and return a PastEventDetails object
-        return PastEventDetails(title, mode, dateTime, tags, shortDesc, longDesc, whenDate, whenTime, agenda)
+        return PastEventDetails(title, mode, dateTime, tags, shortDesc, longDesc, whenDate, whenTime, agenda, bannerUrl, logoUrl)
     }
 }

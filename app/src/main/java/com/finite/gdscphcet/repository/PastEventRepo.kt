@@ -1,11 +1,9 @@
 package com.finite.gdscphcet.repository
 
-import com.finite.gdscphcet.utils.AgendaItems.getAgendaItems
-import com.finite.scrapingpractise.model.Agenda
+import com.finite.gdscphcet.utils.EventUtils
+import com.finite.gdscphcet.utils.EventUtils.getAgendaItems
 import com.finite.scrapingpractise.model.PastEvent
 import com.finite.scrapingpractise.model.PastEventDetails
-import com.finite.scrapingpractise.model.UpcomingEvent
-import com.google.gson.Gson
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.parser.Parser
@@ -42,6 +40,8 @@ object PastEventRepo {
         val dateTime = doc.select("#react-event-header-address > h2 > div").text() ?: ""
         val shortDesc = doc.selectFirst("p.event-short-description-on-banner")?.text() ?: ""
         val longDesc = doc.selectFirst("div.description-container div.event-description")?.text() ?: ""
+        val bannerUrl = EventUtils.getEventBannerUrl(doc)
+        val logoUrl = EventUtils.getEventDetailsLogoUrl(doc)
 
         // Extract the date and time
         val secondColumn = doc.selectFirst("div.second-column")
@@ -76,7 +76,15 @@ object PastEventRepo {
         val agenda = getAgendaItems(doc)
 
 
+
+
         // Create and return a PastEventDetails object
-        return PastEventDetails(title, mode, dateTime, tags, shortDesc, longDesc, whenDate, whenTime, agenda)
+        return PastEventDetails(title, mode, dateTime, tags, shortDesc, longDesc, whenDate, whenTime, agenda, bannerUrl, logoUrl)
     }
+
+    fun getDocument(url: String): Document {
+        return Jsoup.connect(url).get()
+    }
+
+    //fun getBanner
 }

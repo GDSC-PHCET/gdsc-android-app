@@ -139,7 +139,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView4">
@@ -162,7 +162,7 @@
                     android:layout_height="10dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="15dp"
-                    android:layout_marginVertical="5dp"
+
                     android:background="@drawable/dashed_line_shimmer" />
 
                 <View
