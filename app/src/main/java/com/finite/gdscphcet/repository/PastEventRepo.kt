@@ -12,7 +12,7 @@ object PastEventRepo {
 
     fun getPastEventsList(url: String): MutableList<PastEvent> {
 
-        val doc = Jsoup.connect(url).ignoreContentType(true).get()
+        val doc = Jsoup.connect(url).timeout(10000).ignoreContentType(true).get()
         val eventsList: MutableList<PastEvent> = mutableListOf()
         val eventElements = doc.select("ul.vertical-boxes.past-event-list > a")
 
@@ -43,7 +43,7 @@ object PastEventRepo {
 
     fun getPastEventDetails(url: String): PastEventDetails {
 
-        val doc = Jsoup.connect(url).get()
+        val doc = Jsoup.connect(url).timeout(10000).get()
 
         val title = Parser.unescapeEntities(doc.selectFirst("h1.event-title-heading span.font_banner2")?.text()?: "", false)
         val dateTime = doc.select("#react-event-header-address > h2 > div").text() ?: ""
