@@ -3,7 +3,6 @@ package com.finite.gdscphcet.ui
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -29,7 +28,6 @@ class EventDetailActivity : AppCompatActivity() {
     private var url = ""
     private lateinit var swipeRefreshLayout: LottieSwipeRefreshLayout
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,28 +37,7 @@ class EventDetailActivity : AppCompatActivity() {
         window.statusBarColor = resources.getColor(R.color.status_bar)
 
         initialiseUI(binding)
-
-        swipeRefreshLayout = binding.eventDetailSwipeRefreshLayout
-
-        swipeRefreshLayout.setOnRefreshListener {
-            window.statusBarColor = resources.getColor(R.color.status_bar)
-            initialiseUI(binding)
-        }
-
-        binding.backButton.setOnClickListener {
-            onBackPressed()
-        }
-
-        binding.shareButton.setOnClickListener {
-            // TODO : Add actual share logic, create a shareable image and share it
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "Hey! Check out this event by GDSC PHCET : $url")
-                type = "text/plain"
-            }
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
-        }
+        setupListeners(binding)
     }
 
     private fun initialiseUI(binding: ActivityEventDetailBinding) {
@@ -81,10 +58,8 @@ class EventDetailActivity : AppCompatActivity() {
     }
 
     private suspend fun loadUpcomingEventDetails(url: String, binding: ActivityEventDetailBinding) {
-        Log.d("Testlog", "Reached loadUpcomingEventDetails:")
         var upcomingEvents = UpcomingEventDetails()
         withContext(Dispatchers.IO) {
-
             val job = async {
                 UpcomingEventRepo.getUpcomingEventDetails(url)
             }
@@ -92,13 +67,23 @@ class EventDetailActivity : AppCompatActivity() {
         }
 
         withContext(Dispatchers.Main) {
-            binding.apply {
+            setupBasicDetails(
+                logoUrl = upcomingEvents.logoUrl,
+                bannerUrl = upcomingEvents.bannerUrl,
+                title = upcomingEvents.title,
+                whenDate = upcomingEvents.whenDate,
+                whenTime = upcomingEvents.whenTime,
+                mode = upcomingEvents.mode,
+                longDesc = upcomingEvents.longDesc,
+                dateTime = upcomingEvents.dateTime,
+                binding = binding
+            )
 
-                setupUpcomingUI(upcomingEvents, binding)
+            setupEventTags(binding, upcomingEvents.tags)
+            setupColors(binding, "upcoming")
 
-                stopShimmer(binding)
-                if(swipeRefreshLayout.isRefreshing) swipeRefreshLayout.isRefreshing = false
-            }
+            stopShimmer(binding)
+            if(swipeRefreshLayout.isRefreshing) swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -112,146 +97,69 @@ class EventDetailActivity : AppCompatActivity() {
         }
 
         withContext(Dispatchers.Main) {
-            binding.apply {
-                setupPastUI(pastEvents, binding)
-
-                stopShimmer(binding)
-                if(swipeRefreshLayout.isRefreshing) swipeRefreshLayout.isRefreshing = false
-            }
-        }
-    }
-
-    private fun setupUpcomingUI(
-        upcomingEvents: UpcomingEventDetails,
-        binding: ActivityEventDetailBinding
-    ) {
-        binding.apply {
-
-            Glide.with(this@EventDetailActivity).load(upcomingEvents.logoUrl)
-                .placeholder(R.mipmap.ic_launcher)
-                .into(logoImageView)
-            Glide.with(this@EventDetailActivity).load(upcomingEvents.bannerUrl)
-                .placeholder(R.drawable.gdsc_banner)
-                .into(coverBannerImageView)
-
-            eventTitleTextView.text = upcomingEvents.title
-
-            if(upcomingEvents.whenDate.isEmpty() || upcomingEvents.whenTime.isEmpty()){
-                val parts = upcomingEvents.dateTime.split(",").map { it.trim() }
-                eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
-                eventTimeTextView.text =  parts[2]
-            } else {
-                eventDateTextView.text = upcomingEvents.whenDate
-                eventTimeTextView.text = upcomingEvents.whenTime
-            }
-
-
-            eventModeTextView.text = upcomingEvents.mode
-            longDescriptionWebView.loadData(
-                upcomingEvents.longDesc,
-                "text/html",
-                "UTF-8"
-            )
-
-            setupEventTags(binding, upcomingEvents.tags)
-
-            when (color) {
-                "blue" -> {
-                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
-                    eventDateTextView.setTextColor(resources.getColor(R.color.google_blue))
-                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_blue))
-                    eventModeTextView.setTextColor(resources.getColor(R.color.google_blue))
-                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_blue))
-                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_blue))
-                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_blue))
-                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_blue))
-                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
-                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
-                    logoImageView.borderColor = resources.getColor(R.color.google_blue_45_opaque)
-                    window.statusBarColor = resources.getColor(R.color.google_blue_alpha_45)
-                }
-
-                "red" -> {
-                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_red_alpha_15))
-                    eventDateTextView.setTextColor(resources.getColor(R.color.google_red))
-                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_red))
-                    eventModeTextView.setTextColor(resources.getColor(R.color.google_red))
-                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_red))
-                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_red))
-                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_red))
-                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_red))
-                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
-                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
-                    logoImageView.borderColor = resources.getColor(R.color.google_red_45_opaque)
-                    window.statusBarColor = resources.getColor(R.color.google_red_alpha_45)
-                }
-
-                "yellow" -> {
-                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_yellow_alpha_15))
-                    eventDateTextView.setTextColor(resources.getColor(R.color.google_yellow))
-                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_yellow))
-                    eventModeTextView.setTextColor(resources.getColor(R.color.google_yellow))
-                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_yellow))
-                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_yellow))
-                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_yellow))
-                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_yellow))
-                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
-                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
-                    logoImageView.borderColor = resources.getColor(R.color.google_yellow_45_opaque)
-                    window.statusBarColor = resources.getColor(R.color.google_yellow_alpha_45)
-                }
-
-                "green" -> {
-                    detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_green_alpha_15))
-                    eventDateTextView.setTextColor(resources.getColor(R.color.google_green))
-                    eventTimeTextView.setTextColor(resources.getColor(R.color.google_green))
-                    eventModeTextView.setTextColor(resources.getColor(R.color.google_green))
-                    eventDateImageView.setColorFilter(resources.getColor(R.color.google_green))
-                    eventTimeImageView.setColorFilter(resources.getColor(R.color.google_green))
-                    eventModeImageView.setColorFilter(resources.getColor(R.color.google_green))
-                    eventTagsImageView.setColorFilter(resources.getColor(R.color.google_green))
-                    longDescriptionWebView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
-                    nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
-                    logoImageView.borderColor = resources.getColor(R.color.google_green_45_opaque)
-                    window.statusBarColor = resources.getColor(R.color.google_green_alpha_45)
-                }
-            }
-        }
-    }
-
-    private fun setupPastUI(
-        pastEvents: PastEventDetails,
-        binding: ActivityEventDetailBinding
-    ) {
-        binding.apply {
-
-            Glide.with(this@EventDetailActivity).load(pastEvents.logoUrl)
-                .placeholder(R.mipmap.ic_launcher)
-                .into(logoImageView)
-            Glide.with(this@EventDetailActivity).load(pastEvents.bannerUrl)
-                .placeholder(R.drawable.gdsc_banner)
-                .into(coverBannerImageView)
-
-            eventTitleTextView.text = pastEvents.title
-
-            if(pastEvents.whenDate.isEmpty() || pastEvents.whenTime.isEmpty()){
-                val parts = pastEvents.dateTime.split(",").map { it.trim() }
-                eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
-                eventTimeTextView.text =  parts[2]
-            } else {
-                eventDateTextView.text = pastEvents.whenDate
-                eventTimeTextView.text = pastEvents.whenTime
-            }
-
-            eventModeTextView.text = pastEvents.mode
-            longDescriptionWebView.loadData(
-                pastEvents.longDesc,
-                "text/html",
-                "UTF-8"
+            setupBasicDetails(
+                logoUrl = pastEvents.logoUrl,
+                bannerUrl = pastEvents.bannerUrl,
+                title = pastEvents.title,
+                whenDate = pastEvents.whenDate,
+                whenTime = pastEvents.whenTime,
+                mode = pastEvents.mode,
+                longDesc = pastEvents.longDesc,
+                dateTime = pastEvents.dateTime,
+                binding = binding
             )
 
             setupEventTags(binding, pastEvents.tags)
+            setupColors(binding, "past")
 
+            stopShimmer(binding)
+            if(swipeRefreshLayout.isRefreshing) swipeRefreshLayout.isRefreshing = false
+        }
+    }
+
+    private fun setupBasicDetails(
+        logoUrl : String = "",
+        bannerUrl : String = "",
+        title : String = "",
+        whenDate : String = "",
+        whenTime : String = "",
+        mode : String = "",
+        longDesc : String = "",
+        dateTime : String = "",
+        binding: ActivityEventDetailBinding
+    ) {
+
+        binding.apply {
+            Glide.with(this@EventDetailActivity).load(logoUrl)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(logoImageView)
+            Glide.with(this@EventDetailActivity).load(bannerUrl)
+                .placeholder(R.drawable.gdsc_banner)
+                .into(coverBannerImageView)
+
+            eventTitleTextView.text = title
+
+            if(whenDate.isEmpty() || whenTime.isEmpty()){
+                val parts = dateTime.split(",").map { it.trim() }
+                eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
+                eventTimeTextView.text =  parts[2]
+            } else {
+                eventDateTextView.text = whenDate
+                eventTimeTextView.text = whenTime
+            }
+
+            eventModeTextView.text = mode
+            longDescriptionWebView.loadData(
+                longDesc,
+                "text/html",
+                "UTF-8"
+            )
+        }
+
+    }
+
+    private fun setupColors(binding: ActivityEventDetailBinding, eventType: String) {
+        binding.apply {
             when (color) {
                 "blue" -> {
                     detailsCardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
@@ -341,6 +249,7 @@ class EventDetailActivity : AppCompatActivity() {
                 resources.getDimensionPixelSize(R.dimen.tag_margin_bottom)
             )
             textView.layoutParams = layoutParams
+
             textView.setPadding(
                 resources.getDimensionPixelSize(R.dimen.tag_padding_start),
                 resources.getDimensionPixelSize(R.dimen.tag_padding_top),
@@ -351,7 +260,7 @@ class EventDetailActivity : AppCompatActivity() {
             val background = GradientDrawable()
             background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
 
-            val colorResource = when(color) {
+            val color = when(color) {
                 "blue" -> R.color.google_blue_alpha_45
                 "red" -> R.color.google_red_alpha_45
                 "yellow" -> R.color.google_yellow_alpha_45
@@ -359,7 +268,7 @@ class EventDetailActivity : AppCompatActivity() {
                 else -> R.color.google_blue_alpha_45
             }
 
-            background.setColor(ContextCompat.getColor(this@EventDetailActivity, colorResource))
+            background.setColor(ContextCompat.getColor(this@EventDetailActivity, color))
             textView.background = background
             binding.tagsContainer.addView(textView)
         }
@@ -369,6 +278,30 @@ class EventDetailActivity : AppCompatActivity() {
         binding.shimmerLayout.stopShimmer()
         binding.shimmerLayout.visibility = View.GONE
         binding.uiConstraintLayout.visibility = View.VISIBLE
+    }
+
+    private fun setupListeners(binding: ActivityEventDetailBinding) {
+        swipeRefreshLayout = binding.eventDetailSwipeRefreshLayout
+
+        swipeRefreshLayout.setOnRefreshListener {
+            window.statusBarColor = resources.getColor(R.color.status_bar)
+            initialiseUI(binding)
+        }
+
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.shareButton.setOnClickListener {
+            // TODO : Add actual share logic, create a shareable image and share it
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "Hey! Check out this event by GDSC PHCET : $url")
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
     }
 
     override fun onBackPressed() {
