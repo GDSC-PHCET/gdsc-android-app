@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/upcomingEventCardView"
+    tools:cardBack="@color/google_red_background"
+    android:clickable="true"
+    android:padding="10dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
+    android:focusable="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/itemPastImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="55dp"
+            app:cardElevation="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageUpcomingEvent"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/ic_asj" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/titleUpcomingEvent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/dark_gray"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
+            app:layout_constraintTop_toTopOf="@+id/itemPastImage"
+            tools:text="Android Study Jams Day 04 - Kickstarting Android" />
+
+        <LinearLayout
+            android:id="@+id/dateLinearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
+            app:layout_constraintTop_toBottomOf="@+id/titleUpcomingEvent">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/tagsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:alignItems="stretch"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start"
+                app:layout_constraintTop_toBottomOf="@+id/titleUpcomingEvent">
+                <!-- TextViews will be added here programmatically -->
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <TextView
+                android:id="@+id/dateUpcomingEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/google_blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="📅  Dec 17th, 2021" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/typeLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/emote_notes"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
+            app:layout_constraintTop_toTopOf="@+id/typeUpcomingEvent" />
+
+        <TextView
+            android:id="@+id/typeUpcomingEvent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="30dp"
+            android:text="Virtual\nEvent"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/typeLinearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/dateLinearLayout" />
+
+        <LinearLayout
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            >
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/leftSemiCircle"
+                    android:layout_width="10dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/semi_circle_left" />
+
+                <View
+                    android:id="@+id/upcomingEventDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="5dp"
+                    tools:background="@drawable/dashed_line_red" />
+
+                <View
+                    android:id="@+id/rightSemiCircle"
+                    android:layout_width="10dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="@drawable/semi_circle_right" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/upcomingTextViewDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:text="View Details"/>
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

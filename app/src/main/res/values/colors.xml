@@ -26,4 +26,30 @@
     <color name="navy">#000000</color>
     <color name="shimmer_color">#BFBDBD</color>
 
+    <color name="google_blue">#4285F4</color>
+    <color name="google_red">#FF4737</color>
+    <color name="google_green">#08AD50</color>
+    <color name="google_yellow">#FEBF08</color>
+
+    <color name="google_blue_alpha_5">#084285F4</color>
+    <color name="google_red_alpha_5">#08FF4737</color>
+    <color name="google_green_alpha_5">#1008AD50</color>
+    <color name="google_yellow_alpha_5">#10FEBF08</color>
+
+    <color name="google_blue_alpha_15">#154285F4</color>
+    <color name="google_red_alpha_15">#15FF4737</color>
+    <color name="google_green_alpha_15">#1508AD50</color>
+    <color name="google_yellow_alpha_15">#15FEBF08</color>
+
+    <color name="google_blue_alpha_45">#454285F4</color>
+    <color name="google_red_alpha_45">#45FF4737</color>
+    <color name="google_green_alpha_45">#4508AD50</color>
+    <color name="google_yellow_alpha_45">#45FEBF08</color>
+
+    <color name="google_yellow_45_opaque">#FFF6EE</color>
+    <color name="google_red_45_opaque">#FFF5F9</color>
+    <color name="google_green_45_opaque">#F0F5F4</color>
+    <color name="google_blue_45_opaque">#FAF6FF</color>
+
+
 </resources>

@@ -2,18 +2,14 @@ package com.finite.gdscphcet
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.finite.gdscphcet.databinding.ActivityCertificateBinding
-import com.finite.gdscphcet.ui.CertificateViewModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class CertificateActivity : AppCompatActivity() {
 
-    private val viewModel : CertificateViewModel by viewModels()
     private lateinit var database : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +23,6 @@ class CertificateActivity : AppCompatActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.statusBarColor = this.resources.getColor(R.color.status_bar)
 
-        binding?.apply {
-            certificateVm = viewModel
-            certificateActivity = this@CertificateActivity
-        }
 
         binding.verifyButton.setOnClickListener{
             var text: String = binding.codeEditText.text.toString().trim()

@@ -7,6 +7,8 @@
     <string name="about_us_details">Google Developer Student Clubs (GDSC) are community groups for college and university students interested in Google developer technologies. Students from all undergraduate or graduate programs with an interest in growing as a developer are welcome. By joining a GDSC, students grow their knowledge in a peer-to-peer learning environment and build solutions for local businesses and their community.</string>
     <string name="join_us_details">Backed by a community of passionate student developers from across the globe. Get access to all our resources, attend events, work together and connect with other passionate developers.</string>
 
+    <string name="emote_calendar">📅 </string>
+
     <string name="infosession">dsc001</string>
     <string name="itgc1">dsc002</string>
     <string name="asj1">dsc003</string>
@@ -65,10 +67,7 @@
     <string name="anuj">https://firebasestorage.googleapis.com/v0/b/gdsc-phcet.appspot.com/o/anuj.png?alt=media&amp;token=a6a38d4c-8221-4b88-b3e2-14490e7a2d31</string>
     <string name="ishika">https://firebasestorage.googleapis.com/v0/b/gdsc-phcet.appspot.com/o/ishika.png?alt=media&amp;token=fc79c5f9-86bc-4321-b7ef-648a3f7f50be</string>
     <string name="aakash">https://firebasestorage.googleapis.com/v0/b/gdsc-phcet.appspot.com/o/aakash.png?alt=media&amp;token=8be2215f-1f9a-4852-9139-1e1dae4f4c7d</string>
-
-
-
-
+    <string name="emote_notes">📝  </string>
 
 
 </resources>

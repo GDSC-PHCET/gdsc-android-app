@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/upcomingEventCardView"
+    tools:cardBack="@color/google_red_background"
+    android:clickable="true"
+    android:padding="10dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="0dp"
+    android:focusable="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/itemPastImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="55dp"
+            app:cardElevation="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageUpcomingEvent"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:background="@color/shimmer_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/titleUpcomingEvent"
+            android:layout_width="0dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
+            android:backgroundTint="@color/shimmer_color"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
+            app:layout_constraintTop_toTopOf="@+id/itemPastImage" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="90dp"
+            android:layout_height="17dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:backgroundTint="@color/shimmer_color"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toEndOf="@+id/itemPastImage"
+            app:layout_constraintTop_toBottomOf="@+id/titleUpcomingEvent" />
+
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="25dp"
+            android:columnCount="5"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_columnWeight="6"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/shimmer_color"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_columnWeight="9"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/shimmer_color"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_columnWeight="3"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/shimmer_color"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp" />
+
+
+        </GridLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="140dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/shimmer_color"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="@+id/gridLayout"
+            app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
+            android:layout_width="170dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/shimmer_color"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="@+id/gridLayout"
+            app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+
+
+        <LinearLayout
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView4">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/leftSemiCircle"
+                    android:layout_width="10dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/semi_circle_left" />
+
+                <View
+                    android:id="@+id/upcomingEventDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="15dp"
+
+                    android:background="@drawable/dashed_line_shimmer" />
+
+                <View
+                    android:id="@+id/rightSemiCircle"
+                    android:layout_width="10dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="@drawable/semi_circle_right" />
+            </FrameLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="120dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/shimmer_color"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="0dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="@+id/gridLayout"
+                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

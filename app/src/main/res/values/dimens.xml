@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Define padding values -->
+    <dimen name="tag_padding_start">8dp</dimen>
+    <dimen name="tag_padding_end">8dp</dimen>
+    <dimen name="tag_padding_top">4dp</dimen>
+    <dimen name="tag_padding_bottom">4dp</dimen>
+
+    <!-- Define corner radius value -->
+    <dimen name="corner_radius">16dp</dimen>
+
+    <!-- Define margin values -->
+    <dimen name="tag_margin_end">2dp</dimen>
+    <dimen name="tag_margin_bottom">3dp</dimen>
+</resources>

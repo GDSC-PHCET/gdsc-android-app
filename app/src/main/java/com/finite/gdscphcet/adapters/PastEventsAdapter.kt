@@ -1,8 +1,6 @@
 package com.finite.gdscphcet.adapters
 
-import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +8,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.os.bundleOf
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
-import com.finite.gdscphcet.model.PastEventModel
 import com.finite.gdscphcet.ui.EventDetailActivity
+import com.finite.scrapingpractise.model.PastEvent
 
-class PastEventsAdapter(private val contxt: Context,private val pastEventsList : MutableList<PastEventModel>) : RecyclerView.Adapter<PastEventsAdapter.EventViewHolder>() {
+class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : RecyclerView.Adapter<PastEventsAdapter.EventViewHolder>() {
+
+    private var colorCounter = (1..4).random()
+    private val baseCounter = colorCounter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.past_event_item,parent,false)
@@ -30,22 +27,63 @@ class PastEventsAdapter(private val contxt: Context,private val pastEventsList :
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val currentEvent = pastEventsList[position]
         holder.itemView.apply {
-            Log.d("PRI","link ${currentEvent.thumbnaillink}")
-            Glide.with(holder.itemView.context).load(currentEvent.thumbnaillink).into(holder.pastEventThumbnail)
-            holder.pastEventTitle.text = currentEvent.title
-            holder.pastEventDate.text = currentEvent.date
-            /*holder.itemView.setOnClickListener{ view ->
-                val bundle = bundleOf("pastEventId" to currentEvent.eventId)
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_eventDetailActivity,bundle)
-            }*/
+
+            Glide.with(holder.itemView.context).load(currentEvent.image).placeholder(R.mipmap.ic_launcher).into(holder.logo)
+            holder.title.text = currentEvent.title
+            holder.date.text = "\uD83D\uDCC5  ${currentEvent.date}"
+
+            holder.type.text = currentEvent.type
+
+            when (colorCounter) {
+                1 -> {
+
+                    colorCounter++
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_blue_alpha_15))
+                    holder.date.setTextColor(resources.getColor(R.color.google_blue))
+                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_blue))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_blue)
+                }
+
+                2 -> {
+
+                    colorCounter++
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_red_alpha_15))
+                    holder.date.setTextColor(resources.getColor(R.color.google_red))
+                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_red))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_red)
+                }
+
+                3 -> {
+
+                    colorCounter++
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_yellow_alpha_15))
+                    holder.date.setTextColor(resources.getColor(R.color.google_yellow))
+                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_yellow))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_yellow)
+                }
+
+                4 -> {
+
+                    colorCounter = 1
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.google_green_alpha_15))
+                    holder.date.setTextColor(resources.getColor(R.color.google_green))
+                    holder.icNextButton.setColorFilter(resources.getColor(R.color.google_green))
+                    holder.divider.setBackgroundResource(R.drawable.dashed_vertical_line_green)
+                }
+
+
+                else -> {
+                    holder.cardView.setCardBackgroundColor(resources.getColor(R.color.white))
+                }
+            }
+
             holder.itemView.setOnClickListener {
                 val intent = Intent(context,EventDetailActivity::class.java)
-                intent.putExtra("eventId",currentEvent.eventId)
-                holder.itemView.context.startActivity(intent)
-            }
-            holder.cardView.setOnClickListener {
-                val intent = Intent(context,EventDetailActivity::class.java)
-                intent.putExtra("eventId",currentEvent.eventId)
+                //Log.d("Testlog", "Past: url = ${currentEvent.url} and type = past")
+                Log.d("Testlog", "Color = ${getCurrentColor(((baseCounter + position)%4))}, Position is ${position} Position +1 is ${(position+1)}")
+                intent.putExtra("eventUrl", currentEvent.url)
+                intent.putExtra("eventType", "past")
+                intent.putExtra("color", getCurrentColor((baseCounter + position)%4))
                 holder.itemView.context.startActivity(intent)
             }
         }
@@ -55,10 +93,24 @@ class PastEventsAdapter(private val contxt: Context,private val pastEventsList :
         return pastEventsList.size
     }
 
+    private fun getCurrentColor(colorCounter: Int): String {
+        return when (colorCounter) {
+            1 -> "blue"
+            2 -> "red"
+            3 -> "yellow"
+            0 -> "green"
+
+            else -> "white"
+        }
+    }
+
     inner class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val pastEventThumbnail : ImageView = itemView.findViewById(R.id.ivPastEventsImage)
-        val pastEventTitle : TextView = itemView.findViewById(R.id.tvPastEventsTitle)
-        val pastEventDate : TextView = itemView.findViewById(R.id.tvPastEventsDate)
-        val cardView : CardView = itemView.findViewById(R.id.cvImage)
+        val logo : ImageView = itemView.findViewById(R.id.imagePastEvent)
+        val title : TextView = itemView.findViewById(R.id.titlePastEvent)
+        val date : TextView = itemView.findViewById(R.id.datePastEvent)
+        val type : TextView = itemView.findViewById(R.id.typePastEvent)
+        val icNextButton : ImageView = itemView.findViewById(R.id.icPastEventNextButton)
+        val divider : View = itemView.findViewById(R.id.pastEventDivider)
+        val cardView : CardView = itemView.findViewById(R.id.pastEventCardView)
     }
 }
