@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/eventDetailSwipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
+    app:lottie_rawRes="@raw/lottie_google_loading"
     tools:context=".ui.EventDetailActivity">
+
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:id="@+id/eventDetailSwipeRefreshLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="visible"-->
+<!--        tools:context=".ui.EventDetailActivity">-->
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -56,7 +66,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Back Button -->
+                <!-- Share Button -->
                 <ImageView
                     android:id="@+id/shareButton"
                     android:layout_width="36dp"
@@ -227,4 +237,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout>

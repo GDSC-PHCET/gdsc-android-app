@@ -1,27 +1,22 @@
 package com.finite.gdscphcet.ui
 
-import android.app.PendingIntent.OnFinished
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
-import com.finite.gdscphcet.adapters.PastEventsAdapter
 import com.finite.gdscphcet.databinding.ActivityEventDetailBinding
 import com.finite.gdscphcet.repository.PastEventRepo
 import com.finite.gdscphcet.repository.UpcomingEventRepo
 import com.finite.scrapingpractise.model.PastEventDetails
 import com.finite.scrapingpractise.model.UpcomingEventDetails
+import com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -32,18 +27,14 @@ class EventDetailActivity : AppCompatActivity() {
 
     private var color = ""
     private var url = ""
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var swipeRefreshLayout: LottieSwipeRefreshLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityEventDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-//        val window = this.window
-//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//        window.statusBarColor = this.resources.getColor(R.color.status_bar)
 
         window.statusBarColor = resources.getColor(R.color.status_bar)
 
@@ -81,9 +72,6 @@ class EventDetailActivity : AppCompatActivity() {
         url = intent.getStringExtra("eventUrl") ?: ""
         color = intent.getStringExtra("color") ?: ""
 
-        Log.d("Testlog", "onCreate: $eventType : $url")
-
-
         CoroutineScope(Dispatchers.Main).launch {
             when (eventType) {
                 "upcoming" -> loadUpcomingEventDetails(url, binding)
@@ -105,12 +93,7 @@ class EventDetailActivity : AppCompatActivity() {
 
         withContext(Dispatchers.Main) {
             binding.apply {
-                Glide.with(this@EventDetailActivity).load(upcomingEvents.logoUrl)
-                    .placeholder(R.mipmap.ic_launcher)
-                    .into(binding.logoImageView)
-                Glide.with(this@EventDetailActivity).load(upcomingEvents.bannerUrl)
-                    .placeholder(R.drawable.gdsc_banner)
-                    .into(binding.coverBannerImageView)
+
                 setupUpcomingUI(upcomingEvents, binding)
 
                 stopShimmer(binding)
@@ -119,31 +102,17 @@ class EventDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun stopShimmer(binding: ActivityEventDetailBinding) {
-        binding.shimmerLayout.stopShimmer()
-        binding.shimmerLayout.visibility = View.GONE
-        binding.uiConstraintLayout.visibility = View.VISIBLE
-    }
-
     private suspend fun loadPastEventDetails(url: String, binding: ActivityEventDetailBinding) {
-        //Log.d("Testlog", "Reached loadPastEventDetails: $url")
         var pastEvents = PastEventDetails()
         withContext(Dispatchers.IO) {
             val job = async {
                 PastEventRepo.getPastEventDetails(url)
             }
             pastEvents = job.await()
-            //Log.d("Testlog", "loadPastEventDetails: $pastEvents")
         }
 
         withContext(Dispatchers.Main) {
             binding.apply {
-                Glide.with(this@EventDetailActivity).load(pastEvents.logoUrl)
-                    .placeholder(R.mipmap.ic_launcher)
-                    .into(binding.logoImageView)
-                Glide.with(this@EventDetailActivity).load(pastEvents.bannerUrl)
-                    .placeholder(R.drawable.gdsc_banner)
-                    .into(binding.coverBannerImageView)
                 setupPastUI(pastEvents, binding)
 
                 stopShimmer(binding)
@@ -157,109 +126,34 @@ class EventDetailActivity : AppCompatActivity() {
         binding: ActivityEventDetailBinding
     ) {
         binding.apply {
-            binding.eventTitleTextView.text = upcomingEvents.title
+
+            Glide.with(this@EventDetailActivity).load(upcomingEvents.logoUrl)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(logoImageView)
+            Glide.with(this@EventDetailActivity).load(upcomingEvents.bannerUrl)
+                .placeholder(R.drawable.gdsc_banner)
+                .into(coverBannerImageView)
+
+            eventTitleTextView.text = upcomingEvents.title
 
             if(upcomingEvents.whenDate.isEmpty() || upcomingEvents.whenTime.isEmpty()){
                 val parts = upcomingEvents.dateTime.split(",").map { it.trim() }
-                binding.eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
-                binding.eventTimeTextView.text =  parts[2]
+                eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
+                eventTimeTextView.text =  parts[2]
             } else {
-                binding.eventDateTextView.text = upcomingEvents.whenDate
-                binding.eventTimeTextView.text = upcomingEvents.whenTime
+                eventDateTextView.text = upcomingEvents.whenDate
+                eventTimeTextView.text = upcomingEvents.whenTime
             }
 
 
-            binding.eventModeTextView.text = upcomingEvents.mode
-            binding.longDescriptionWebView.loadData(
+            eventModeTextView.text = upcomingEvents.mode
+            longDescriptionWebView.loadData(
                 upcomingEvents.longDesc,
                 "text/html",
                 "UTF-8"
             )
 
-            binding.tagsContainer.removeAllViews()
-
-            for (tag in upcomingEvents.tags) {
-                val textView = TextView(this@EventDetailActivity)
-                textView.text = tag
-                textView.textSize = 10f
-                textView.setTextColor(
-                    ContextCompat.getColor(
-                        this@EventDetailActivity,
-                        R.color.black
-                    )
-                )
-
-                val layoutParams = ViewGroup.MarginLayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-
-                layoutParams.setMargins(
-                    0,
-                    0,
-                    resources.getDimensionPixelSize(R.dimen.tag_margin_end),
-                    resources.getDimensionPixelSize(R.dimen.tag_margin_bottom)
-                )
-                textView.layoutParams = layoutParams
-                textView.setPadding(
-                    resources.getDimensionPixelSize(R.dimen.tag_padding_start),
-                    resources.getDimensionPixelSize(R.dimen.tag_padding_top),
-                    resources.getDimensionPixelSize(R.dimen.tag_padding_end),
-                    resources.getDimensionPixelSize(R.dimen.tag_padding_bottom)
-                )
-
-                when (color) {
-                    "blue" -> {
-                        val background = GradientDrawable()
-                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
-                        background.setColor(
-                            ContextCompat.getColor(
-                                this@EventDetailActivity,
-                                R.color.google_blue_alpha_45
-                            )
-                        )
-                        textView.background = background
-                    }
-
-                    "red" -> {
-                        val background = GradientDrawable()
-                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
-                        background.setColor(
-                            ContextCompat.getColor(
-                                this@EventDetailActivity,
-                                R.color.google_red_alpha_45
-                            )
-                        )
-                        textView.background = background
-                    }
-
-                    "yellow" -> {
-                        val background = GradientDrawable()
-                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
-                        background.setColor(
-                            ContextCompat.getColor(
-                                this@EventDetailActivity,
-                                R.color.google_yellow_alpha_45
-                            )
-                        )
-                        textView.background = background
-                    }
-
-                    "green" -> {
-                        val background = GradientDrawable()
-                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
-                        background.setColor(
-                            ContextCompat.getColor(
-                                this@EventDetailActivity,
-                                R.color.google_green_alpha_45
-                            )
-                        )
-                        textView.background = background
-                    }
-                }
-
-                binding.tagsContainer.addView(textView)
-            }
+            setupEventTags(binding, upcomingEvents.tags)
 
             when (color) {
                 "blue" -> {
@@ -275,7 +169,6 @@ class EventDetailActivity : AppCompatActivity() {
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
                     logoImageView.borderColor = resources.getColor(R.color.google_blue_45_opaque)
                     window.statusBarColor = resources.getColor(R.color.google_blue_alpha_45)
-                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_blue)
                 }
 
                 "red" -> {
@@ -291,7 +184,6 @@ class EventDetailActivity : AppCompatActivity() {
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
                     logoImageView.borderColor = resources.getColor(R.color.google_red_45_opaque)
                     window.statusBarColor = resources.getColor(R.color.google_red_alpha_45)
-                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_red)
                 }
 
                 "yellow" -> {
@@ -307,7 +199,6 @@ class EventDetailActivity : AppCompatActivity() {
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
                     logoImageView.borderColor = resources.getColor(R.color.google_yellow_45_opaque)
                     window.statusBarColor = resources.getColor(R.color.google_yellow_alpha_45)
-                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_yellow)
                 }
 
                 "green" -> {
@@ -323,7 +214,6 @@ class EventDetailActivity : AppCompatActivity() {
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
                     logoImageView.borderColor = resources.getColor(R.color.google_green_45_opaque)
                     window.statusBarColor = resources.getColor(R.color.google_green_alpha_45)
-                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_green)
                 }
             }
         }
@@ -334,109 +224,33 @@ class EventDetailActivity : AppCompatActivity() {
         binding: ActivityEventDetailBinding
     ) {
         binding.apply {
-            binding.eventTitleTextView.text = pastEvents.title
+
+            Glide.with(this@EventDetailActivity).load(pastEvents.logoUrl)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(logoImageView)
+            Glide.with(this@EventDetailActivity).load(pastEvents.bannerUrl)
+                .placeholder(R.drawable.gdsc_banner)
+                .into(coverBannerImageView)
+
+            eventTitleTextView.text = pastEvents.title
 
             if(pastEvents.whenDate.isEmpty() || pastEvents.whenTime.isEmpty()){
                 val parts = pastEvents.dateTime.split(",").map { it.trim() }
-                binding.eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
-                binding.eventTimeTextView.text =  parts[2]
+                eventDateTextView.text = "${parts[0]}, ${parts[1]}" // Date is composed of parts[0] and parts[1]
+                eventTimeTextView.text =  parts[2]
             } else {
-                binding.eventDateTextView.text = pastEvents.whenDate
-                binding.eventTimeTextView.text = pastEvents.whenTime
+                eventDateTextView.text = pastEvents.whenDate
+                eventTimeTextView.text = pastEvents.whenTime
             }
 
-            binding.eventModeTextView.text = pastEvents.mode
-            //Log.d("Testlog", "setupPastUI: ${pastEvents.longDesc}")
-            binding.longDescriptionWebView.loadData(
+            eventModeTextView.text = pastEvents.mode
+            longDescriptionWebView.loadData(
                 pastEvents.longDesc,
                 "text/html",
                 "UTF-8"
             )
 
-            binding.tagsContainer.removeAllViews()
-
-            for (tag in pastEvents.tags) {
-                val textView = TextView(this@EventDetailActivity)
-                textView.text = tag
-                textView.textSize = 10f
-                textView.setTextColor(
-                    ContextCompat.getColor(
-                        this@EventDetailActivity,
-                        R.color.black
-                    )
-                )
-
-                val layoutParams = ViewGroup.MarginLayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-
-                layoutParams.setMargins(
-                    0,
-                    0,
-                    resources.getDimensionPixelSize(R.dimen.tag_margin_end),
-                    resources.getDimensionPixelSize(R.dimen.tag_margin_bottom)
-                )
-                textView.layoutParams = layoutParams
-                textView.setPadding(
-                    resources.getDimensionPixelSize(R.dimen.tag_padding_start),
-                    resources.getDimensionPixelSize(R.dimen.tag_padding_top),
-                    resources.getDimensionPixelSize(R.dimen.tag_padding_end),
-                    resources.getDimensionPixelSize(R.dimen.tag_padding_bottom)
-                )
-
-                when (color) {
-                    "blue" -> {
-                        val background = GradientDrawable()
-                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
-                        background.setColor(
-                            ContextCompat.getColor(
-                                this@EventDetailActivity,
-                                R.color.google_blue_alpha_45
-                            )
-                        )
-                        textView.background = background
-                    }
-
-                    "red" -> {
-                        val background = GradientDrawable()
-                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
-                        background.setColor(
-                            ContextCompat.getColor(
-                                this@EventDetailActivity,
-                                R.color.google_red_alpha_45
-                            )
-                        )
-                        textView.background = background
-                    }
-
-                    "yellow" -> {
-                        val background = GradientDrawable()
-                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
-                        background.setColor(
-                            ContextCompat.getColor(
-                                this@EventDetailActivity,
-                                R.color.google_yellow_alpha_45
-                            )
-                        )
-                        textView.background = background
-                    }
-
-                    "green" -> {
-                        val background = GradientDrawable()
-                        background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
-                        background.setColor(
-                            ContextCompat.getColor(
-                                this@EventDetailActivity,
-                                R.color.google_green_alpha_45
-                            )
-                        )
-                        textView.background = background
-                    }
-                }
-
-                binding.tagsContainer.addView(textView)
-            }
+            setupEventTags(binding, pastEvents.tags)
 
             when (color) {
                 "blue" -> {
@@ -452,7 +266,6 @@ class EventDetailActivity : AppCompatActivity() {
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_blue_alpha_5))
                     logoImageView.borderColor = resources.getColor(R.color.google_blue_45_opaque)
                     window.statusBarColor = resources.getColor(R.color.google_blue_alpha_45)
-                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_blue)
                 }
 
                 "red" -> {
@@ -468,7 +281,6 @@ class EventDetailActivity : AppCompatActivity() {
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_red_alpha_5))
                     logoImageView.borderColor = resources.getColor(R.color.google_red_45_opaque)
                     window.statusBarColor = resources.getColor(R.color.google_red_alpha_45)
-                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_red)
                 }
 
                 "yellow" -> {
@@ -484,7 +296,6 @@ class EventDetailActivity : AppCompatActivity() {
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_yellow_alpha_5))
                     logoImageView.borderColor = resources.getColor(R.color.google_yellow_45_opaque)
                     window.statusBarColor = resources.getColor(R.color.google_yellow_alpha_45)
-                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_yellow)
                 }
 
                 "green" -> {
@@ -500,17 +311,68 @@ class EventDetailActivity : AppCompatActivity() {
                     nestedScrollView.setBackgroundColor(resources.getColor(R.color.google_green_alpha_5))
                     logoImageView.borderColor = resources.getColor(R.color.google_green_45_opaque)
                     window.statusBarColor = resources.getColor(R.color.google_green_alpha_45)
-                    //backButton.backgroundTintList = AppCompatResources.getColorStateList(this@EventDetailActivity, R.color.google_green)
                 }
             }
         }
     }
 
-    // when back button is pressed finish the activity
+    private fun setupEventTags(binding: ActivityEventDetailBinding, tags : List<String>) {
+        binding.tagsContainer.removeAllViews()
+        for (tag in tags) {
+            val textView = TextView(this@EventDetailActivity)
+            textView.text = tag
+            textView.textSize = 10f
+            textView.setTextColor(
+                ContextCompat.getColor(
+                    this@EventDetailActivity,
+                    R.color.black
+                )
+            )
+
+            val layoutParams = ViewGroup.MarginLayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            layoutParams.setMargins(
+                0,
+                0,
+                resources.getDimensionPixelSize(R.dimen.tag_margin_end),
+                resources.getDimensionPixelSize(R.dimen.tag_margin_bottom)
+            )
+            textView.layoutParams = layoutParams
+            textView.setPadding(
+                resources.getDimensionPixelSize(R.dimen.tag_padding_start),
+                resources.getDimensionPixelSize(R.dimen.tag_padding_top),
+                resources.getDimensionPixelSize(R.dimen.tag_padding_end),
+                resources.getDimensionPixelSize(R.dimen.tag_padding_bottom)
+            )
+
+            val background = GradientDrawable()
+            background.cornerRadius = resources.getDimension(R.dimen.corner_radius)
+
+            val colorResource = when(color) {
+                "blue" -> R.color.google_blue_alpha_45
+                "red" -> R.color.google_red_alpha_45
+                "yellow" -> R.color.google_yellow_alpha_45
+                "green" -> R.color.google_green_alpha_45
+                else -> R.color.google_blue_alpha_45
+            }
+
+            background.setColor(ContextCompat.getColor(this@EventDetailActivity, colorResource))
+            textView.background = background
+            binding.tagsContainer.addView(textView)
+        }
+    }
+
+    private fun stopShimmer(binding: ActivityEventDetailBinding) {
+        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.visibility = View.GONE
+        binding.uiConstraintLayout.visibility = View.VISIBLE
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
-
-
 }
