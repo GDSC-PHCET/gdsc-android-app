@@ -3,7 +3,14 @@ package com.finite.gdscphcet.ui
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -15,19 +22,23 @@ import com.finite.gdscphcet.R
 import com.finite.gdscphcet.databinding.ActivityEventDetailBinding
 import com.finite.gdscphcet.repository.PastEventRepo
 import com.finite.gdscphcet.repository.UpcomingEventRepo
+import com.finite.gdscphcet.utils.ExtractTextFromHTML
 import com.finite.scrapingpractise.model.PastEventDetails
 import com.finite.scrapingpractise.model.UpcomingEventDetails
 import com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
 
 class EventDetailViewModel : ViewModel() {
 
     var url = ""
-    private var color = ""
+    var longDesc = ""
+    var color = ""
     private lateinit var swipeRefreshLayout: LottieSwipeRefreshLayout
 
     fun initialiseUI(binding: ActivityEventDetailBinding, intent: Intent, window: Window) {
@@ -56,6 +67,8 @@ class EventDetailViewModel : ViewModel() {
             }
             upcomingEvents = job.await()
         }
+
+        longDesc = upcomingEvents.longDesc
 
         withContext(Dispatchers.Main) {
             setupBasicDetails(
@@ -87,6 +100,8 @@ class EventDetailViewModel : ViewModel() {
             }
             pastEvents = job.await()
         }
+
+        longDesc = pastEvents.longDesc
 
         withContext(Dispatchers.Main) {
             setupBasicDetails(
@@ -149,7 +164,6 @@ class EventDetailViewModel : ViewModel() {
                 "UTF-8"
             )
         }
-
     }
 
     private fun setupColors(binding: ActivityEventDetailBinding, eventType: String, resources: Resources, window: Window) {
@@ -281,7 +295,47 @@ class EventDetailViewModel : ViewModel() {
             window.statusBarColor = resources.getColor(R.color.status_bar)
             initialiseUI(binding, intent, window)
         }
+    }
 
+    fun shareEvent(binding: ActivityEventDetailBinding, context: EventDetailActivity) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val uiLayout = binding.uiConstraintLayout
+            binding.shareButton.visibility = View.GONE
+            binding.backButton.visibility = View.GONE
+            binding.extraDetailsLinearLayout.visibility = View.GONE
 
+            when(color) {
+                "blue" -> uiLayout.background = ColorDrawable(ContextCompat.getColor(context, R.color.google_blue_alpha_5))
+                "red" -> uiLayout.background = ColorDrawable(ContextCompat.getColor(context, R.color.google_red_alpha_5))
+                "yellow" -> uiLayout.background = ColorDrawable(ContextCompat.getColor(context, R.color.google_yellow_alpha_5))
+                "green" -> uiLayout.background = ColorDrawable(ContextCompat.getColor(context, R.color.google_green_alpha_5))
+            }
+
+            delay(100)
+
+            val bitmap = Bitmap.createBitmap(uiLayout.width, uiLayout.height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            uiLayout.draw(canvas)
+
+            val outputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            val path: String = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "${"Test-Share-Image"} ${System.currentTimeMillis()}", null)
+            val uri: Uri = Uri.parse(path)
+
+            uiLayout.background = ColorDrawable(Color.TRANSPARENT)
+
+            binding.shareButton.visibility = View.VISIBLE
+            binding.backButton.visibility = View.VISIBLE
+            binding.extraDetailsLinearLayout.visibility = View.VISIBLE
+
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "image/*"
+
+            Log.d("Testlog", "Original HTML: \n${longDesc}")
+
+            intent.putExtra(Intent.EXTRA_TEXT, "${ExtractTextFromHTML.extract(longDesc)}\n\n${url}")
+            intent.putExtra(Intent.EXTRA_STREAM, uri)
+            context.startActivity(Intent.createChooser(intent, "Share"))
+        }
     }
 }

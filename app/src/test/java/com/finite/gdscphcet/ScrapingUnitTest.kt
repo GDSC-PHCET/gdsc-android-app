@@ -4,7 +4,11 @@ import com.finite.gdscphcet.repository.PastEventRepo
 import com.finite.gdscphcet.repository.UpcomingEventRepo
 import com.finite.gdscphcet.utils.EventUtils
 import kotlinx.coroutines.runBlocking
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
+import org.jsoup.nodes.TextNode
 import org.junit.Test
+import java.util.regex.Pattern
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -21,7 +25,7 @@ class ScrapingUnitTest {
 
     private val url = "https://gdsc.community.dev/mit-academy-of-engineering-pune/"
 
-    private val pastEventUrl = "https://gdsc.community.dev/events/details/developer-student-clubs-dy-patil-college-of-engineering-pune-presents-google-io-extended-watch-party-pathway-to-become-a-senior-developer-at-paytm/"
+    private val pastEventUrl = "https://gdsc.community.dev/events/details/developer-student-clubs-pillai-hoc-college-of-engineering-and-technology-navi-mumbai-presents-gdsc-orientation-2021/"
     private val upcomingEventUrl = "https://gdsc.community.dev/events/details/developer-student-clubs-dy-patil-college-of-engineering-pune-presents-google-cloud-study-jam-session-1/"
 
     @Test
@@ -77,6 +81,15 @@ class ScrapingUnitTest {
             println("Tags: ${pastEventDetails.tags.joinToString(", ")}")
             println("Short Description: ${pastEventDetails.shortDesc}")
             println("Long Description: ${pastEventDetails.longDesc}")
+
+            //val doc = Jsoup.parse(pastEventDetails.longDesc)
+
+            // Extract the text from the parsed HTML while preserving formatting
+            val textData = extractAndFormatText(pastEventDetails.longDesc)
+
+            // Print or store the extracted text
+            println("Parsed: \n$textData")
+
             println("When Date: ${pastEventDetails.whenDate}")
             println("When Time: ${pastEventDetails.whenTime}")
             println("Banner URL: ${pastEventDetails.bannerUrl}")
@@ -95,6 +108,63 @@ class ScrapingUnitTest {
             }
         }
 
+    }
+
+
+
+    fun extractAndFormatText(input: String): String {
+        val node = Jsoup.parse(input)
+        val text = StringBuilder()
+        val pattern = Pattern.compile("\\s{2,}")
+        var inBoldTag = false
+        var inUnderlineTag = false
+        var inItalicTag = false
+
+        fun processNode(node: Element) {
+            when (node.tagName()) {
+                "p" -> {
+                    if (text.isNotEmpty()) {
+                        text.append("\n") // Add a newline after each <p> tag ends
+                    }
+                }
+                "br" -> text.append("\n") // Add a newline after each <br> tag
+
+                "b" -> inBoldTag = true
+                "u" -> inUnderlineTag = true
+                "i" -> inItalicTag = true
+            }
+
+            for (child in node.childNodes()) {
+                when (child) {
+                    is TextNode -> {
+                        val cleanText = pattern.matcher(child.text()).replaceAll(" ")
+                        val formattedText = StringBuilder()
+
+                        if (inBoldTag) {
+                            formattedText.append("*$cleanText*")
+                        } else if (inUnderlineTag) {
+                            formattedText.append("_${cleanText}_")
+                        } else if (inItalicTag) {
+                            formattedText.append("*_${cleanText}_*")
+                        } else {
+                            formattedText.append(cleanText)
+                        }
+
+                        text.append(formattedText)
+                    }
+                    is Element -> processNode(child)
+                }
+            }
+
+            when (node.tagName()) {
+                "b" -> inBoldTag = false
+                "u" -> inUnderlineTag = false
+                "i" -> inItalicTag = false
+            }
+        }
+
+        processNode(node)
+        return text.toString().trim()
     }
 
     @Test
