@@ -14,7 +14,7 @@ object UpcomingEventRepo {
 
     fun getUpcomingEventsList(url: String): MutableList<UpcomingEvent> {
 
-        val doc = Jsoup.connect(url).timeout(10000).ignoreContentType(true).get()
+        val doc = Jsoup.connect(url).timeout(10 * 1000).ignoreContentType(true).get()
         val eventsList: MutableList<UpcomingEvent> = mutableListOf()
         val eventElements = doc.select("ul.event-list > li.event")
 

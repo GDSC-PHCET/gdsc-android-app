@@ -288,16 +288,20 @@ class EventDetailViewModel : ViewModel() {
         binding.uiConstraintLayout.visibility = View.VISIBLE
     }
 
-    fun setupListeners(binding: ActivityEventDetailBinding, window: Window, resources: Resources, intent: Intent) {
+    fun setupListeners(binding: ActivityEventDetailBinding, window: Window, intent: Intent) {
         swipeRefreshLayout = binding.eventDetailSwipeRefreshLayout
 
         swipeRefreshLayout.setOnRefreshListener {
-            window.statusBarColor = resources.getColor(R.color.status_bar)
+            window.statusBarColor = binding.root.resources.getColor(R.color.status_bar)
             initialiseUI(binding, intent, window)
+        }
+
+        binding.shareButton.setOnClickListener {
+            shareEvent(binding,binding.root.context as EventDetailActivity)
         }
     }
 
-    fun shareEvent(binding: ActivityEventDetailBinding, context: EventDetailActivity) {
+    private fun shareEvent(binding: ActivityEventDetailBinding, context: EventDetailActivity) {
         CoroutineScope(Dispatchers.Main).launch {
             val uiLayout = binding.uiConstraintLayout
             binding.shareButton.visibility = View.GONE

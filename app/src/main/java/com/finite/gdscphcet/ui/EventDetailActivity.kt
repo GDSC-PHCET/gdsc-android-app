@@ -46,17 +46,12 @@ class EventDetailActivity : AppCompatActivity() {
         window.statusBarColor = resources.getColor(R.color.status_bar)
 
         viewModel.initialiseUI(binding, intent, window)
-        viewModel.setupListeners(binding, window, resources, intent)
+        viewModel.setupListeners(binding, window, intent)
 
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
 
-        binding.shareButton.setOnClickListener {
-            // TODO : Add actual share logic, create a shareable image and share it
-
-            viewModel.shareEvent(binding,this@EventDetailActivity)
-        }
     }
 
     override fun onBackPressed() {
