@@ -1,8 +1,15 @@
 package com.finite.gdscphcet.ui
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -14,17 +21,19 @@ import com.finite.gdscphcet.R
 import com.finite.gdscphcet.databinding.ActivityEventDetailBinding
 import com.finite.gdscphcet.repository.PastEventRepo
 import com.finite.gdscphcet.repository.UpcomingEventRepo
+import com.finite.gdscphcet.utils.ExtractTextFromHTML
 import com.finite.scrapingpractise.model.PastEventDetails
 import com.finite.scrapingpractise.model.UpcomingEventDetails
 import com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
 
 class EventDetailActivity : AppCompatActivity() {
-
 
     private val viewModel: EventDetailViewModel by viewModels()
 
@@ -45,19 +54,10 @@ class EventDetailActivity : AppCompatActivity() {
 
         binding.shareButton.setOnClickListener {
             // TODO : Add actual share logic, create a shareable image and share it
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "Hey! Check out this event by GDSC PHCET : ${viewModel.url}")
-                type = "text/plain"
-            }
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
+
+            viewModel.shareEvent(binding,this@EventDetailActivity)
         }
     }
-
-
-
-
 
     override fun onBackPressed() {
         super.onBackPressed()

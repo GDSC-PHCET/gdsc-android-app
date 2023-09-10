@@ -5,7 +5,10 @@ import com.finite.gdscphcet.utils.EventUtils.getAgendaItems
 import com.finite.scrapingpractise.model.UpcomingEventDetails
 import com.finite.scrapingpractise.model.UpcomingEvent
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
+import org.jsoup.nodes.TextNode
 import org.jsoup.parser.Parser
+import java.util.regex.Pattern
 
 object UpcomingEventRepo {
 

@@ -6,7 +6,10 @@ import com.finite.scrapingpractise.model.PastEvent
 import com.finite.scrapingpractise.model.PastEventDetails
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
+import org.jsoup.nodes.TextNode
 import org.jsoup.parser.Parser
+import java.util.regex.Pattern
 
 object PastEventRepo {
 
@@ -96,6 +99,8 @@ object PastEventRepo {
     fun getDocument(url: String): Document {
         return Jsoup.connect(url).get()
     }
+
+
 
     //fun getBanner
 }

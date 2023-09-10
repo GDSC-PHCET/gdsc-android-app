@@ -30,20 +30,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
+                android:paddingBottom="16dp"
                 android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:visibility="visible">
 
                 <!-- Background Cover Banner -->
                 <ImageView
                     android:id="@+id/coverBannerImageView"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:scaleType="centerCrop"
+                    android:layout_height="wrap_content"
+                    android:minHeight="120dp"
+                    android:maxHeight="160dp"
+                    android:scaleType="fitXY"
+                    tools:src="@drawable/gdsc_banner"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@tools:sample/backgrounds/scenic" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- Back Button -->
                 <ImageView
@@ -75,12 +79,12 @@
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="112dp"
+                    android:layout_marginTop="-48dp"
                     android:visibility="visible"
                     app:civ_border_color="#FFFFFF"
                     app:civ_border_width="5dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/coverBannerImageView"
                     tools:src="@tools:sample/avatars" />
 
                 <!-- Event Title -->
@@ -204,16 +208,17 @@
                     android:id="@+id/extraDetailsLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="visible"
                     android:orientation="vertical"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/detailsCardView">
+
                     <WebView
                         android:id="@+id/longDescriptionWebView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="10dp"
                         android:backgroundTint="#00FFFFFF"
                         android:scrollbars="none"
