@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.ui.EventDetailActivity
-import com.finite.scrapingpractise.model.PastEvent
+import com.finite.gdscphcet.model.PastEvent
 
 class PastEventsAdapter(private val pastEventsList : List<PastEvent>) : RecyclerView.Adapter<PastEventsAdapter.EventViewHolder>() {
 

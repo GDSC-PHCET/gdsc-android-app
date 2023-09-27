@@ -1,4 +1,4 @@
-package com.finite.scrapingpractise.model
+package com.finite.gdscphcet.model
 
 data class PastEvent (
     val title: String = "",

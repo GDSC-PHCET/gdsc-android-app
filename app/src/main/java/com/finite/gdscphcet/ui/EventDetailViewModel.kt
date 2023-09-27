@@ -23,8 +23,8 @@ import com.finite.gdscphcet.databinding.ActivityEventDetailBinding
 import com.finite.gdscphcet.repository.PastEventRepo
 import com.finite.gdscphcet.repository.UpcomingEventRepo
 import com.finite.gdscphcet.utils.ExtractTextFromHTML
-import com.finite.scrapingpractise.model.PastEventDetails
-import com.finite.scrapingpractise.model.UpcomingEventDetails
+import com.finite.gdscphcet.model.PastEventDetails
+import com.finite.gdscphcet.model.UpcomingEventDetails
 import com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

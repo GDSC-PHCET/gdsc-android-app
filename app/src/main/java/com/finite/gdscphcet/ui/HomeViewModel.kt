@@ -9,8 +9,8 @@ import com.finite.gdscphcet.adapters.UpcomingEventsAdapter
 import com.finite.gdscphcet.databinding.FragmentHomeBinding
 import com.finite.gdscphcet.repository.PastEventRepo
 import com.finite.gdscphcet.repository.UpcomingEventRepo
-import com.finite.scrapingpractise.model.PastEvent
-import com.finite.scrapingpractise.model.UpcomingEvent
+import com.finite.gdscphcet.model.PastEvent
+import com.finite.gdscphcet.model.UpcomingEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay

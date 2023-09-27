@@ -2,13 +2,10 @@ package com.finite.gdscphcet.repository
 
 import com.finite.gdscphcet.utils.EventUtils
 import com.finite.gdscphcet.utils.EventUtils.getAgendaItems
-import com.finite.scrapingpractise.model.UpcomingEventDetails
-import com.finite.scrapingpractise.model.UpcomingEvent
+import com.finite.gdscphcet.model.UpcomingEventDetails
+import com.finite.gdscphcet.model.UpcomingEvent
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
-import org.jsoup.nodes.TextNode
 import org.jsoup.parser.Parser
-import java.util.regex.Pattern
 
 object UpcomingEventRepo {
 
