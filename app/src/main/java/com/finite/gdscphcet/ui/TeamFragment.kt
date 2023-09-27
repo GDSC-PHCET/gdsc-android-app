@@ -1,6 +1,5 @@
 package com.finite.gdscphcet.ui
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,19 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.adapters.TeamAdapter
 import com.finite.gdscphcet.databinding.FragmentTeamBinding
-import com.finite.gdscphcet.model.TeamMember
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class TeamFragment : Fragment() {
 
@@ -46,6 +38,22 @@ class TeamFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initRecyclerViewSetup()
+        setObservers()
+        getTeamDetails()
+
+        binding!!.teamSwipeRefreshLayout.setOnRefreshListener {
+            getTeamDetails()
+        }
+    }
+
+    private fun getTeamDetails() {
+        viewModel.getSeniorCoreTeamDetails(binding!!)
+        viewModel.getJuniorCoreTeamDetails(binding!!)
+        viewModel.getLeadDetails(binding!!)
+    }
+
+    private fun initRecyclerViewSetup() {
         seniorRecyclerView = binding!!.seniorCoreTeamRecyclerView
         juniorRecyclerView = binding!!.juniorCoreTeamRecyclerView
 
@@ -54,17 +62,21 @@ class TeamFragment : Fragment() {
 
         seniorRecyclerView.adapter = seniorAdapter
         juniorRecyclerView.adapter = juniorAdapter
+    }
 
+    private fun setObservers() {
         viewModel.seniorTeam.observe(viewLifecycleOwner) {
             seniorAdapter = TeamAdapter(it)
             seniorRecyclerView.adapter = seniorAdapter
             seniorAdapter.notifyDataSetChanged()
+            if (binding!!.teamSwipeRefreshLayout.isRefreshing) binding!!.teamSwipeRefreshLayout.isRefreshing = false
         }
 
         viewModel.juniorTeam.observe(viewLifecycleOwner) {
             juniorAdapter = TeamAdapter(it)
             juniorRecyclerView.adapter = juniorAdapter
             juniorAdapter.notifyDataSetChanged()
+            if (binding!!.teamSwipeRefreshLayout.isRefreshing) binding!!.teamSwipeRefreshLayout.isRefreshing = false
         }
 
         viewModel.leadData.observe(viewLifecycleOwner) {
@@ -98,18 +110,8 @@ class TeamFragment : Fragment() {
             binding!!.leadGoogleDev.setOnClickListener {
                 openLink(lead.googledev!!)
             }
-        }
 
-        val dbRef = FirebaseDatabase.getInstance().reference.child("team")
-
-        viewModel.getSeniorCoreTeamDetails(dbRef, binding!!)
-        viewModel.getJuniorCoreTeamDetails(dbRef, binding!!)
-        viewModel.getLeadDetails(dbRef, binding!!)
-
-        binding!!.teamSwipeRefreshLayout.setOnRefreshListener {
-            viewModel.getSeniorCoreTeamDetails(dbRef, binding!!)
-            viewModel.getJuniorCoreTeamDetails(dbRef, binding!!)
-            viewModel.getLeadDetails(dbRef, binding!!)
+            if (binding!!.teamSwipeRefreshLayout.isRefreshing) binding!!.teamSwipeRefreshLayout.isRefreshing = false
         }
     }
 
