@@ -1,4 +1,4 @@
-package com.finite.scrapingpractise.model
+package com.finite.gdscphcet.model
 
 import com.finite.gdscphcet.model.Agenda
 import org.jsoup.nodes.Element

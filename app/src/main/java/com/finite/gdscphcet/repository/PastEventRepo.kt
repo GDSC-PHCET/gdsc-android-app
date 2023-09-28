@@ -2,14 +2,11 @@ package com.finite.gdscphcet.repository
 
 import com.finite.gdscphcet.utils.EventUtils
 import com.finite.gdscphcet.utils.EventUtils.getAgendaItems
-import com.finite.scrapingpractise.model.PastEvent
-import com.finite.scrapingpractise.model.PastEventDetails
+import com.finite.gdscphcet.model.PastEvent
+import com.finite.gdscphcet.model.PastEventDetails
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
-import org.jsoup.nodes.TextNode
 import org.jsoup.parser.Parser
-import java.util.regex.Pattern
 
 object PastEventRepo {
 

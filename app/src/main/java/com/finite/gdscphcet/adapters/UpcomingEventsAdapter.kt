@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.finite.gdscphcet.R
 import com.finite.gdscphcet.ui.EventDetailActivity
-import com.finite.scrapingpractise.model.UpcomingEvent
-import kotlin.math.log
+import com.finite.gdscphcet.model.UpcomingEvent
 
 class UpcomingEventsAdapter(private val upcomingEventList:  List<UpcomingEvent>) : RecyclerView.Adapter<UpcomingEventsAdapter.EventViewHolder>() {
 
