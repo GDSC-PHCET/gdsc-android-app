@@ -69,25 +69,45 @@ class TeamAdapter(private val teamMembers: List<TeamMember>, private val teamVie
 
         val context = holder.itemView.context
 
-        // Set click listeners for social media links
-        holder.linkedInImageView.setOnClickListener {
-            openLink(member.linkedin!!, context)
+        if (member.linkedin == "") {
+            holder.linkedInImageView.visibility = View.GONE
+        } else {
+            holder.linkedInImageView.visibility = View.VISIBLE
+            holder.linkedInImageView.setOnClickListener {
+                openLink(member.linkedin!!, context)
+            }
         }
-
-        holder.instagramImageView.setOnClickListener {
-            openLink(member.instagram!!, context)
+        if (member.instagram == "") {
+            holder.instagramImageView.visibility = View.GONE
+        } else {
+            holder.instagramImageView.visibility = View.VISIBLE
+            holder.instagramImageView.setOnClickListener {
+                openLink(member.instagram!!, context)
+            }
         }
-
-        holder.githubImageView.setOnClickListener {
-            openLink(member.github!!, context)
+        if (member.github == "") {
+            holder.githubImageView.visibility = View.GONE
+        } else {
+            holder.githubImageView.visibility = View.VISIBLE
+            holder.githubImageView.setOnClickListener {
+                openLink(member.github!!, context)
+            }
         }
-
-        holder.twitterImageView.setOnClickListener {
-            openLink(member.twitter!!, context)
+        if (member.twitter == "") {
+            holder.twitterImageView.visibility = View.GONE
+        } else {
+            holder.twitterImageView.visibility = View.VISIBLE
+            holder.twitterImageView.setOnClickListener {
+                openLink(member.twitter!!, context)
+            }
         }
-
-        holder.googleDevImageView.setOnClickListener {
-            openLink(member.googledev!!, context)
+        if (member.googledev == "") {
+            holder.googleDevImageView.visibility = View.GONE
+        } else {
+            holder.googleDevImageView.visibility = View.VISIBLE
+            holder.googleDevImageView.setOnClickListener {
+                openLink(member.googledev!!, context)
+            }
         }
     }
 
