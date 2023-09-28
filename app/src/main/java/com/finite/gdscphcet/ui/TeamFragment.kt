@@ -41,11 +41,16 @@ class TeamFragment : Fragment() {
         initRecyclerViewSetup()
         setObservers()
         getTeamDetails()
+        viewModel.setLeadCardUi(binding!!)
 
         binding!!.teamSwipeRefreshLayout.setOnRefreshListener {
+            viewModel.changeStartColor()
+            viewModel.setLeadCardUi(binding!!)
             getTeamDetails()
         }
     }
+
+
 
     private fun getTeamDetails() {
         viewModel.getSeniorCoreTeamDetails(binding!!)
@@ -57,8 +62,8 @@ class TeamFragment : Fragment() {
         seniorRecyclerView = binding!!.seniorCoreTeamRecyclerView
         juniorRecyclerView = binding!!.juniorCoreTeamRecyclerView
 
-        seniorAdapter = TeamAdapter(emptyList())
-        juniorAdapter = TeamAdapter(emptyList())
+        seniorAdapter = TeamAdapter(emptyList(), viewModel)
+        juniorAdapter = TeamAdapter(emptyList(), viewModel)
 
         seniorRecyclerView.adapter = seniorAdapter
         juniorRecyclerView.adapter = juniorAdapter
@@ -66,15 +71,17 @@ class TeamFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.seniorTeam.observe(viewLifecycleOwner) {
-            seniorAdapter = TeamAdapter(it)
+            seniorAdapter = TeamAdapter(it, viewModel)
             seniorRecyclerView.adapter = seniorAdapter
+            seniorRecyclerView.setHasFixedSize(true)
             seniorAdapter.notifyDataSetChanged()
             if (binding!!.teamSwipeRefreshLayout.isRefreshing) binding!!.teamSwipeRefreshLayout.isRefreshing = false
         }
 
         viewModel.juniorTeam.observe(viewLifecycleOwner) {
-            juniorAdapter = TeamAdapter(it)
+            juniorAdapter = TeamAdapter(it, viewModel)
             juniorRecyclerView.adapter = juniorAdapter
+            juniorRecyclerView.setHasFixedSize(true)
             juniorAdapter.notifyDataSetChanged()
             if (binding!!.teamSwipeRefreshLayout.isRefreshing) binding!!.teamSwipeRefreshLayout.isRefreshing = false
         }
